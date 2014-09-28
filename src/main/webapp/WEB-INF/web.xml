@@ -5,6 +5,8 @@
 	version="2.4">
 
 	<display-name>HelloWorld Application</display-name>
-	<welcome-file-list>index.html</welcome-file-list>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+	</welcome-file-list>
 
 </web-app>  
