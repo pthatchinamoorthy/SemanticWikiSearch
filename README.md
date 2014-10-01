@@ -8,6 +8,7 @@ The Use Cases are
         <ol>
           <li>Keyword search</li>
           <li>Multiple Options Search</li>
+        </ol>
     </li>
     <li>Publish the Company Profile with Structured data by applying Semantic Markups</li>
     <li>Enable Client to extract/download the published Structured data</li>
@@ -28,9 +29,5 @@ The Use Cases are
             <li>RDFa serialization format</li>
           </ol>
       </li>
-      <li>RDFa Distiller (Yet to decided) to extract Structed data from the Web Page. </li>
+      <li>RDFa Distiller (Yet to decided) to extract Structed data from the Web Page.</li>
     </ol>
-
-  
-      
-  
