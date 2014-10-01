@@ -19,7 +19,7 @@ The Use Cases are
     <ol>
       <li>Data Access Layer
             <ol>
-                <li>SPARQL to query <a href="http://dbpedia.org/sparql/">DBPedia</a></li>
+                <li>SPARQL to query <a href="http://dbpedia.org/sparql/">http://dbpedia.org/sparql/</a></li>
                 <li>Apache Jena's ARQ library to build, fire and aggregate SPARQL queries</li>
             </ol>
       </li>
