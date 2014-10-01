@@ -1,4 +1,4 @@
-# <b><em>AdvancedWikiSearch - A Semantic Web Application</em></b>
+# <em>AdvancedWikiSearch - A Semantic Web Application</em>
 
 # <em>What is it</em>
 This is a Semantic Web Application that allows you to search for any Company's profile. 
@@ -15,17 +15,18 @@ The Use Cases are
   </ol>
 
 # <em>What is it made of</em>
+  The building blocks of this applications are
     <ol>
       <li>Data Access Layer
             <ol>
-                <li>SPARQL to query <a href="http://dbpedia.org/sparql">http://dbpedia.org/sparql</a></li>
+                <li>SPARQL to query <a href="http://dbpedia.org/sparql/">DBPedia</a></li>
                 <li>Apache Jena's ARQ library to build, fire and aggregate SPARQL queries</li>
             </ol>
       </li>
       <li>Presentation Layer
           <ol>
             <li>Spring Web MVC with ThemeLeaf templates</li>
-            <li><a href="http://schema.org/">http://schema.org/</a> ontology to markup the web pages</li>
+            <li><a href="http://schema.org/">SCHEMA.org</a> ontology to markup the web pages</li>
             <li>RDFa serialization format</li>
           </ol>
       </li>
