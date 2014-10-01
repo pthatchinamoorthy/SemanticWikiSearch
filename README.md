@@ -26,7 +26,7 @@ The Use Cases are
       <li>Presentation Layer
           <ol>
             <li>Spring Web MVC with ThemeLeaf templates</li>
-            <li><a href="http://schema.org/">SCHEMA.org</a> ontology to markup the web pages</li>
+            <li><a href="http://schema.org/">http://schema.org/</a> ontology to markup the web pages</li>
             <li>RDFa serialization format</li>
           </ol>
       </li>
