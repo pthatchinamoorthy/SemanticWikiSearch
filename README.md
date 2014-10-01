@@ -35,6 +35,11 @@ The Use Cases are
     
   # <em>Component Diagram</em>
     The following figure depicts the technical components and the activity flow for all the 3 Use Cases
-    <img src="https://s3-us-west-2.amazonaws.com/semanticwikisearch/images/ComponentDiagram.png"/>
+    <ol>
+      <li>
+        <img src="https://s3-us-west-2.amazonaws.com/semanticwikisearch/images/ComponentDiagram.png"/>
+      </li>
+    </ol>
+      
     
   
