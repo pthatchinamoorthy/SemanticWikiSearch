@@ -1,7 +1,8 @@
 # <b><em>AdvancedWikiSearch - A Semantic Web Application</em></b>
 
-# <em>What it does</em>
-This is a Semantic Web Application that allows you to search for any Company's profile. The detailed Use Cases are
+# <em>What is it</em>
+This is a Semantic Web Application that allows you to search for any Company's profile. 
+The Use Cases are
   <ol>
     <li>Enable Company Profile search by using 2 ways
         <ol>
@@ -25,9 +26,10 @@ This is a Semantic Web Application that allows you to search for any Company's p
             <li>Spring Web MVC with ThemeLeaf templates</li>
             <li><a href="http://schema.org/">http://schema.org/</a> ontology to markup the web pages</li>
             <li>RDFa serialization format</li>
+          </ol>
       </li>
       <li>RDFa Distiller (Yet to decided) to extract Structed data from the Web Page. </li>
-  </ol>
+    </ol>
 
   
       
