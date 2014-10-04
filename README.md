@@ -42,4 +42,5 @@ The Use Cases are
   	<li>Install Java, Gradle</li>
   	<li>Run the command "gradle" which will call the default task "jettyRun"</li>
   	<li>http://localhost:8080/SmartWikiSearch/company/search/{company_keyword}</li> 
+  	<li>Add the Chrome Browser extension - "JSON Formatter" to view the JSON clearly in the browser</>
   </ol>
