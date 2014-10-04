@@ -1,4 +1,7 @@
-package com.pt.sparql.access;
+package edu.ms.pt.sparql.access;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import com.hp.hpl.jena.graph.NodeFactory;
 import com.hp.hpl.jena.graph.Triple;
@@ -18,14 +21,14 @@ import com.hp.hpl.jena.sparql.syntax.ElementFilter;
 import com.hp.hpl.jena.sparql.syntax.ElementGroup;
 import com.hp.hpl.jena.sparql.syntax.ElementTriplesBlock;
 
-public class DBPediaSparqlAccessObject {
+public class DBPediaSAO {
 
 	/**
-	 * @param companyName
+	 * @param searchKeyword
 	 */
-	public void searchCompanyInfo(String companyName) {		
+	public List<Company> searchCompanyInfo(String searchKeyword) {	
 		Triple triple = Triple.create(Var.alloc("organization"), NodeFactory.createURI("http://xmlns.com/foaf/0.1/name") , Var.alloc("name"));
-		Expr e = new E_Regex(new ExprVar("name"), new NodeValueString("^" + companyName + "*"), new NodeValueString("i"));
+		Expr e = new E_Regex(new ExprVar("name"), new NodeValueString("^" + searchKeyword + "*"), new NodeValueString("i"));
 		
 		ElementTriplesBlock tripleBlock = new ElementTriplesBlock();
 		tripleBlock.addTriple(triple);
@@ -45,20 +48,23 @@ public class DBPediaSparqlAccessObject {
 		
 		QueryExecution queryExecution = QueryExecutionFactory.sparqlService("http://dbpedia.org/sparql", query);
 		ResultSet resultSet = queryExecution.execSelect();
+		
+		List<Company> companyList = new ArrayList<Company>();
 		while(resultSet.hasNext()) {
 			QuerySolution result = resultSet.next();
-			RDFNode organization = result.get("organization");
+			RDFNode organizationObject = result.get("organization");
 			RDFNode name = result.get("name");
 			
-			System.out.println("---------> " + organization.toString() + "----------------->" + name);
-			getCompanyInfo(organization.toString());
-			
+			Company company = new Company();
+			company.setCompanyName(name.toString());
+			company.setCompanyUrl(organizationObject.toString().replace("http://dbpedia.org/resource/", "http://localhost:8080/SmartWikiSearch/company/"));
+			companyList.add(company);
 		}	
-		
+		return companyList;
 	}	
 	
-	public void getCompanyInfo(String companyURL) {		
-		Triple triple = Triple.create(NodeFactory.createURI("http://dbpedia.org/resource/Microsoft_Live_Labs_Listas"), Var.alloc("property"), Var.alloc("value"));
+	public Company getCompanyInfo(String companyURL) {
+		Triple triple = Triple.create(NodeFactory.createURI("http://dbpedia.org/resource/" + companyURL), Var.alloc("property"), Var.alloc("value"));
 		
 		ElementTriplesBlock tripleBlock = new ElementTriplesBlock();
 		tripleBlock.addTriple(triple);
@@ -71,21 +77,27 @@ public class DBPediaSparqlAccessObject {
 		query.addResultVar("property");
 		query.addResultVar("value");
 		query.setQueryPattern(queryBody);
-		query.setLimit(5);
+		//query.setLimit(5);
 		
 		QueryExecution queryExecution = QueryExecutionFactory.sparqlService("http://dbpedia.org/sparql", query);
 		ResultSet resultSet = queryExecution.execSelect();
+		Company company = new Company();
 		while(resultSet.hasNext()) {
 			QuerySolution result = resultSet.next();
 			RDFNode property = result.get("property");
 			RDFNode value = result.get("value");
-			System.out.println("========> " + property + "===========>" + value);
+			if (property.toString().equals("http://xmlns.com/foaf/0.1/name"))
+				company.setCompanyName(value.toString());
+			if (property.toString().equals("http://dbpedia.org/ontology/abstract"))
+				company.setDescription(value.toString());
+			if (property.toString().equals("http://xmlns.com/foaf/0.1/isPrimaryTopicOf"))
+				company.setDataSourceUrl(value.toString());
 		}	
-		
+		return company;
 	}	
 	
 	public static void main(String[] args) {
-		new DBPediaSparqlAccessObject().searchCompanyInfo("microsoft");
+		new DBPediaSAO().searchCompanyInfo("microsoft");
 	}
 
 }

@@ -36,6 +36,10 @@ The Use Cases are
 # <em>Component Diagram</em>
   The following figure depicts the technical components and the activity flow for all the 3 Use Cases
   <img src="https://s3-us-west-2.amazonaws.com/semanticwikisearch/images/ComponentDiagram.png"/>
-      
-    
   
+# <em>How to build</em>
+  <ol>
+  	<li>Install Java, Gradle</li>
+  	<li>Run the command "gradle" which will call the default task "jettyRun"</li>
+  	<li>http://localhost:8080/SmartWikiSearch/company/search/{company_keyword}</li> 
+  </ol>

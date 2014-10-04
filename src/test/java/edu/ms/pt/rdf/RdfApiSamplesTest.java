@@ -1,4 +1,4 @@
-package com.pt.rdf;
+package edu.ms.pt.rdf;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -10,6 +10,8 @@ import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.rdf.model.StmtIterator;
 import com.hp.hpl.jena.vocabulary.VCARD;
+
+import edu.ms.pt.rdf.RdfApiSamples;
 
 
 public class RdfApiSamplesTest {

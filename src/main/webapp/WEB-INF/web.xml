@@ -4,9 +4,30 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
 	version="2.4">
 
-	<display-name>HelloWorld Application</display-name>
+	<display-name>Semantic Web Application</display-name>
+	
+	<servlet>
+		<servlet-name>CompanySearch</servlet-name>
+		<servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
+		<init-param>
+			<param-name>javax.ws.rs.Application</param-name>
+			<param-value>edu.ms.pt.resource.JerseyApplication</param-value>
+		</init-param>
+		<init-param>
+			<param-name>jersey.config.server.provider.packages</param-name>
+			<param-value>edu.ms.pt.resource</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>CompanySearch</servlet-name>
+		<url-pattern>/company/*</url-pattern>
+	</servlet-mapping>
+	
 	<welcome-file-list>
-		<welcome-file>index.html</welcome-file>
+		<welcome-file>https://github.com/prabhakar1983/SemanticWikiSearch/blob/master/README.md</welcome-file>
 	</welcome-file-list>
+	
 
 </web-app>  

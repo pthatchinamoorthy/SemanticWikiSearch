@@ -1,4 +1,4 @@
-package com.pt.rdf;
+package edu.ms.pt.rdf;
 
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;

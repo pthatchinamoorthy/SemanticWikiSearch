@@ -1,6 +1,5 @@
 apply plugin: "jetty"
 apply plugin: 'eclipse'
-
 defaultTasks 'jettyRun'
 
 repositories {
@@ -8,18 +7,18 @@ repositories {
 }
 
 dependencies {	
+	compile (
+		[group: 'org.apache.jena', name: 'jena-core', version: '2.12.0'],
+		[group: 'org.apache.jena', name:'jena-arq', version: '2.12.0'],
+		[group: 'org.glassfish.jersey.containers', name:'jersey-container-servlet', version:'2.6'],
+		[group: 'org.glassfish.jersey.media', name:'jersey-media-json-jackson', version: '2.6'],
+		[group: 'log4j', name:'log4j', version:'1.2.7']
+	)
 	testCompile (
 		[group: 'junit', name: 'junit', version:'4.11']
 	)	
 	providedCompile	(
-		[group: 'javax.servlet', name: 'servlet-api', version: '2.5'],
-		[group: 'org.apache.jena', name: 'jena-core', version: '2.12.0'],
-		[group: 'org.apache.jena', name:'jena-arq', version: '2.12.0']
-	)
-	runtime (
-		[group: 'javax.servlet', name: 'jstl', version: '1.1.2'],
-		[group: 'org.apache.jena', name:'jena-core', version: '2.12.0'],
-		[group: 'org.apache.jena', name:'jena-arq', version: '2.12.0']
+		[group: 'javax.servlet', name: 'servlet-api', version: '2.5']		
 	)
 }
 
@@ -33,3 +32,11 @@ war {
 	baseName = 'SmartWikiSearch'
 	version = '1.0'	
 }
+
+/*
+	Use the below Gradle plugin and command, if you plan to create a war and deploy to Jetty step by step  
+		apply plugin: "war"
+		Download Jetty Server - jetty-runner-9.1.0.M0.jar [	org/eclipse/jetty jetty-runner 9.1.0.M0 ] 
+		~/softwares/jdk1.8.0_20/bin/java -jar server/jetty-runner-9.1.0.M0.jar --port 8081 build/libs/SmartWikiSearch-1.0.war
+		http://localhost:8081/company/search	
+*/
