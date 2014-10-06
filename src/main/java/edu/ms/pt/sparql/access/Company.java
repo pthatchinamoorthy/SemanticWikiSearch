@@ -1,11 +1,23 @@
 package edu.ms.pt.sparql.access;
 
-public class Company {
+import org.codehaus.jackson.annotate.JsonProperty;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
 
-	private String companyName;
-	private String companyUrl;
-	private String dataSourceUrl;
-	private String description;
+@JsonSerialize(include=Inclusion.NON_NULL)
+public class Company {
+	
+	@JsonProperty("foaf:name")
+	private String companyName = null;
+	
+	@JsonProperty("foaf:url")
+	private String url = null;
+	
+	@JsonProperty("dbpedia-owl:isPrimaryTopicOf")
+	private String dataSourceUrl = null;
+	
+	@JsonProperty("foaf:abstract")
+	private String description = null;
 	
 	public String getDataSourceUrl() {
 		return dataSourceUrl;
@@ -30,13 +42,13 @@ public class Company {
 	public void setCompanyName(String companyName) {
 		this.companyName = companyName;
 	}
-
-	public String getCompanyUrl() {
-		return companyUrl;
+	
+	public String getUrl() {
+		return url;
 	}
 
-	public void setCompanyUrl(String companyUrl) {
-		this.companyUrl = companyUrl;
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
 }

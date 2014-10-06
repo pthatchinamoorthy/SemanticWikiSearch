@@ -1,7 +1,7 @@
-apply plugin: "jetty"
+apply plugin: "jetty" 
 apply plugin: 'eclipse'
 defaultTasks 'jettyRun'
-
+ 
 repositories {
     mavenCentral()
 }
@@ -30,7 +30,7 @@ test {
 
 war {
 	baseName = 'SmartWikiSearch'
-	version = '1.0'	
+	//version = '1.0'	
 }
 
 /*
