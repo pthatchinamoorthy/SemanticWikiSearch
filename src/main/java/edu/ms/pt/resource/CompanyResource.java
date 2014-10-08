@@ -30,7 +30,7 @@ public class CompanyResource extends Resource{
 		
 		CompanyList companylist = new CompanyList();
 		companylist.setContext(getContext());
-		companylist.setId("http://" + uriInfo.getBaseUri().getHost() + ":" + uriInfo.getBaseUri().getPort() + uriInfo.getAbsolutePath().getRawPath());
+		companylist.setId("http://" + uriInfo.getBaseUri().getHost() + uriInfo.getAbsolutePath().getRawPath());
 		List<Company> companies = new ArrayList<Company>();
 		companies.add(company);
 		companylist.setCompanies(companies);

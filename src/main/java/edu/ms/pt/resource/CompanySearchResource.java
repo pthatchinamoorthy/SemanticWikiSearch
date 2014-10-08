@@ -24,7 +24,7 @@ public class CompanySearchResource extends Resource{
 		
 		CompanyList companyList = new DBPediaSAO().searchCompanyInfo(companyKeyword, uriInfo);
 		companyList.setContext(this.getContext());
-		companyList.setId("http://" + uriInfo.getBaseUri().getHost() + ":" + uriInfo.getBaseUri().getPort() + uriInfo.getAbsolutePath().getRawPath());
+		companyList.setId("http://" + uriInfo.getBaseUri().getHost() + uriInfo.getAbsolutePath().getRawPath());
 		
 		return Response.ok().entity(companyList).build();
 	}

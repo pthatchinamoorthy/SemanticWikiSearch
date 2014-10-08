@@ -25,6 +25,8 @@ import com.hp.hpl.jena.sparql.syntax.ElementTriplesBlock;
 
 public class DBPediaSAO {
 
+	private static final int RECORD_LIMIT = 10;
+
 	/**
 	 * @param searchKeyword
 	 * @param uriInfo 
@@ -47,7 +49,7 @@ public class DBPediaSAO {
 		query.addResultVar("organization");
 		query.addResultVar("name");
 		query.setQueryPattern(queryBody);
-		query.setLimit(5);
+		query.setLimit(RECORD_LIMIT);
 		
 		QueryExecution queryExecution = QueryExecutionFactory.sparqlService("" +
 				"http://dbpedia.org/sparql", query);
@@ -65,7 +67,7 @@ public class DBPediaSAO {
 			
 			Company company = new Company();
 			company.setCompanyName(name.toString());
-			company.setUrl(organizationObject.toString().replace("http://dbpedia.org/resource/", "http://" + uriInfo.getRequestUri().getHost()+":"+ uriInfo.getRequestUri().getPort() + "/SmartWikiSearch/company/"));
+			company.setUrl(organizationObject.toString().replace("http://dbpedia.org/resource/", "http://" + uriInfo.getRequestUri().getHost() + "/company/"));
 			companyList.add(company);
 		}	
 		return companies;
