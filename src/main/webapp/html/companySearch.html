@@ -25,7 +25,7 @@
 				border:double;
 				width: 200px;
 				height: 100%;
-				background: olive; 
+				background-color: olive; 
 			}	
 			section {										
 				border:double;	
@@ -102,11 +102,28 @@
 
 		<article ng-controller="CompanySearchController">
 			<nav>
-				<form action="">
-					<h4 style="color: white">Enter Company Keyword</h4> 
-					<input style="padding: 5px" type="search"></input>
-					<br />
-				</form>
+				<div style="border: groove;">
+					<h2 style="color:white">Keyword Search</h2>
+					<form action="" name="Keyword Search">
+						Company Keyword : <input style="padding: 5px" type="search"></input>
+						<br />
+						<button type="submit" >Submit</button>
+					</form>
+				</div>
+				<br/>
+				<br/>
+				<div style="border: groove;">
+					<h2 style="color:white; width: 100%">Multiple Option Search</h2>
+					<form action="" name="Multi Option Search">
+						Company Name : <input style="padding: 5px" type="text"/>
+						<br />
+						Employee Size <em>greater than<em>: <input style="padding: 5px" type="number"/>
+						<br/>
+						Foundeed Date <em>greater than</em>: <input style="padding: 5px" type="date"/>
+						<button type="submit" >Submit</button>
+						<button type="reset" >Reset</button>
+					</form>
+				</div>
 			</nav>
 	
 			<section>		

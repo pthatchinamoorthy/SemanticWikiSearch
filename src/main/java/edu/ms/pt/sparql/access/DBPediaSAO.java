@@ -26,7 +26,7 @@ import com.hp.hpl.jena.sparql.syntax.ElementTriplesBlock;
 public class DBPediaSAO {
 
 	private static final int RECORD_LIMIT = 10;
-	private static final boolean DEPLOY_ENV_AMAZAON = false;
+	private static final boolean DEPLOY_ENV_AMAZAON = true;
 
 	/**
 	 * @param searchKeyword
