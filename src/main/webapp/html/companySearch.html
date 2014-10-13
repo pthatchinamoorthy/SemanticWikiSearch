@@ -8,34 +8,35 @@
 			}
 			header {
 				border: solid;						
-				height: 100px; width: 100%;	
+				height: 80px; width: 100%;	
 				position: absolute; top:0px; left: 0px; right:0px; bottom: 0px;
 				background-color: white;					
 			}
 			article {
 				border:double;
 				position: absolute;
-				top: 100px;
-				bottom: 100px;
+				left:0px;
+				top: 80px;
+				bottom: 50px;
 				width: 100%;				
 			}			
 			nav {
 				position: absolute;
 				border:double;
-				width: 200px;
+				width: 100px;
 				height: 100%;
 				background: olive; 
 			}	
 			section {										
 				border:double;	
 				height: 100%;			
-				padding-left:250px;
-				padding-right:50px;
+				padding-left:120px;
+				padding-right:30px;
 				right:5px;
 				background-color: SandyBrown; 														
 			}			
 			footer {	
-				position: absolute; bottom: 0; height: 100px; width: 100%;						
+				position: absolute; bottom: 0px; height: 50px; width: 100%; left:0px;					
 				background-color: white;
 				border:double				
 			}
@@ -44,22 +45,22 @@
 			}	
 			#imgsematiclogo {
 				position : absolute; top:0px; left:0px;
-				height: 100px;
-				width: 360px;  				
+				height: 80px;
+				width: 300px;  				
 			}			
 			#imagsemantic {
 				position : absolute; top:0px; right:0px;
-				height: 100px;
-				width: 300px; 				
+				height: 80px;
+				width: 200px; 				
 			}
 			#imagcognizant {
 				position : absolute; bottom:0px; left:0px;
-				height: 100px;
+				height: 50px;
 				width: 150px; 				
 			}
 			#imagbits {
 				position : absolute; bottom:0px; right:0px;
-				height: 100px;
+				height: 50px;
 				width: 200px; 				
 			}			
 		</style>
@@ -74,27 +75,28 @@
 			}
 		</script>
 	</head>
-	<body ng-controller="CompanySearchController">		
+	<body>		
 		<header>			
 			<img id="imgsematiclogo" src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcS6O5wBdsvtOH4KtGKAT-3lEBJPDix_pC__OMevUCJBdZGKKzzc8yP33x6n"/>
-			<h2 style="text-align: center ; color: blue ; text-shadow: 1px 1px blue">Company Profile Search - A Semantic approach</h2>
-			<p style="text-align: center ; color: black"><em>Sophisticated Search of Company's Profile. Powered with WikiPedia's Data</em>
+			<h3 style="text-align: center ; color: blue ; text-shadow: 1px 1px blue">Company Profile Search - A Semantic approach</h3>
+			<p style="text-align: center ; color: grey">
+				<em>Sophisticated Search of Company's Profile. Powered with WikiPedia's Data</em>
 			</p>
 			<img id="imagsemantic" alt="" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQ4d0NfqGCDLqcYaiyyZ0htWNWAFCqpxZeXIO32hudZ4TnkXNR2"/>
 		</header>
 
-		<article>
+		<article ng-controller="CompanySearchController">
 			<nav>
 				<form action="">
-					<h1>Enter Company Keyword</h1> 
-					<input type="search"></input>
+					<h4 style="width:100%">Enter Company Keyword</h4> 
+					<input style="width: 100%" type="search"></input>
 					<br />
 				</form>
 			</nav>
 	
 			<section>		
-				<h1>Company Search Results</h1>		
-				<table style="background-color: white;">
+				<b style="text-align: left;">Company Search Results</b>		
+				<table style="background-color: white; font-size: 10px">
 					<thead>
 						<tr>
 							<th>Index</th>
@@ -103,7 +105,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr ng-show="companies" ng-repeat="company in companies">
+						<tr ng-show="companies" ng-repeat="company in companies" style="font-size: 5;">
 							<td>{{$index + 1}}</td>							
 							<td>{{company.name}}</td>
 							<td>{{company.abstract}}</td>
@@ -115,12 +117,11 @@
 
 		<footer>
 			<img id="imagcognizant" alt="" src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSMMbZ-E060eweFxXr_JXUOS8g01KhL6uBLBbzsP4-tZQ4Djcju">
-			<p style="padding-left: 100px ; color: blue; text-align: center;">
-				<b style="text-align: center;">This project is a research project - demonstrating the capabilities of Semantic Technologies - SPARQL, RDFa and Semantic Markups</b>
+			<p style="padding-left: 100px ; padding-right:100px ; color: blue; text-align: center;">
+				<b>This project is a research project - demonstrating the capabilities of Semantic Technologies - SPARQL, RDFa and Semantic Markups</b>
 				<br/>
 				<span style="color: grey">
 					 @ <b><em>Guide</em></b>: Rahul Nandhagopal
-					 <br/> 				
 					 @ <b><em>Author</em></b> : Prabhakaran Thatchinamoorthy
 					 </span>
 			</p>			
