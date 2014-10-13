@@ -8,7 +8,7 @@
 			}
 			header {
 				border: solid;						
-				height: 80px; width: 100%;	
+				height: 90px; width: 100%;	
 				position: absolute; top:0px; left: 0px; right:0px; bottom: 0px;
 				background-color: white;					
 			}
@@ -16,41 +16,56 @@
 				border:double;
 				position: absolute;
 				left:0px;
-				top: 80px;
+				top: 90px;
 				bottom: 50px;
 				width: 100%;				
 			}			
 			nav {
 				position: absolute;
 				border:double;
-				width: 100px;
+				width: 200px;
 				height: 100%;
 				background: olive; 
 			}	
 			section {										
 				border:double;	
 				height: 100%;			
-				padding-left:120px;
+				padding-left:230px;
 				padding-right:30px;
 				right:5px;
-				background-color: SandyBrown; 														
+				background-color: lightgrey; 														
 			}			
 			footer {	
 				position: absolute; bottom: 0px; height: 50px; width: 100%; left:0px;					
 				background-color: white;
 				border:double				
 			}
+			table {
+    			border-collapse: collapse;
+    			padding: 10px;
+			}
 			table, th, td {
-    			border: 1px solid blue;
+    			border: 1px solid black;
 			}	
+			th {
+    			background-color: olive;
+    			color: white;
+    			padding: 4px;
+			}
+			td {
+    			background-color: white;
+    			color: olive ;
+    			padding: 4px;
+			}
+			
 			#imgsematiclogo {
 				position : absolute; top:0px; left:0px;
-				height: 80px;
+				height: 90px;
 				width: 300px;  				
 			}			
 			#imagsemantic {
 				position : absolute; top:0px; right:0px;
-				height: 80px;
+				height: 90px;
 				width: 200px; 				
 			}
 			#imagcognizant {
@@ -80,7 +95,7 @@
 			<img id="imgsematiclogo" src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcS6O5wBdsvtOH4KtGKAT-3lEBJPDix_pC__OMevUCJBdZGKKzzc8yP33x6n"/>
 			<h3 style="text-align: center ; color: blue ; text-shadow: 1px 1px blue">Company Profile Search - A Semantic approach</h3>
 			<p style="text-align: center ; color: grey">
-				<em>Sophisticated Search of Company's Profile. Powered with WikiPedia's Data</em>
+				<em>Sophisticated Search of a Company's Profile. Powered with WikiPedia-DBPedia's Data</em>
 			</p>
 			<img id="imagsemantic" alt="" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQ4d0NfqGCDLqcYaiyyZ0htWNWAFCqpxZeXIO32hudZ4TnkXNR2"/>
 		</header>
@@ -88,27 +103,31 @@
 		<article ng-controller="CompanySearchController">
 			<nav>
 				<form action="">
-					<h4 style="width:100%">Enter Company Keyword</h4> 
-					<input style="width: 100%" type="search"></input>
+					<h4 style="color: white">Enter Company Keyword</h4> 
+					<input style="padding: 5px" type="search"></input>
 					<br />
 				</form>
 			</nav>
 	
 			<section>		
-				<b style="text-align: left;">Company Search Results</b>		
-				<table style="background-color: white; font-size: 10px">
+				<h3>Company Search Results</h3>		
+				<table>
 					<thead>
 						<tr>
 							<th>Index</th>
 							<th>Company Name</th>
-							<th>Company Description</th>
+							<th>Address</th>
+							<th>StockSymbol</th>
+							<th>Company Source - WikiPedia URL</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr ng-show="companies" ng-repeat="company in companies" style="font-size: 5;">
+						<tr ng-show="companies" ng-repeat="company in companies">
 							<td>{{$index + 1}}</td>							
+							<td><a ng-href="{{company.dbpediaowlisPrimaryTopicOf}}">{{company.name}}</a></td>							
 							<td>{{company.name}}</td>
-							<td>{{company.abstract}}</td>
+							<td>{{company.name}}</td>
+							<td><a ng-href="{{company.dbpediaowlisPrimaryTopicOf}}">{{company.dbpediaowlisPrimaryTopicOf}}</a></td>
 						</tr>
 					</tbody>
 				</table>									
@@ -121,9 +140,9 @@
 				<b>This project is a research project - demonstrating the capabilities of Semantic Technologies - SPARQL, RDFa and Semantic Markups</b>
 				<br/>
 				<span style="color: grey">
-					 @ <b><em>Guide</em></b>: Rahul Nandhagopal
+					 @ <b><em>Guide</em></b>  : Rahul Nandhagopal
 					 @ <b><em>Author</em></b> : Prabhakaran Thatchinamoorthy
-					 </span>
+				</span>
 			</p>			
 			<img id="imagbits" alt="" src="http://www.bits-pilani.ac.in/Uploads/Campus/BITS_university_logo.gif">
 		</footer>				
