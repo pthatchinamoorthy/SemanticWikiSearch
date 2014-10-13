@@ -26,12 +26,13 @@ import com.hp.hpl.jena.sparql.syntax.ElementTriplesBlock;
 public class DBPediaSAO {
 
 	private static final int RECORD_LIMIT = 10;
+	private static final boolean DEPLOY_ENV_AMAZAON = false;
 
 	/**
 	 * @param searchKeyword
 	 * @param uriInfo 
 	 */
-	public CompanyList searchCompanyInfo(String searchKeyword, UriInfo uriInfo) {	
+	public List<Company> searchCompanyInfo(String searchKeyword, UriInfo uriInfo) {	
 		Triple triple = Triple.create(Var.alloc("organization"), NodeFactory.createURI("http://xmlns.com/foaf/0.1/name") , Var.alloc("name"));
 		Expr e = new E_Regex(new ExprVar("name"), new NodeValueString("^" + searchKeyword + "*"), new NodeValueString("i"));
 		
@@ -56,9 +57,7 @@ public class DBPediaSAO {
 		ResultSet resultSet = queryExecution.execSelect();
 		
 		
-		CompanyList companies = new CompanyList();
 		List<Company> companyList = new ArrayList<Company>();
-		companies.setCompanies(companyList);
 		
 		while(resultSet.hasNext()) {
 			QuerySolution result = resultSet.next();
@@ -67,10 +66,17 @@ public class DBPediaSAO {
 			
 			Company company = new Company();
 			company.setCompanyName(name.toString());
-			company.setUrl(organizationObject.toString().replace("http://dbpedia.org/resource/", "http://" + uriInfo.getRequestUri().getHost() + "/company/"));
+			if (DEPLOY_ENV_AMAZAON)
+				company.setUrl(organizationObject.toString().replace(
+												"http://dbpedia.org/resource/", 
+												"http://" + uriInfo.getRequestUri().getHost() + "/company/"));
+			else
+				company.setUrl(organizationObject.toString().replace(
+												"http://dbpedia.org/resource/", 
+												"http://" + uriInfo.getRequestUri().getHost() + ":8080/SmartWikiSearch/company/"));
 			companyList.add(company);
 		}	
-		return companies;
+		return companyList;
 	}	
 	
 	public Company getCompanyInfo(String companyName, UriInfo uriInfo) {
