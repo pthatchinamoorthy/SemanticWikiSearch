@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" ng-app>
+	<head>		
+		<title>SemanticWikiSearch</title>
+		<style>
+			body {
+				background-color: lightgrey;																			
+			}
+			header {
+				border: solid;						
+				height: 100px; width: 100%;	
+				position: absolute; top:0px; left: 0px; right:0px; bottom: 0px;
+				background-color: white;					
+			}
+			article {
+				border:double;
+				position: absolute;
+				top: 100px;
+				bottom: 100px;
+				width: 100%;				
+			}			
+			nav {
+				position: absolute;
+				border:double;
+				width: 200px;
+				height: 100%;
+				background: linear-gradient(to bottom, skyblue, grey, skyblue);
+			}	
+			section {										
+				border:double;	
+				height: 100%;			
+				padding-left:250px;		
+				background: linear-gradient(to bottom, grey, white, grey);								
+			}			
+			footer {	
+				position: absolute; bottom: 0; height: 100px; width: 100%;						
+				background-color: white;
+				border:double				
+			}
+			table, th, td {
+    			border: 1px solid blue;
+			}	
+			#imgsematiclogo {
+				position : absolute; top:0px; left:0px;
+				height: 100px;
+				width: 360px;  				
+			}			
+			#imagsemantic {
+				position : absolute; top:0px; right:0px;
+				height: 100px;
+				width: 300px; 				
+			}
+			#imagcognizant {
+				position : absolute; bottom:0px; left:0px;
+				height: 100px;
+				width: 150px; 				
+			}
+			#imagbits {
+				position : absolute; bottom:0px; right:0px;
+				height: 100px;
+				width: 200px; 				
+			}			
+		</style>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+		<script>			
+			function CompanySearchController($scope, $http) {				
+				$http.get('html/company.json').
+					success(function (data) {
+						$scope.companies = data.companies;
+						}
+					);											
+			}
+		</script>
+	</head>
+	<body ng-controller="CompanySearchController">		
+		<header>			
+			<img id="imgsematiclogo" src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcS6O5wBdsvtOH4KtGKAT-3lEBJPDix_pC__OMevUCJBdZGKKzzc8yP33x6n"/>
+			<h2 style="text-align: center ; color: blue ; text-shadow: 1px 1px blue">Company Profile Search - A Semantic approach</h2>
+			<p style="text-align: center ; color: black"><em>This app will enable you to search for Company's Data in a
+				advanced options, and would return company profile with Semantic Markups.</em>
+			</p>
+			<img id="imagsemantic" alt="" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQ4d0NfqGCDLqcYaiyyZ0htWNWAFCqpxZeXIO32hudZ4TnkXNR2"/>
+		</header>
+
+		<article>
+			<nav>
+				<form action="">
+					<h1>Enter company keyword </h1> 
+					<input type="search"></input>
+					<br />
+				</form>
+			</nav>
+	
+			<section>		
+				<h1>Company Search Results</h1>		
+				<table style="border: double">
+					<thead>
+						<tr>
+							<th>Index</th>
+							<th>Company Name</th>
+							<th>Company Description</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-show="companies" ng-repeat="company in companies">
+							<td>{{$index + 1}}</td>							
+							<td>{{company.name}}</td>
+							<td>{{company.abstract}}</td>
+						</tr>
+					</tbody>
+				</table>									
+			</section>
+		</article>
+
+		<footer>
+			<img id="imagcognizant" alt="" src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSMMbZ-E060eweFxXr_JXUOS8g01KhL6uBLBbzsP4-tZQ4Djcju">
+			<p style="padding-left: 100px ; color: blue; text-align: center;">
+				<b style="text-align: center;">@ This project is a research project - demonstrating the capabilities of Semantic Technologies - SPARQL, RDFa and Semantic Markups</b><br/>
+				<span style="color: black"> @ <b><em>Guide</em></b>: Rahul Nandhagopal 				@ <b><em>Author</em></b> : Prabhakaran Thatchinamoorthy</span><br />
+			</p>			
+			<img id="imagbits" alt="" src="http://www.bits-pilani.ac.in/Uploads/Campus/BITS_university_logo.gif">
+		</footer>				
+		
+	</body>
+</html>

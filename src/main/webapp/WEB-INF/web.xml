@@ -26,7 +26,7 @@
 	</servlet-mapping>
 	
 	<welcome-file-list>
-		<welcome-file>html/index.html</welcome-file>
+		<welcome-file>html/companySearch.html</welcome-file>
 	</welcome-file-list>
 	
 
