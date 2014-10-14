@@ -21,16 +21,17 @@
 				width: 100%;				
 			}			
 			nav {
+				padding: 2px;
 				position: absolute;
 				border:double;
-				width: 300px;
+				width: 400px;
 				height: 100%;				
 				background-color: olive; 
 			}	
 			section {										
 				border:double;	
 				height: 100%;			
-				padding-left:320px;
+				padding-left:420px;
 				padding-right:20px;
 				right:5px;
 				background-color: lightgrey; 														
@@ -54,9 +55,9 @@
 			}
 			td {
     			background-color: white;
-    			color: olive ;
+    			color: black ;
     			padding: 4px;
-			}
+    		}
 			
 			#imgsematiclogo {
 				position : absolute; top:0px; left:0px;
@@ -69,9 +70,9 @@
 				width: 200px; 				
 			}
 			#imagwikipedia {
-				position : absolute; top:0px; right:200px;
+				position : absolute; top:0px; right:0px;
 				height: 90px;
-				width: 200px; 				
+				width: 250px; 				
 			}			
 			#imagcognizant {
 				position : absolute; bottom:0px; left:0px;
@@ -85,8 +86,8 @@
 			}
 			input {
 				padding: 5px; 
-				background-color:grey;
-				width: 30%;
+				background-color:lightgrey;			
+				width: 20%;
 			}		
 		</style>
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
@@ -106,14 +107,13 @@
 			<h2 style="text-align: center ; color: blue ; text-shadow: 1px 1px blue">Company Profile Search - A Semantic approach</h2>
 			<p style="text-align: center ; color: grey">
 				<em>Sophisticated Search of a Company's Profile. Powered with WikiPedia-DBPedia's Data</em>
-			</p>
-			<img id="imagsemantic" alt="" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTwIGiwmuW_fQsoUhFRg-y-sOsv3uDuc2A-9qEKbA84mJjih3xm"/>
+			</p>			
 			<img id="imagwikipedia" alt="" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiM_VIr99qQjaROXWuk9NsuqDEd12sR5-byII7h45WQ6sCDrDM"/>
 		</header>
 
 		<article ng-controller="CompanySearchController">
 			<nav>
-				<div style="border: double;">
+				<div style="border: double; padding:5px">
 					<h2 style="color:white">Keyword Search</h2>
 					<form action="" name="Keyword Search">
 						Company Keyword : <input type="search"></input>
@@ -121,23 +121,75 @@
 						<button type="submit" >Submit</button>
 					</form>
 				</div>
+				
 				<br/>
-				<br/>
-				<div style="border: double">
+				<div style="border: double ; padding:5px ;">
 					<h2 style="color:white; width: 100%">Multiple Option Search</h2>
-					<form action="" name="Multi Option Search">
-						Company Name : <input type="text"  />
-						<br />
-						Employee Size <b> > : </b> <input name=empsize1-test type=range min=1000 max=1000000 step=1000 onchange="this.form.empsize1.value=this.value;">
+					<form action="" name="Multi Option Search" style="right:5px">
+						<table>
+							<tbody>
+								<tr>
+									<td>
+										Company Name : <input type="text"  />
+									</td>
+									<td>
+										Industry Name : <input type="text"  />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Stock Symbol : <input type="text"  />
+									</td>
+									<td>
+										key People : <input type="text"  />	
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Employee Size <b> >  </b> <input name=empsize1-test type=range min=1000 max=1000000 step=1000 onchange="this.form.empsize1.value=this.value;">						
 						<output name=empsize1 for=range-test value=0></output>
-						<br/>
-						Employee Size <b> < : </b> <input name=empsize2-test type=range min=1000 max=1000000 step=1000 onchange="this.form.empsize2.value=this.value;">
+									</td>								
+									<td>
+									Employee Size <b> <  </b> <input name=empsize2-test type=range min=1000 max=1000000 step=1000 onchange="this.form.empsize2.value=this.value;">
 						<output name=empsize2 for=range-test value=0></output>
-						<br/>
-						Founded Date : <input type="date"  />
-						<br/>					
-						<button type="reset" >Reset</button>
-						<button type="submit" >Submit</button>						
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Founded Date : <input type="date"  />
+									</td>
+									<td>
+										Founded By : <input type="text"  />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Income > <input type="number"  />	
+									</td>
+									<td>
+										Revenue > <input type="number"  />		
+									</td>
+								</tr>
+								<tr>
+									<td>
+										City : <input type="text"  />	
+									</td>
+									<td>
+										State : <input type="text"  />	
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Country : <input type="text"  />
+									</td>
+									<td>
+										Company Name : <input type="text"  />
+									</td>
+								</tr>
+								<button type="reset" >Reset</button>
+								<button type="submit" >Submit</button>								
+							</tbody>
+						</table>				
 					</form>
 				</div>
 			</nav>
