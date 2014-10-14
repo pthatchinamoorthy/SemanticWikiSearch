@@ -4,40 +4,17 @@
 	
 </head>
 <body>
-	<h1>
-		<em>AdvancedWikiSearch - A Semantic Web Application</em>
-	</h1>
-	
-	<p>
-		<b>
-			<em>REST endpoint</em>
-		</b>
-		<br/>
-		<ul>
-			<li>
-				http://{hostname}/company/search/{search_keyword}
-			<li>
-				<a href="http://prabhakarwikisearch.elasticbeanstalk.com/company/search/microsoft" >http://prabhakarwikisearch.elasticbeanstalk.com/company/search/microsoft</a>
-			</li>
-			<li>
-				<a href="http://prabhakarwikisearch.elasticbeanstalk.com/company/search/cognizant" >http://prabhakarwikisearch.elasticbeanstalk.com/company/search/cognizant</a>
-			</li>
-			<li>
-				<a href="http://prabhakarwikisearch.elasticbeanstalk.com/company/search/apple" >http://prabhakarwikisearch.elasticbeanstalk.com/company/search/apple</a>
-			</li>
-		</ul>
-	</p>
-	
-	<br/>
-	
-	
-	<b><em>Source Code : </em></b> 
+	<h1 style="color: blue;">
+		<em>Company Profile Search - A Semantic Web Approach</em>
+	</h1>	
+	<br/>	
+	<h3 style="color: blue;"><em>Source Code in GITHUB : </em></h3> 
 	<a href="https://github.com/prabhakar1983/SemanticWikiSearch/">https://github.com/prabhakar1983/SemanticWikiSearch/</a>
 	<br/>
 	<br/>
 	
 	
-	<b><em>Use Cases</em></b>
+	<h3 style="color: blue;"><em>Use Cases</em></h3>
 	<br/> 
 	This is a Semantic Web Application that allows you
 	to search for any Company's profile. The Use Cases are
@@ -54,7 +31,7 @@
 			data</li>
 	</ol>
 	<br/>
-	<b><em>Technology</em></b>
+	<h3 style="color: blue;"><em>Technology</em></h3>
 	<br/>
 	The building blocks of this applications are
 	<ol>
@@ -67,7 +44,7 @@
 		</li>
 		<li>Presentation Layer
 			<ol>
-				<li>Spring Web MVC with ThemeLeaf templates</li>
+				<li>Angular JS</li>
 				<li><a href="http://schema.org/">http://schema.org/</a>
 					ontology to markup the web pages</li>
 				<li>RDFa serialization format</li>
@@ -75,15 +52,41 @@
 		</li>
 		<li>RDFa Distiller (Yet to decided) to extract Structed data from
 			the Web Page.</li>
+		<li>Build and Deployment
+			<ol>
+				<li>Deployed Environment : Amazon Elastic Bean Stalk</li>
+				<li>Deployment Server : Tomcat</li>
+				<li>Build Tool : GRADLE </li>				
+			</ol>
+		</li>
 	</ol>
 	
 	<br/>
-	<b><em>Component Diagram</em></b>
+	<h3 style="color: blue;"><em>Component Diagram</em></h3>
 	<br/> 
 	The following figure depicts the technical
 	components and the activity flow for all the 3 Use Cases
 	<img
 		src="https://s3-us-west-2.amazonaws.com/semanticwikisearch/images/ComponentDiagram.png" />
-
+<br/>
+	<p>
+		<h3 style="color: blue;">
+			<em>REST endpoint</em>
+		</h3>
+		<br/>
+		<ul>
+			<li>
+				http://{hostname}/company/search/{search_keyword}
+			<li>
+				<a href="http://prabhakarwikisearch.elasticbeanstalk.com/company/search/microsoft" >http://prabhakarwikisearch.elasticbeanstalk.com/company/search/microsoft</a>
+			</li>
+			<li>
+				<a href="http://prabhakarwikisearch.elasticbeanstalk.com/company/search/cognizant" >http://prabhakarwikisearch.elasticbeanstalk.com/company/search/cognizant</a>
+			</li>
+			<li>
+				<a href="http://prabhakarwikisearch.elasticbeanstalk.com/company/search/apple" >http://prabhakarwikisearch.elasticbeanstalk.com/company/search/apple</a>
+			</li>
+		</ul>
+	</p>
 </body>
 </html>
