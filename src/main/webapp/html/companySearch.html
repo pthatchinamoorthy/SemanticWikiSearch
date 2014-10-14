@@ -23,15 +23,15 @@
 			nav {
 				position: absolute;
 				border:double;
-				width: 200px;
-				height: 100%;
+				width: 350px;
+				height: 100%;				
 				background-color: olive; 
 			}	
 			section {										
 				border:double;	
 				height: 100%;			
-				padding-left:230px;
-				padding-right:30px;
+				padding-left:370px;
+				padding-right:20px;
 				right:5px;
 				background-color: lightgrey; 														
 			}			
@@ -82,7 +82,12 @@
 				position : absolute; bottom:0px; right:0px;
 				height: 90px;
 				width: 200px; 				
-			}			
+			}
+			input {
+				padding: 5px; 
+				background-color:grey;
+				width: 30%;
+			}		
 		</style>
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
 		<script>			
@@ -108,26 +113,32 @@
 
 		<article ng-controller="CompanySearchController">
 			<nav>
-				<div style="border: groove;">
+				<div style="border: double;">
 					<h2 style="color:white">Keyword Search</h2>
 					<form action="" name="Keyword Search">
-						Company Keyword : <input style="padding: 5px" type="search"></input>
+						Company Keyword : <input type="search"></input>
 						<br />
 						<button type="submit" >Submit</button>
 					</form>
 				</div>
 				<br/>
 				<br/>
-				<div style="border: groove;">
+				<div style="border: double; height: 100%">
 					<h2 style="color:white; width: 100%">Multiple Option Search</h2>
 					<form action="" name="Multi Option Search">
-						Company Name : <input style="padding: 5px" type="text"/>
+						Company Name : <input type="text"  />
 						<br />
-						Employee Size <em>greater than<em>: <input style="padding: 5px" type="number"/>
+						Employee Size <b> > : </b> <input name=empsize1-test type=range min=1000 max=1000000 step=1000 onchange="this.form.empsize1.value=this.value;">
+						<output name=empsize1 for=range-test value=0></output>
 						<br/>
-						Foundeed Date <em>greater than</em>: <input style="padding: 5px" type="date"/>
-						<button type="submit" >Submit</button>
+						Employee Size <b> < : </b> <input name=empsize2-test type=range min=1000 max=1000000 step=1000 onchange="this.form.empsize2.value=this.value;">
+						<output name=empsize2 for=range-test value=0></output>
+						<br/>
+						Founded Date : <input type="date"  />
+
+						<br/>					
 						<button type="reset" >Reset</button>
+						<button type="submit" >Submit</button>						
 					</form>
 				</div>
 			</nav>
