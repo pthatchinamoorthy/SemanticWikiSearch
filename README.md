@@ -1,7 +1,7 @@
 # <em>AdvancedWikiSearch - A Semantic Web Application</em>
 
 # <em> Hosted URL - </em>
-         <a href="http://prabhakarwikisearch.elasticbeanstalk.com">http://prabhakarwikisearch.elasticbeanstalk.com</a>
+<a href="http://prabhakarwikisearch.elasticbeanstalk.com">http://prabhakarwikisearch.elasticbeanstalk.com</a>
 
 # <em>What is it</em>
 This is a Semantic Web Application that allows you to search for any Company's profile. 
