@@ -1,6 +1,6 @@
 # <em>AdvancedWikiSearch - A Semantic Web Application</em>
 
-# <em> Hosted URL - </em>
+# <em>URL - </em>
 <a href="http://prabhakarwikisearch.elasticbeanstalk.com">http://prabhakarwikisearch.elasticbeanstalk.com</a>
 
 # <em>What is it</em>
