@@ -32,7 +32,7 @@ public class DBPediaSAO {
 	 * @param searchKeyword
 	 * @param uriInfo 
 	 */
-	public List<Company> searchCompanyInfo(String searchKeyword, UriInfo uriInfo) {	
+	public Companies searchCompanyInfo(String searchKeyword, UriInfo uriInfo) {	
 		Triple triple = Triple.create(Var.alloc("organization"), NodeFactory.createURI("http://xmlns.com/foaf/0.1/name") , Var.alloc("name"));
 		Expr e = new E_Regex(new ExprVar("name"), new NodeValueString("^" + searchKeyword + "*"), new NodeValueString("i"));
 		
@@ -76,7 +76,7 @@ public class DBPediaSAO {
 												"http://" + uriInfo.getRequestUri().getHost() + ":8080/SmartWikiSearch/company/"));
 			companyList.add(company);
 		}	
-		return companyList;
+		return new Companies(companyList);
 	}	
 	
 	public Company getCompanyInfo(String companyName, UriInfo uriInfo) {

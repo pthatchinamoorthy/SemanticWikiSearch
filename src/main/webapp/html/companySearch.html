@@ -4,7 +4,7 @@
 		<title>SemanticWikiSearch</title>
 		<style>
 			body {
-				background-color: lightgrey;																			
+				background-color: white;																			
 			}
 			header {
 				border: solid;						
@@ -34,7 +34,7 @@
 				padding-left:420px;
 				padding-right:20px;
 				right:5px;
-				background-color: lightgrey; 														
+				background-color: white; 														
 			}			
 			footer {	
 				position: absolute; bottom: 0px; height: 90px; width: 100%; left:0px;					
@@ -86,18 +86,45 @@
 			}
 			input {
 				padding: 5px; 
-				background-color:lightgrey;			
+				background-color:yellow;			
 				width: 20%;
 			}		
 		</style>
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
 		<script>			
-			function CompanySearchController($scope, $http) {				
-				$http.get('html/company.json').
+			function CompanySearchController($scope, $http) {
+						
+				$scope.keywordSearch = function(){
+					$scope.company=null;
+					//$http.get('html/company.json').
+					$http.get('company/search/' + $scope.keyword).										
+						success(function (data) {							
+							$scope.companies = data.companies;
+						}
+					);
+				}
+					
+				$scope.multipleOptionSearch = function(){					
+					var multipleOptionURL = 'company/mutilple-option-search?' + "companyName=" + $scope.companyName + "&industryName=" + $scope.industryName + "&stockSymbol=" + $scope.stockSymbol + "&keyPeople=" + $scope.keyPeople + "&greaterThanEmployeeSize=" + $scope.greaterThanEmployeeSize + "&lesserThanEmployeeSize=" + $scope.lesserThanEmployeeSize + "&foundedBy=" + $scope.foundedBy + "&income=" + $scope.income + "&revenue=" + $scope.revenue + "&city=" + $scope.city + "&state=" + $scope.state + "&country=" + $scope.country + "&xxx=" + $scope.xxx;
+					alert(multipleOptionURL);																  
+					$http.get($multipleOptionURL).									
 					success(function (data) {
 						$scope.companies = data.companies;
 						}
-					);											
+					);
+				}
+				
+				$scope.getCompanyInfo = function(companyUrl){		
+					$scope.companies = null;
+					//var companyUrl = companyUrl.substring(38);
+					var companyUrl = companyUrl.substring(48);
+					$http.get(companyUrl).									
+						success(function (data) {
+							$scope.company = data;
+						}
+					);
+				}	
+																
 			}
 		</script>
 	</head>
@@ -116,9 +143,9 @@
 				<div style="border: double; padding:5px">
 					<h2 style="color:white">Keyword Search</h2>
 					<form action="" name="Keyword Search">
-						Company Keyword : <input type="search"></input>
+						Company Keyword : <input ng-model="keyword" type="search"></input>
 						<br />
-						<button type="submit" >Submit</button>
+						<button type="submit" ng-click="keywordSearch();">Submit</button>
 					</form>
 				</div>
 				
@@ -130,64 +157,66 @@
 							<tbody>
 								<tr>
 									<td>
-										Company Name : <input type="text"  />
+										Company Name : <input ng-model="companyName" type="text"  />
 									</td>
 									<td>
-										Industry Name : <input type="text"  />
-									</td>
-								</tr>
-								<tr>
-									<td>
-										Stock Symbol : <input type="text"  />
-									</td>
-									<td>
-										key People : <input type="text"  />	
+										Industry Name : <input ng-model="industryName" type="text"  />
 									</td>
 								</tr>
 								<tr>
 									<td>
-										Employee Size <b> >  </b> <input name=empsize1-test type=range min=1000 max=1000000 step=1000 onchange="this.form.empsize1.value=this.value;">						
-						<output name=empsize1 for=range-test value=0></output>
+										Stock Symbol : <input ng-model="stockSymbol" type="text"  />
+									</td>
+									<td>
+										key People : <input ng-model="keyPeople" type="text"  />	
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Employee Size <b> >  </b> 
+										<input ng-model="greaterThanEmployeeSize" name=empsize1-test type=range min=1000 max=1000000 step=1000 onchange="this.form.empsize1.value=this.value;">						
+										<output name=empsize1 for=range-test value=0></output>
 									</td>								
 									<td>
-									Employee Size <b> <  </b> <input name=empsize2-test type=range min=1000 max=1000000 step=1000 onchange="this.form.empsize2.value=this.value;">
-						<output name=empsize2 for=range-test value=0></output>
+									Employee Size <b> < </b>
+									<input ng-model="lesserThanEmployeeSize" name=empsize2-test type=range min=1000 max=1000000 step=1000 onchange="this.form.empsize2.value=this.value;">
+									<output name=empsize2 for=range-test value=0></output>
 									</td>
 								</tr>
 								<tr>
 									<td>
-										Founded Date : <input type="date"  />
+										Founded Date : <input ng-model="foundedDate" type="date"  />
 									</td>
 									<td>
-										Founded By : <input type="text"  />
-									</td>
-								</tr>
-								<tr>
-									<td>
-										Income > <input type="number"  />	
-									</td>
-									<td>
-										Revenue > <input type="number"  />		
+										Founded By : <input ng-model="foundedBy" type="text"  />
 									</td>
 								</tr>
 								<tr>
 									<td>
-										City : <input type="text"  />	
+										Income > <input ng-model="income" type="number"  />	
 									</td>
 									<td>
-										State : <input type="text"  />	
+										Revenue > <input ng-model="revenue" type="number"  />		
 									</td>
 								</tr>
 								<tr>
 									<td>
-										Country : <input type="text"  />
+										City : <input ng-model="city" type="text"  />	
 									</td>
 									<td>
-										Company Name : <input type="text"  />
+										State : <input ng-model="state" type="text"  />	
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Country : <input ng-model="country" type="text"  />
+									</td>
+									<td>
+										xxx : <input ng-model="xxx" type="text"  />
 									</td>
 								</tr>
 								<button type="reset" >Reset</button>
-								<button type="submit" >Submit</button>								
+								<button type="submit" ng-click="multipleOptionSearch();">Submit</button>								
 							</tbody>
 						</table>				
 					</form>
@@ -195,27 +224,77 @@
 			</nav>
 	
 			<section>		
-				<h3>Company Search Results</h3>		
-				<table>
-					<thead>
-						<tr>
-							<th>Index</th>
-							<th>Company Name</th>
-							<th>Address</th>
-							<th>StockSymbol</th>
-							<th>Company Source - WikiPedia URL</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr ng-show="companies" ng-repeat="company in companies">
-							<td>{{$index + 1}}</td>
-							<td><a ng-href="{{company.dbpediaowlisPrimaryTopicOf}}">{{company.name}}</a></td>
-							<td>{{company.name}}</td>
-							<td>{{company.name}}</td>
-							<td><a ng-href="{{company.dbpediaowlisPrimaryTopicOf}}">{{company.dbpediaowlisPrimaryTopicOf}}</a></td>
-						</tr>
-					</tbody>
-				</table>									
+				
+				<div><h3 ng-show="keyword || companyName || industryName || stockSymbol || greaterThanEmployeeSize
+									|| lesserThanEmployeeSize || foundedBy || foundedDate || income ||
+									 revenue || city || state || country || xxx">Input Search Criteria</h3>
+					<p style="color:green">
+						<span style="color:green" ng-show="keyword">Company Keyword : <span style="color:blue" ng-show="keyword">{{keyword}} </span></span>&nbsp;&nbsp;&nbsp;
+						<span style="color:green" ng-show="companyName">companyName : <span style="color:blue" ng-show="companyName">{{companyName}}  </span></span>&nbsp;&nbsp;&nbsp;						
+						<span style="color:green" ng-show="industryName">industryName : <span style="color:blue" ng-show="industryName"> {{industryName}}  </span></span>&nbsp;&nbsp;&nbsp;
+						<span style="color:green" ng-show="stockSymbol">stockSymbol : <span style="color:blue" ng-show="stockSymbol">{{stockSymbol}} </span> </span>&nbsp;&nbsp;&nbsp;
+						<span style="color:green" ng-show="greaterThanEmployeeSize">greaterThanEmployeeSize : <span style="color:blue" ng-show="greaterThanEmployeeSize">{{greaterThanEmployeeSize}} </span> </span>&nbsp;&nbsp;&nbsp;
+						<span style="color:green" ng-show="lesserThanEmployeeSize">lesserThanEmployeeSize : <span style="color:blue" ng-show="lesserThanEmployeeSize">{{lesserThanEmployeeSize}}  </span></span>&nbsp;&nbsp;&nbsp;
+						<span style="color:green" ng-show=foundedBy>foundedBy : <span style="color:blue" ng-show=foundedBy>{{foundedBy}}  </span></span>&nbsp;&nbsp;&nbsp;
+						<span style="color:green" ng-show="foundedDate">foundedDate : <span style="color:blue" ng-show="foundedDate"> {{foundedDate}}  </span></span>&nbsp;&nbsp;&nbsp;
+						<span style="color:green" ng-show="income">income : <span style="color:blue" ng-show="income">{{income}} </span> </span>&nbsp;&nbsp;&nbsp;
+						<span style="color:green" ng-show="revenue">revenue : <span style="color:blue" ng-show="revenue"> {{revenue}}  </span></span>&nbsp;&nbsp;&nbsp;
+						<span style="color:green" ng-show="city">city : <span style="color:blue" ng-show="city">{{city}}  </span></span>&nbsp;&nbsp;&nbsp;		
+						<span style="color:green" ng-show="state">state : <span style="color:blue" ng-show="state">{{state}} </span> </span>&nbsp;&nbsp;&nbsp;
+						<span style="color:green" ng-show="country">country : <span style="color:blue" ng-show="country">{{country}}  </span></span>&nbsp;&nbsp;&nbsp;
+						<span style="color:green" ng-show="xxx">xxx : <span style="color:blue" ng-show="xxx">{{xxx}}  </span></span>&nbsp;&nbsp;&nbsp;				
+					</p>
+				</div>
+				
+				<div ng-show="companies"><h3>Company Search Results</h3>					
+					<table>
+						<thead>
+							<tr>
+								<th>Index</th>
+								<th>Company Name</th>
+								<th>Address</th>
+								<th>StockSymbol</th>
+								<th>Company Source - WikiPedia URL</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="company in companies">
+								<td>{{$index + 1}}</td>
+								<td><a ng-click="getCompanyInfo(company.url);">{{company.companyName}}</a></td>
+								<td>{{company.companyName}}</td>
+								<td>{{company.companyName}}</td>
+								<td><a ng-href="{{company.dbpediaowlisPrimaryTopicOf}}">{{company.url}}</a></td>
+							</tr>
+							
+						</tbody>
+						<button type="button" ng-click="companies = null">Clear Results</button>
+					</table>
+				</div>
+				
+				<div ng-show="company"><h3>Company Information</h3>					
+					<table>						
+						<tbody>
+							<tr>
+								<td>Company Name</td>
+								<td>{{company.companyName}}</td>
+							</tr>
+							<tr>
+								<td>Company URL</td>
+								<td>{{company.url}}</td>
+							</tr>
+							<tr>
+								<td>WikiPedia Name</td>
+								<td>{{company.dataSourceUrl}}</td>
+							</tr>
+							<tr>
+								<td>Company Synopsis</td>
+								<td>{{company.description}}</td>
+							</tr>
+							
+						</tbody>
+						<button type="button" ng-click="company = null">Clear Results</button>
+					</table>
+				</div>	
 			</section>			
 		</article>
 
