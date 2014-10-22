@@ -1,70 +1,62 @@
-{  
-   "@context":{  
-      "dbpedia-owl":"http://dbpedia.org/ontology/",
-      "foaf":"http://xmlns.com/foaf/0.1/"
-   },
-   "@id":"http://localhost:8080/SmartWikiSearch/company/Microsoft_Live_Labs_Listas",
-   "companies":[  
-      {  
-         "name":"Listas@en",
-         "foafurl":"http://localhost:8080/SmartWikiSearch/company/Microsoft_Live_Labs_Listas",
-         "dbpediaowlisPrimaryTopicOf":"http://en.wikipedia.org/wiki/Microsoft_Live_Labs_Listas",
-         "abstract":"Listas was a tool for the creation, management and sharing of lists, notes, and favorites, being developed at Microsoft Live labs. It allowed users to quickly and easily edit lists, share them with others for reading or wiki-style editing, and discover the public lists of other users.The Listas Community section allowed users to find highlights of the most popular lists from around the community of public lists, such as the most used tags, the \"hottest lists\", and prolific contributors. Users were able to add another user's lists or RSS feed to their own Listas to keep them up to date.Listas has since been retired as a project from Live Labs.@en"
-      },
-      {  
-         "name":"Microsfot@en",
-         "foafurl":"http://localhost:8080/SmartWikiSearch/company/Microsoft_Live_Labs_Listas",
-         "dbpediaowlisPrimaryTopicOf":"http://en.wikipedia.org/wiki/Microsoft_Live_Labs_Listas",
-         "abstract":"Microsfot was a tool for the creation, management and sharing of lists, notes, and favorites, being developed at Microsoft Live labs. It allowed users to quickly and easily edit lists, share them with others for reading or wiki-style editing, and discover the public lists of other users.The Listas Community section allowed users to find highlights of the most popular lists from around the community of public lists, such as the most used tags, the \"hottest lists\", and prolific contributors. Users were able to add another user's lists or RSS feed to their own Listas to keep them up to date.Listas has since been retired as a project from Live Labs.@en"
-      },
-      {  
-         "name":"Microsfot@en",
-         "foafurl":"http://localhost:8080/SmartWikiSearch/company/Microsoft_Live_Labs_Listas",
-         "dbpediaowlisPrimaryTopicOf":"http://en.wikipedia.org/wiki/Microsoft_Live_Labs_Listas",
-         "abstract":"Microsfot was a tool for the creation, management and sharing of lists, notes, and favorites, being developed at Microsoft Live labs. It allowed users to quickly and easily edit lists, share them with others for reading or wiki-style editing, and discover the public lists of other users.The Listas Community section allowed users to find highlights of the most popular lists from around the community of public lists, such as the most used tags, the \"hottest lists\", and prolific contributors. Users were able to add another user's lists or RSS feed to their own Listas to keep them up to date.Listas has since been retired as a project from Live Labs.@en"
-      },
-      {  
-         "name":"Microsfot@en",
-         "foafurl":"http://localhost:8080/SmartWikiSearch/company/Microsoft_Live_Labs_Listas",
-         "dbpediaowlisPrimaryTopicOf":"http://en.wikipedia.org/wiki/Microsoft_Live_Labs_Listas",
-         "abstract":"Microsfot was a tool for the creation, management and sharing of lists, notes, and favorites, being developed at Microsoft Live labs. It allowed users to quickly and easily edit lists, share them with others for reading or wiki-style editing, and discover the public lists of other users.The Listas Community section allowed users to find highlights of the most popular lists from around the community of public lists, such as the most used tags, the \"hottest lists\", and prolific contributors. Users were able to add another user's lists or RSS feed to their own Listas to keep them up to date.Listas has since been retired as a project from Live Labs.@en"
-      },
-      {  
-         "name":"Microsfot@en",
-         "foafurl":"http://localhost:8080/SmartWikiSearch/company/Microsoft_Live_Labs_Listas",
-         "dbpediaowlisPrimaryTopicOf":"http://en.wikipedia.org/wiki/Microsoft_Live_Labs_Listas",
-         "abstract":"Microsfot was a tool for the creation, management and sharing of lists, notes, and favorites, being developed at Microsoft Live labs. It allowed users to quickly and easily edit lists, share them with others for reading or wiki-style editing, and discover the public lists of other users.The Listas Community section allowed users to find highlights of the most popular lists from around the community of public lists, such as the most used tags, the \"hottest lists\", and prolific contributors. Users were able to add another user's lists or RSS feed to their own Listas to keep them up to date.Listas has since been retired as a project from Live Labs.@en"
-      },
-      {  
-         "name":"Microsfot@en",
-         "foafurl":"http://localhost:8080/SmartWikiSearch/company/Microsoft_Live_Labs_Listas",
-         "dbpediaowlisPrimaryTopicOf":"http://en.wikipedia.org/wiki/Microsoft_Live_Labs_Listas",
-         "abstract":"Microsfot was a tool for the creation, management and sharing of lists, notes, and favorites, being developed at Microsoft Live labs. It allowed users to quickly and easily edit lists, share them with others for reading or wiki-style editing, and discover the public lists of other users.The Listas Community section allowed users to find highlights of the most popular lists from around the community of public lists, such as the most used tags, the \"hottest lists\", and prolific contributors. Users were able to add another user's lists or RSS feed to their own Listas to keep them up to date.Listas has since been retired as a project from Live Labs.@en"
-      },
-      {  
-         "name":"Microsfot@en",
-         "foafurl":"http://localhost:8080/SmartWikiSearch/company/Microsoft_Live_Labs_Listas",
-         "dbpediaowlisPrimaryTopicOf":"http://en.wikipedia.org/wiki/Microsoft_Live_Labs_Listas",
-         "abstract":"Microsfot was a tool for the creation, management and sharing of lists, notes, and favorites, being developed at Microsoft Live labs. It allowed users to quickly and easily edit lists, share them with others for reading or wiki-style editing, and discover the public lists of other users.The Listas Community section allowed users to find highlights of the most popular lists from around the community of public lists, such as the most used tags, the \"hottest lists\", and prolific contributors. Users were able to add another user's lists or RSS feed to their own Listas to keep them up to date.Listas has since been retired as a project from Live Labs.@en"
-      },
-      {  
-         "name":"Microsfot@en",
-         "foafurl":"http://localhost:8080/SmartWikiSearch/company/Microsoft_Live_Labs_Listas",
-         "dbpediaowlisPrimaryTopicOf":"http://en.wikipedia.org/wiki/Microsoft_Live_Labs_Listas",
-         "abstract":"Microsfot was a tool for the creation, management and sharing of lists, notes, and favorites, being developed at Microsoft Live labs. It allowed users to quickly and easily edit lists, share them with others for reading or wiki-style editing, and discover the public lists of other users.The Listas Community section allowed users to find highlights of the most popular lists from around the community of public lists, such as the most used tags, the \"hottest lists\", and prolific contributors. Users were able to add another user's lists or RSS feed to their own Listas to keep them up to date.Listas has since been retired as a project from Live Labs.@en"
-      },
-      {  
-         "name":"Microsfot@en",
-         "foafurl":"http://localhost:8080/SmartWikiSearch/company/Microsoft_Live_Labs_Listas",
-         "dbpediaowlisPrimaryTopicOf":"http://en.wikipedia.org/wiki/Microsoft_Live_Labs_Listas",
-         "abstract":"Microsfot was a tool for the creation, management and sharing of lists, notes, and favorites, being developed at Microsoft Live labs. It allowed users to quickly and easily edit lists, share them with others for reading or wiki-style editing, and discover the public lists of other users.The Listas Community section allowed users to find highlights of the most popular lists from around the community of public lists, such as the most used tags, the \"hottest lists\", and prolific contributors. Users were able to add another user's lists or RSS feed to their own Listas to keep them up to date.Listas has since been retired as a project from Live Labs.@en"
-      },
-      {  
-         "name":"Microsfot@en",
-         "foafurl":"http://localhost:8080/SmartWikiSearch/company/Microsoft_Live_Labs_Listas",
-         "dbpediaowlisPrimaryTopicOf":"http://en.wikipedia.org/wiki/Microsoft_Live_Labs_Listas",
-         "abstract":"Microsfot was a tool for the creation, management and sharing of lists, notes, and favorites, being developed at Microsoft Live labs. It allowed users to quickly and easily edit lists, share them with others for reading or wiki-style editing, and discover the public lists of other users.The Listas Community section allowed users to find highlights of the most popular lists from around the community of public lists, such as the most used tags, the \"hottest lists\", and prolific contributors. Users were able to add another user's lists or RSS feed to their own Listas to keep them up to date.Listas has since been retired as a project from Live Labs.@en"
-      }
-      
-   ]
+{companies=[
+{
+"companyName": "Microsoft Live Labs@en",
+"url": "http://localhost:8080/SmartWikiSearch/company/Microsoft_Live_Labs_Listas",
+"dataSourceUrl": null,
+"description": null
+},
+{
+"companyName": "Microsoft Cluster Server@en",
+"url": "http://localhost:8080/SmartWikiSearch/company/Microsoft_Cluster_Server",
+"dataSourceUrl": null,
+"description": null
+},
+{
+"companyName": "Microsoft Streets & Trips@en",
+"url": "http://localhost:8080/SmartWikiSearch/company/Microsoft_Streets_&_Trips",
+"dataSourceUrl": null,
+"description": null
+},
+{
+"companyName": "Microsoft Encarta@en",
+"url": "http://localhost:8080/SmartWikiSearch/company/Encarta",
+"dataSourceUrl": null,
+"description": null
+},
+{
+"companyName": "Microsoft Power Pivot@en",
+"url": "http://localhost:8080/SmartWikiSearch/company/PowerPivot",
+"dataSourceUrl": null,
+"description": null
+},
+{
+"companyName": "Microsoft Exchange ActiveSync@en",
+"url": "http://localhost:8080/SmartWikiSearch/company/Exchange_ActiveSync",
+"dataSourceUrl": null,
+"description": null
+},
+{
+"companyName": "Microsoft Bob@en",
+"url": "http://localhost:8080/SmartWikiSearch/company/Microsoft_Bob",
+"dataSourceUrl": null,
+"description": null
+},
+{
+"companyName": "Microsoft Developer Network@en",
+"url": "http://localhost:8080/SmartWikiSearch/company/Microsoft_Developer_Network",
+"dataSourceUrl": null,
+"description": null
+},
+{
+"companyName": "Microsoft InterConnect@en",
+"url": "http://localhost:8080/SmartWikiSearch/company/Microsoft_InterConnect",
+"dataSourceUrl": null,
+"description": null
+},
+{
+"companyName": "Microsoft Office 95@en",
+"url": "http://localhost:8080/SmartWikiSearch/company/Microsoft_Office_95",
+"dataSourceUrl": null,
+"description": null
 }
+]}
