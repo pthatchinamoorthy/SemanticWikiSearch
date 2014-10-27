@@ -1,0 +1,113 @@
+body {
+	background-color: white;
+}
+
+header {
+	border: solid;
+	height: 90px;
+	width: 100%;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+	background-color: white;
+}
+
+article {
+	border: double;
+	position: absolute;
+	left: 0px;
+	top: 90px;
+	bottom: 90px;
+	width: 100%;
+}
+
+nav {
+	padding: 2px;
+	position: absolute;
+	border: double;
+	width: 400px;
+	height: 100%;
+	background-color: olive;
+}
+
+section {
+	border: double;
+	height: 100%;
+	padding-left: 420px;
+	padding-right: 20px;
+	right: 5px;
+	background-color: white;
+}
+
+footer {
+	position: absolute;
+	bottom: 0px;
+	height: 90px;
+	width: 100%;
+	left: 0px;
+	background-color: white;
+	border: double
+}
+
+table {
+	border-collapse: collapse;
+	padding: 10px;
+}
+
+table,th,td {
+	border: 1px solid black;
+}
+
+th {
+	background-color: olive;
+	color: white;
+	padding: 4px;
+}
+
+td {
+	background-color: white;
+	color: black;
+	padding: 4px;
+}
+
+#imgsematiclogo {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	height: 90px;
+	width: 300px;
+}
+
+#imagsemantic {
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	height: 90px;
+	width: 200px;
+}
+
+#imagwikipedia {
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	height: 90px;
+	width: 250px;
+}
+
+#imagcognizant {
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+	height: 90px;
+	width: 150px;
+}
+
+#imagbits {
+	position: absolute;
+	bottom: 0px;
+	right: 0px;
+	height: 90px;
+	width: 200px;
+}

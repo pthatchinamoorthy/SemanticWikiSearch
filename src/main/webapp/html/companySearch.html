@@ -2,140 +2,20 @@
 <html lang="en" ng-app>
 	<head>		
 		<title>SemanticWikiSearch</title>
-		<style>
-			body {
-				background-color: white;																			
-			}
-			header {
-				border: solid;						
-				height: 90px; width: 100%;	
-				position: absolute; top:0px; left: 0px; right:0px; bottom: 0px;
-				background-color: white;					
-			}
-			article {
-				border:double;
-				position: absolute;
-				left:0px;
-				top: 90px;
-				bottom: 90px;
-				width: 100%;				
-			}			
-			nav {
-				padding: 2px;
-				position: absolute;
-				border:double;
-				width: 400px;
-				height: 100%;				
-				background-color: olive; 
-			}	
-			section {				
-				border:double;	
-				height: 100%;			
-				padding-left:420px;
-				padding-right:20px;
-				right:5px;
-				background-color: white; 														
-			}			
-			footer {	
-				position: absolute;
-				bottom: 0px;
-				height: 90px;
-				width: 100%;
-				left:0px;					
-				background-color: white;
-				border:double				
-			}
-			table {
-    			border-collapse: collapse;
-    			padding: 10px;
-			}
-			table, th, td {
-    			border: 1px solid black;
-			}	
-			th {
-    			background-color: olive;
-    			color: white;
-    			padding: 4px;
-			}
-			td {
-    			background-color: white;
-    			color: black ;
-    			padding: 4px;
-    		}
-			
-			#imgsematiclogo {
-				position : absolute; top:0px; left:0px;
-				height: 90px;
-				width: 300px;  				
-			}			
-			#imagsemantic {
-				position : absolute; top:0px; right:0px;
-				height: 90px;
-				width: 200px; 				
-			}
-			#imagwikipedia {
-				position : absolute; top:0px; right:0px;
-				height: 90px;
-				width: 250px; 				
-			}			
-			#imagcognizant {
-				position : absolute; bottom:0px; left:0px;
-				height: 90px;
-				width: 150px; 				
-			}
-			#imagbits {
-				position : absolute; bottom:0px; right:0px;
-				height: 90px;
-				width: 200px; 				
-			}					
-		</style>
-		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
-		<script>			
-			function CompanySearchController($scope, $http) {
-						
-				$scope.keywordSearch = function(){
-					$scope.ajax=1;
-					$scope.company=null;
-					//$http.get('html/company.json').
-					$http.get('company/search/' + $scope.keyword).										
-						success(function (data) {							
-							$scope.companies = data.companies;
-						}
-					);
-					$scope.ajax=null;
-				}
-					
-				$scope.multipleOptionSearch = function(){					
-					var multipleOptionURL = 'company/mutilple-option-search?' + "companyName=" + $scope.companyName + "&industryName=" + $scope.industryName + "&stockSymbol=" + $scope.stockSymbol + "&keyPeople=" + $scope.keyPeople + "&greaterThanEmployeeSize=" + $scope.greaterThanEmployeeSize + "&lesserThanEmployeeSize=" + $scope.lesserThanEmployeeSize + "&foundedBy=" + $scope.foundedBy + "&income=" + $scope.income + "&revenue=" + $scope.revenue + "&city=" + $scope.city + "&state=" + $scope.state + "&country=" + $scope.country + "&xxx=" + $scope.xxx;
-					alert(multipleOptionURL);																  
-					$http.get($multipleOptionURL).									
-					success(function (data) {
-						$scope.companies = data.companies;
-						}
-					);
-				}
-				
-				$scope.getCompanyInfo = function(companyUrl){		
-					$scope.companies = null;
-					var companyUrl = companyUrl.substring(38); 
-					//var companyUrl = companyUrl.substring(48); // AMAZON
-					$http.get(companyUrl).									
-						success(function (data) {
-							$scope.company = data;
-						}
-					);
-				}																
-			}
-		</script>
+		
+		<link rel="stylesheet" type="text/css" href="css/wiki-search.css"></link>
+		
+		<script type="text/javascript" src="js/angular.min.js"></script>
+		<script type="text/javascript" src="js/wiki-search.js"></script>
 	</head>
 	<body>		
 		<header>			
-			<img id="imgsematiclogo" src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSsT3ooJxLXU_elPl_Ff4EnW2w9xjqgI7CvfB5Rei9hiohy2GWh"/>
+			<img id="imgsematiclogo" src="images/SEO.jpg"/>
 			<h2 style="text-align: center ; color: blue ; text-shadow: 1px 1px blue">Company Profile Search - A Semantic approach</h2>
 			<p style="text-align: center ; color: grey">
 				<em>Sophisticated Search of a Company's Profile. Powered with WikiPedia-DBPedia's Data</em>
 			</p>			
-			<img id="imagwikipedia" alt="" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiM_VIr99qQjaROXWuk9NsuqDEd12sR5-byII7h45WQ6sCDrDM"/>
+			<img id="imagwikipedia" alt="" src="images/wikipedia.png"/>
 		</header>
 
 		<article ng-controller="CompanySearchController">
@@ -302,7 +182,7 @@
 		</article>
 
 		<footer>
-			<img id="imagcognizant" alt="" src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSMMbZ-E060eweFxXr_JXUOS8g01KhL6uBLBbzsP4-tZQ4Djcju">
+			<img id="imagcognizant" alt="" src="images/cognizant.jpg">
 			<p style="padding-left: 100px ; padding-right:100px ; color: blue; text-align: center;">
 				<b>This is a research project submitted for BITS MS-Software Engineering Thesis - demonstrating the capabilities of Semantic Technologies - SPARQL, RDFa and Semantic Markups</b>				
 				<br/>
@@ -316,7 +196,7 @@
 					 <a href="html/documentation.html" style="color: grey">Documentation</a>
 				</span>
 			</p>			
-			<img id="imagbits" alt="" src="http://www.bits-pilani.ac.in/Uploads/Campus/BITS_university_logo.gif">
+			<img id="imagbits" alt="" src="images/bits.gif">
 		</footer>				
 		
 	</body>
