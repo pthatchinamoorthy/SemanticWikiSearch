@@ -28,7 +28,7 @@
 				height: 100%;				
 				background-color: olive; 
 			}	
-			section {										
+			section {				
 				border:double;	
 				height: 100%;			
 				padding-left:420px;
@@ -37,7 +37,11 @@
 				background-color: white; 														
 			}			
 			footer {	
-				position: absolute; bottom: 0px; height: 90px; width: 100%; left:0px;					
+				position: absolute;
+				bottom: 0px;
+				height: 90px;
+				width: 100%;
+				left:0px;					
 				background-color: white;
 				border:double				
 			}
@@ -83,12 +87,7 @@
 				position : absolute; bottom:0px; right:0px;
 				height: 90px;
 				width: 200px; 				
-			}
-			input {
-				padding: 5px; 
-				background-color:yellow;			
-				width: 20%;
-			}		
+			}					
 		</style>
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
 		<script>			
@@ -116,15 +115,14 @@
 				
 				$scope.getCompanyInfo = function(companyUrl){		
 					$scope.companies = null;
-					//var companyUrl = companyUrl.substring(38); 
-					var companyUrl = companyUrl.substring(48); // AMAZON
+					var companyUrl = companyUrl.substring(38); 
+					//var companyUrl = companyUrl.substring(48); // AMAZON
 					$http.get(companyUrl).									
 						success(function (data) {
 							$scope.company = data;
 						}
 					);
-				}	
-																
+				}																
 			}
 		</script>
 	</head>
@@ -223,11 +221,12 @@
 				</div>
 			</nav>
 	
-			<section>		
-				
-				<div><h3 ng-show="keyword || companyName || industryName || stockSymbol || greaterThanEmployeeSize
+			<section>				
+				<div>
+					<h3 ng-show="keyword || companyName || industryName || stockSymbol || greaterThanEmployeeSize
 									|| lesserThanEmployeeSize || foundedBy || foundedDate || income ||
-									 revenue || city || state || country || xxx">Input Search Criteria</h3>
+									 revenue || city || state || country || xxx">Input Search Criteria
+					</h3>
 					<p style="color:green">
 						<span style="color:green" ng-show="keyword">Company Keyword : <span style="color:blue" ng-show="keyword">{{keyword}} </span></span>&nbsp;&nbsp;&nbsp;
 						<span style="color:green" ng-show="companyName">companyName : <span style="color:blue" ng-show="companyName">{{companyName}}  </span></span>&nbsp;&nbsp;&nbsp;						
