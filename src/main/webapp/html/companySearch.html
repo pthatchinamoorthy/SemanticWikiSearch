@@ -94,6 +94,7 @@
 			function CompanySearchController($scope, $http) {
 						
 				$scope.keywordSearch = function(){
+					$scope.ajax=1;
 					$scope.company=null;
 					//$http.get('html/company.json').
 					$http.get('company/search/' + $scope.keyword).										
@@ -101,6 +102,7 @@
 							$scope.companies = data.companies;
 						}
 					);
+					$scope.ajax=null;
 				}
 					
 				$scope.multipleOptionSearch = function(){					
@@ -245,6 +247,8 @@
 					</p>
 				</div>
 				
+				
+				
 				<div ng-show="companies"><h3>Company Search Results</h3>					
 					<table>
 						<thead>
@@ -256,7 +260,7 @@
 								<th>Company Source - WikiPedia URL</th>
 							</tr>
 						</thead>
-						<tbody>
+						<tbody vocab="http://schema.org/" typeof="Organization">
 							<tr ng-repeat="company in companies">
 								<td>{{$index + 1}}</td>
 								<td><a ng-click="getCompanyInfo(company.url);">{{company.companyName}}</a></td>
@@ -268,26 +272,26 @@
 						</tbody>
 						<button type="button" ng-click="companies = null">Clear Results</button>
 					</table>
-				</div>
+				</div>				
 				
-				<div ng-show="company"><h3>Company Information</h3>					
+				<div ng-show="company" vocab="http://schema.org/" typeof="Organization"><h3>Company Information</h3>					
 					<table>						
 						<tbody>
 							<tr>
 								<td>Company Name</td>
-								<td>{{company.companyName}}</td>
+								<td><span property="legalName">{{company.companyName}}</span></td>
 							</tr>
 							<tr>
 								<td>Company URL</td>
-								<td>{{company.url}}</td>
+								<td><span property="url">{{company.url}}</span></td>
 							</tr>
 							<tr>
-								<td>WikiPedia Name</td>
-								<td>{{company.dataSourceUrl}}</td>
+								<td>WikiPedia URL</td>
+								<td><span property="telephone">{{company.dataSourceUrl}}</span></td>
 							</tr>
 							<tr>
 								<td>Company Synopsis</td>
-								<td>{{company.description}}</td>
+								<td><span property="description">{{company.description}}</span></td>
 							</tr>
 							
 						</tbody>
