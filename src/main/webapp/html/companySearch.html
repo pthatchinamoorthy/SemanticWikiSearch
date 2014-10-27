@@ -23,9 +23,9 @@
 				<div style="border: double; padding:5px">
 					<h2 style="color:white">Keyword Search</h2>
 					<form action="" name="Keyword Search">
-						Company Keyword : <input ng-model="keyword" type="search"></input>
+						<b>Company Keyword : </b> <input ng-model="keyword" type="search"></input>
 						<br />
-						<button type="submit" ng-click="keywordSearch();">Submit</button>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="submit" ng-click="keywordSearch();">Submit</button>
 					</form>
 				</div>
 				
@@ -37,65 +37,58 @@
 							<tbody>
 								<tr>
 									<td>
-										Company Name : <input ng-model="companyName" type="text"  />
+										<b>Company Name :</b> <input ng-model="companyName" type="text"  />
 									</td>
 									<td>
-										Industry Name : <input ng-model="industryName" type="text"  />
-									</td>
-								</tr>
-								<tr>
-									<td>
-										Stock Symbol : <input ng-model="stockSymbol" type="text"  />
-									</td>
-									<td>
-										key People : <input ng-model="keyPeople" type="text"  />	
+										<b>Industry Name :</b> <input ng-model="industryName" type="text"  />
 									</td>
 								</tr>
 								<tr>
 									<td>
-										Employee Size <b> >  </b> 
+										<b>Stock Symbol :</b> <input ng-model="stockSymbol" type="text"  />
+									</td>
+									<td>
+										<b>key People :</b> <input ng-model="keyPeople" type="text"  />	
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<b>Employee Size >  </b> 
 										<input ng-model="greaterThanEmployeeSize" name=empsize1-test type=range min=1000 max=1000000 step=1000 onchange="this.form.empsize1.value=this.value;">						
 										<output name=empsize1 for=range-test value=0></output>
 									</td>								
 									<td>
-									Employee Size <b> < </b>
+									<b>Employee Size < </b>
 									<input ng-model="lesserThanEmployeeSize" name=empsize2-test type=range min=1000 max=1000000 step=1000 onchange="this.form.empsize2.value=this.value;">
 									<output name=empsize2 for=range-test value=0></output>
 									</td>
 								</tr>
 								<tr>
 									<td>
-										Founded Date : <input ng-model="foundedDate" type="date"  />
+										<b>Founded Date :</b> <input ng-model="foundedDate" type="date"  />
 									</td>
 									<td>
-										Founded By : <input ng-model="foundedBy" type="text"  />
+										<b>Founded By :</b> <input ng-model="foundedBy" type="text"  />
 									</td>
 								</tr>
 								<tr>
 									<td>
-										Income > <input ng-model="income" type="number"  />	
+										<b>Income > </b> <input ng-model="income" type="number"  />	
 									</td>
 									<td>
-										Revenue > <input ng-model="revenue" type="number"  />		
+										<b>Revenue > </b> <input ng-model="revenue" type="number"  />		
 									</td>
 								</tr>
 								<tr>
 									<td>
-										City : <input ng-model="city" type="text"  />	
+										<b>City : </b><input ng-model="city" type="text"  />	
 									</td>
 									<td>
-										State : <input ng-model="state" type="text"  />	
+										<b>Country : </b> <input ng-model="country" type="text"  />	
 									</td>
-								</tr>
-								<tr>
-									<td>
-										Country : <input ng-model="country" type="text"  />
-									</td>
-									<td>
-										xxx : <input ng-model="xxx" type="text"  />
-									</td>
-								</tr>
-								<button type="reset" >Reset</button>
+								</tr>				
+												
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="reset" >Reset</button>&nbsp;&nbsp; 
 								<button type="submit" ng-click="multipleOptionSearch();">Submit</button>								
 							</tbody>
 						</table>				
@@ -104,11 +97,10 @@
 			</nav>
 	
 			<section>				
-				<div>
+				<div ng-hide="company">
 					<h3 ng-show="keyword || companyName || industryName || stockSymbol || greaterThanEmployeeSize
 									|| lesserThanEmployeeSize || foundedBy || foundedDate || income ||
-									 revenue || city || state || country || xxx">Input Search Criteria
-					</h3>
+									 revenue || city || state || country || xxx" >Input Search Criteria</h3>
 					<p style="color:green">
 						<span style="color:green" ng-show="keyword">Company Keyword : <span style="color:blue" ng-show="keyword">{{keyword}} </span></span>&nbsp;&nbsp;&nbsp;
 						<span style="color:green" ng-show="companyName">companyName : <span style="color:blue" ng-show="companyName">{{companyName}}  </span></span>&nbsp;&nbsp;&nbsp;						
@@ -135,47 +127,75 @@
 							<tr>
 								<th>Index</th>
 								<th>Company Name</th>
-								<th>Address</th>
-								<th>StockSymbol</th>
-								<th>Company Source - WikiPedia URL</th>
+								<th>Country</th>
+								<th>Key Executives</th>
 							</tr>
 						</thead>
 						<tbody vocab="http://schema.org/" typeof="Organization">
 							<tr ng-repeat="company in companies">
 								<td>{{$index + 1}}</td>
-								<td><a ng-click="getCompanyInfo(company.url);">{{company.companyName}}</a></td>
-								<td>{{company.companyName}}</td>
-								<td>{{company.companyName}}</td>
-								<td><a ng-href="{{company.dbpediaowlisPrimaryTopicOf}}">{{company.url}}</a></td>
+								<td><a ng-click="getCompanyInfo(company.url);">{{company.name}}</a></td>
+								<td>{{company.locationCountry}}</td>
+								<td>{{company.keyPeople}}</a></td>
 							</tr>
-							
-						</tbody>
-						<button type="button" ng-click="companies = null">Clear Results</button>
+						</tbody>						
 					</table>
 				</div>				
 				
-				<div ng-show="company" vocab="http://schema.org/" typeof="Organization"><h3>Company Information</h3>					
+				<div ng-show="company" vocab="http://schema.org/" typeof="Organization">
+					<h4> <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<em>Detailed Information</em></b></h4>					
 					<table>						
 						<tbody>
 							<tr>
-								<td>Company Name</td>
-								<td><span property="legalName">{{company.companyName}}</span></td>
+								<td><b>Company Name</b></td>
+								<td><span property="legalName">{{company.name}}</span></td>
 							</tr>
 							<tr>
-								<td>Company URL</td>
-								<td><span property="url">{{company.url}}</span></td>
+								<td><b>City</b></td>
+								<td><span property="description">{{company.locationCity}}</span></td>
 							</tr>
 							<tr>
-								<td>WikiPedia URL</td>
-								<td><span property="telephone">{{company.dataSourceUrl}}</span></td>
-							</tr>
-							<tr>
-								<td>Company Synopsis</td>
-								<td><span property="description">{{company.description}}</span></td>
+								<td><b>Country</b></td>
+								<td><span property="description">{{company.locationCountry}}</span></td>
 							</tr>
 							
-						</tbody>
-						<button type="button" ng-click="company = null">Clear Results</button>
+							<tr>
+								<td><b>Key Executives</b></td>
+								<td><span property="description">{{company.keyPeople}}</span></td>
+							</tr>
+							<tr>
+								<td><b>Stock Symbol</b></td>
+								<td><span property="description">{{company.symbol}}</span></td>
+							</tr>
+							<tr>
+								<td><b>Description</b></td>
+								<td><span property="description">{{company.aabstract}}</span></td>
+							</tr>
+							<tr>
+								<td><b>Revenue</b></td>
+								<td><span property="description">{{company.revenue}}</span></td>
+							</tr>
+							<tr>
+								<td><b>Net Income</b></td>
+								<td><span property="description">{{company.netIncome}}</span></td>
+							</tr>
+							<tr>
+								<td><b>Founded By</b></td>
+								<td><span property="description">{{company.foundedBy}}</span></td>
+							</tr>
+							<tr>
+								<td><b>Founding Date</b></td>
+								<td><span property="description">{{company.foundingDate}}</span></td>
+							</tr>
+							<tr>
+								<td><b>Number of Employees</b></td>
+								<td><span property="description">{{company.numEmployees}}</span></td>
+							</tr>
+							<tr>
+								<td><b>Wikipedia URL</b></td>
+								<td><span property="url">{{company.isPrimaryTopicOf}}</span></td>
+							</tr>							
+						</tbody>						
 					</table>
 				</div>	
 			</section>			

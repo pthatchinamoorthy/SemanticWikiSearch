@@ -25,35 +25,43 @@ import com.hp.hpl.jena.sparql.syntax.ElementTriplesBlock;
 
 public class DBPediaSAO {
 
+	private static final String DBPEDIA_ONT_NS = "http://dbpedia.org/ontology/";
+	private static final String DBPEDIA_PROP_NS = "http://dbpedia.org/property/";
+	private static final String FOAF_NS = "http://xmlns.com/foaf/0.1/";
+	
 	private static final int RECORD_LIMIT = 10;
-	private static final boolean DEPLOY_ENV_AMAZAON = true;
+	private static final boolean DEPLOY_ENV_AMAZAON = false;
 
 	/**
 	 * @param searchKeyword
 	 * @param uriInfo 
 	 */
 	public Companies searchCompanyInfo(String searchKeyword, UriInfo uriInfo) {	
-		Triple triple = Triple.create(Var.alloc("organization"), NodeFactory.createURI("http://xmlns.com/foaf/0.1/name") , Var.alloc("name"));
-		Expr e = new E_Regex(new ExprVar("name"), new NodeValueString("^" + searchKeyword + "*"), new NodeValueString("i"));
-		
 		ElementTriplesBlock tripleBlock = new ElementTriplesBlock();
-		tripleBlock.addTriple(triple);
+		Triple nameTriple = Triple.create(Var.alloc("organization"), NodeFactory.createURI(FOAF_NS + "name") , Var.alloc("name"));
+		tripleBlock.addTriple(nameTriple);				
+		Triple locationCountryTriple = Triple.create(Var.alloc("organization"), NodeFactory.createURI(DBPEDIA_PROP_NS + "locationCountry") , Var.alloc("locationCountry"));
+		tripleBlock.addTriple(locationCountryTriple);		
+		Triple keyPeopleTriple = Triple.create(Var.alloc("organization"), NodeFactory.createURI(DBPEDIA_PROP_NS + "keyPeople") , Var.alloc("keyPeople"));
+		tripleBlock.addTriple(keyPeopleTriple);
+		
+		Expr e = new E_Regex(new ExprVar("name"), new NodeValueString("^" + searchKeyword + "*"), new NodeValueString("i"));
 		ElementFilter filter = new ElementFilter(e);
 		
 		ElementGroup queryBody = new ElementGroup();
 		queryBody.addElement(tripleBlock);
 		queryBody.addElementFilter(filter);
 		
-		
 		Query query = QueryFactory.make();
 		query.setQuerySelectType();
 		query.addResultVar("organization");
 		query.addResultVar("name");
+		query.addResultVar("locationCountry");
+		query.addResultVar("keyPeople");
 		query.setQueryPattern(queryBody);
 		query.setLimit(RECORD_LIMIT);
 		
-		QueryExecution queryExecution = QueryExecutionFactory.sparqlService("" +
-				"http://dbpedia.org/sparql", query);
+		QueryExecution queryExecution = QueryExecutionFactory.sparqlService("" + "http://dbpedia.org/sparql", query);
 		ResultSet resultSet = queryExecution.execSelect();
 		
 		
@@ -63,9 +71,14 @@ public class DBPediaSAO {
 			QuerySolution result = resultSet.next();
 			RDFNode organizationObject = result.get("organization");
 			RDFNode name = result.get("name");
+			RDFNode country = result.get("locationCountry");
+			RDFNode keyPeople = result.get("keyPeople");
 			
 			Company company = new Company();
-			company.setCompanyName(name.toString());
+			company.setName(name.toString());
+			company.setLocationCountry(country != null ? country.toString() : "-");
+			company.setKeyPeople(keyPeople != null ? keyPeople.toString() : "-");
+			
 			if (DEPLOY_ENV_AMAZAON)
 				company.setUrl(organizationObject.toString().replace(
 												"http://dbpedia.org/resource/", 
@@ -104,13 +117,19 @@ public class DBPediaSAO {
 			RDFNode property = result.get("property");
 			RDFNode value = result.get("value");
 			
-			if (property.toString().equals("http://xmlns.com/foaf/0.1/name"))
-				company.setCompanyName(value.toString());
-			if (property.toString().equals("http://dbpedia.org/ontology/abstract"))
-				company.setDescription(value.toString());
-			if (property.toString().equals("http://xmlns.com/foaf/0.1/isPrimaryTopicOf"))
-				company.setDataSourceUrl(value.toString());
-			company.setUrl(uriInfo.getBaseUri().toString() + companyName);
+			if (property.toString().equals(FOAF_NS + "name")) company.setName(value.toString());
+			if (property.toString().equals(FOAF_NS + "isPrimaryTopicOf")) company.setIsPrimaryTopicOf(value.toString());
+			if (property.toString().equals(DBPEDIA_ONT_NS + "abstract")) company.setAabstract(value.toString());
+			if (property.toString().equals(DBPEDIA_PROP_NS + "locationCity")) company.setLocationCity(value.toString());
+			if (property.toString().equals(DBPEDIA_PROP_NS + "locationCountry")) company.setLocationCountry(value.toString());
+			if (property.toString().equals(DBPEDIA_PROP_NS + "keyPeople")) company.setKeyPeople(value.toString());
+			if (property.toString().equals(DBPEDIA_PROP_NS + "symbol")) company.setSymbol(value.toString());
+			if (property.toString().equals(DBPEDIA_PROP_NS + "revenue")) company.setRevenue(value.toString());
+			if (property.toString().equals(DBPEDIA_PROP_NS + "netIncome")) company.setNetIncome(value.toString());
+			
+			if (property.toString().equals(DBPEDIA_ONT_NS + "foundedBy")) company.setFoundedBy(value.toString());
+			if (property.toString().equals(DBPEDIA_ONT_NS + "foundingDate")) company.setFoundingDate(value.toString());
+			if (property.toString().equals(DBPEDIA_PROP_NS + "numEmployees")) company.setNumEmployees(value.toString());
 		}	
 		return company;
 	}

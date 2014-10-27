@@ -1,51 +1,141 @@
 package edu.ms.pt.sparql.access;
 
-
 //@JsonSerialize(include=Inclusion.NON_NULL)
 public class Company {
-	
-	//@JsonProperty("foaf:name")
-	private String companyName = null;
-	
-	//@JsonProperty("foaf:url")
+
+	// @JsonProperty("foaf:name")
+	private String name = null;
+
+	// @JsonProperty("foaf:url")
 	private String url = null;
+
+	// @JsonProperty("dbpedia-owl:isPrimaryTopicOf")
+	private String isPrimaryTopicOf = null;
+
+	// @JsonProperty("foaf:abstract")
+	private String aabstract = null;
+
+	private String symbol = null;
+
+	private String locationCity = null;
+
+	private String locationCountry = null;
+
+	private String revenue = null;
 	
-	//@JsonProperty("dbpedia-owl:isPrimaryTopicOf")
-	private String dataSourceUrl = null;
+	private String netIncome = null;
+
+	private String keyPeople = null;
+
+	private String numEmployees = null;
 	
-	//@JsonProperty("foaf:abstract")
-	private String description = null;
+	private String foundedBy = null;
 	
-	public String getDataSourceUrl() {
-		return dataSourceUrl;
+	private String foundingDate = null;
+
+	public String getFoundingDate() {
+		return foundingDate;
 	}
 
-	public void setDataSourceUrl(String dataSourceUrl) {
-		this.dataSourceUrl = dataSourceUrl;
+	public void setFoundingDate(String foundingDate) {
+		this.foundingDate = foundingDate;
 	}
 
-	public String getDescription() {
-		return description;
+	public String getFoundedBy() {
+		return foundedBy;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setFoundedBy(String foundedBy) {
+		this.foundedBy = foundedBy;
 	}
 
-	public String getCompanyName() {
-		return companyName;
+	public String getName() {
+		return name;
 	}
 
-	public void setCompanyName(String companyName) {
-		this.companyName = companyName;
+	public void setName(String name) {
+		this.name = name;
 	}
-	
+
 	public String getUrl() {
 		return url;
 	}
 
 	public void setUrl(String url) {
 		this.url = url;
+	}
+
+	public String getIsPrimaryTopicOf() {
+		return isPrimaryTopicOf;
+	}
+
+	public void setIsPrimaryTopicOf(String isPrimaryTopicOf) {
+		this.isPrimaryTopicOf = isPrimaryTopicOf;
+	}
+
+	public String getAabstract() {
+		return aabstract;
+	}
+
+	public void setAabstract(String aabstract) {
+		this.aabstract = aabstract;
+	}
+
+	
+	public String getRevenue() {
+		return revenue;
+	}
+
+	public void setRevenue(String revenue) {
+		this.revenue = revenue;
+	}
+
+	public String getKeyPeople() {
+		return keyPeople;
+	}
+
+	public void setKeyPeople(String keyPeople) {
+		this.keyPeople = keyPeople;
+	}
+
+	public String getNumEmployees() {
+		return numEmployees;
+	}
+
+	public void setNumEmployees(String numEmployees) {
+		this.numEmployees = numEmployees;
+	}
+
+	public String getLocationCity() {
+		return locationCity;
+	}
+
+	public void setLocationCity(String locationCity) {
+		this.locationCity = locationCity;
+	}
+
+	public String getLocationCountry() {
+		return locationCountry;
+	}
+
+	public void setLocationCountry(String locationCountry) {
+		this.locationCountry = locationCountry;
+	}
+	
+	public String getNetIncome() {
+		return netIncome;
+	}
+
+	public void setNetIncome(String netIncome) {
+		this.netIncome = netIncome;
+	}
+	
+	public String getSymbol() {
+		return symbol;
+	}
+
+	public void setSymbol(String symbol) {
+		this.symbol = symbol;
 	}
 
 }

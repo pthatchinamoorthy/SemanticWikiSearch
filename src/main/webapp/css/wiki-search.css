@@ -54,6 +54,8 @@ footer {
 table {
 	border-collapse: collapse;
 	padding: 10px;
+	width: 100%;
+	height: 100%;
 }
 
 table,th,td {
