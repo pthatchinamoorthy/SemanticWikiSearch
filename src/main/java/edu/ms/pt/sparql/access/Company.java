@@ -32,6 +32,8 @@ public class Company {
 	private String foundedBy = null;
 	
 	private String foundingDate = null;
+	
+	private String sameAs = null;
 
 	public String getFoundingDate() {
 		return foundingDate;
@@ -136,6 +138,14 @@ public class Company {
 
 	public void setSymbol(String symbol) {
 		this.symbol = symbol;
+	}
+	
+	public String getSameAs() {
+		return sameAs;
+	}
+
+	public void setSameAs(String sameAs) {
+		this.sameAs = sameAs;
 	}
 
 }

@@ -10,6 +10,7 @@ function CompanySearchController($scope, $http) {
 			}
 		);
 		$scope.ajax=null;
+		$scope.notes = null;
 	}
 					
 	$scope.multipleOptionSearch = function(){					
@@ -29,6 +30,14 @@ function CompanySearchController($scope, $http) {
 		$http.get(companyUrl).									
 			success(function (data) {
 				$scope.company = data;
+				}
+			);
+	}
+	
+	$scope.updateNotes = function(name){		
+		$http.put('company/' + name + "?&notes=" + $scope.notes).
+		success(function (data) {
+			$scope.isNotesUpdated = true;			
 			}
 		);
 	}

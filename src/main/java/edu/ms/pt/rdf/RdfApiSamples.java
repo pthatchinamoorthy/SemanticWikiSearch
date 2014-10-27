@@ -1,5 +1,9 @@
 package edu.ms.pt.rdf;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.Property;
@@ -55,7 +59,14 @@ public class RdfApiSamples {
 	}
 	
 	public void writeRDF(){
-		model.write(System.out, "Turtle");
+		File notesFile = new File("C:\\Users\\thatchinamoorthyp\\git\\SemanticWikiSearch\\src\\main\\webapp\\rdf\\notes.rdf");
+		
+		try {
+			model.write(new FileWriter(notesFile), "Turtle");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	

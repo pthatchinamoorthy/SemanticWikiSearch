@@ -1,0 +1,45 @@
+{ 
+  "http://xmlns.com/foaf/0.1/IBS Software Services@en" : { 
+    "http://prabhakar.com/notes" : [ { 
+      "type" : "literal" ,
+      "value" : "IBM is a prospective Customer"
+    }
+     ]
+  }
+   ,
+  "http://xmlns.com/foaf/0.1/IBA-Moscow@en" : { 
+    "http://prabhakar.com/notes" : [ { 
+      "type" : "literal" ,
+      "value" : "great"
+    }
+     ]
+  }
+   ,
+  "http://xmlns.com/foaf/0.1/iBank@en" : { 
+    "http://prabhakar.com/notes" : [ { 
+      "type" : "literal" ,
+      "value" : "awesome"
+    }
+    , { 
+      "type" : "literal" ,
+      "value" : "adsfdasl;jl"
+    }
+     ]
+  }
+   ,
+  "http://xmlns.com/foaf/0.1/Microsoft Japan Co. Ltd.,@en" : { 
+    "http://prabhakar.com/notes" : [ { 
+      "type" : "literal" ,
+      "value" : "Microsoft is a prospective japan"
+    }
+    , { 
+      "type" : "literal" ,
+      "value" : "lets try now"
+    }
+    , { 
+      "type" : "literal" ,
+      "value" : "microsfotdeee"
+    }
+     ]
+  }
+}

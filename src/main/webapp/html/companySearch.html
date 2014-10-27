@@ -194,6 +194,16 @@
 							<tr>
 								<td><b>Wikipedia URL</b></td>
 								<td><span property="url">{{company.isPrimaryTopicOf}}</span></td>
+							</tr>
+							<tr>
+								<td><b>Notes</b></td>
+								<td>
+									<input style="width:500px; height:50px" ng-model="notes"></input>
+									<br/>
+									<button type="submit" ng-click="updateNotes(company.name);">Save Notes</button>
+									<br/>
+									<b ng-show="isNotesUpdated" style="color:brown;padding-left: 50px">The Notes is Updated in the local RDF data store</b>									
+								</td> 								
 							</tr>							
 						</tbody>						
 					</table>

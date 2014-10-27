@@ -1,14 +1,17 @@
 package edu.ms.pt.resource;
 
 import javax.ws.rs.GET;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.apache.log4j.Logger;
 
+import edu.ms.pt.rdf.NotesWriter;
 import edu.ms.pt.sparql.access.Company;
 import edu.ms.pt.sparql.access.DBPediaSAO;
 
@@ -24,6 +27,12 @@ public class CompanyResource extends Resource{
 		
 		Company company = new DBPediaSAO().getCompanyInfo(name, uriInfo);
 		return Response.ok().entity(company).build();
+	}
+	
+	@PUT
+	public void updateCompanyInfo(@PathParam("name") String name, @QueryParam("notes") String notes) {
+		NotesWriter notesWriter = new NotesWriter();
+		notesWriter.createNotes(name, notes);
 	}
 	
 }
