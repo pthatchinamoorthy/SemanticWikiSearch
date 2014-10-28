@@ -25,8 +25,8 @@ function CompanySearchController($scope, $http) {
 				
 	$scope.getCompanyInfo = function(companyUrl){		
 		$scope.companies = null;
-		var companyUrl = companyUrl.substring(38); 
-		//var companyUrl = companyUrl.substring(48);				 // AMAZON
+		//var companyUrl = companyUrl.substring(38); 
+		var companyUrl = companyUrl.substring(48);				 // AMAZON
 		$http.get(companyUrl).									
 			success(function (data) {
 				$scope.company = data;
