@@ -20,7 +20,13 @@
 
 		<article ng-controller="CompanySearchController">
 			<nav>
-				<div style="border: double; padding:5px">
+				<h3 style="color:white">
+						<input type="checkbox" ng-model="keywordSearch">Keyword Search</input>
+						<br/>
+						<input type="checkbox" ng-model="multipleOptionSearch">Multiple Option Search</input>
+				</h3>
+				
+				<div style="border: double; padding:5px" ng-show="keywordSearch == true">
 					<h2 style="color:white">Keyword Search</h2>
 					<form action="" name="Keyword Search">
 						<b>Company Keyword : </b> <input ng-model="keyword" type="search"></input>
@@ -30,7 +36,7 @@
 				</div>
 				
 				<br/>
-				<div style="border: double ; padding:5px ;">
+				<div style="border: double ; padding:5px ;" ng-show="multipleOptionSearch == true">
 					<h2 style="color:white; width: 100%">Multiple Option Search</h2>
 					<form action="" name="Multi Option Search" style="right:5px">
 						<table>
