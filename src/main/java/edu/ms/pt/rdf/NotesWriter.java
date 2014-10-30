@@ -24,7 +24,7 @@ public class NotesWriter {
 		java.nio.file.Path path = Paths.get("src\\main\\webapp\\rdf", "notes.rdf");
 		//java.nio.file.Path path = Paths.get("/tmp/deployment/application/ROOT/rdf", "notes.rdf"); //AMAZON
 		
-		this.model.read(path.toUri().toString(), null, "RDF/JSON");
+		this.model.read(path.toUri().toString(), null, "RDF/XML");
 	}
 	
 	public void createNotes(String resourceName, String notes) {
@@ -34,7 +34,7 @@ public class NotesWriter {
 		try {
 			this.model.add(newModel);
 			
-			this.model.write(new FileWriter("src\\main\\webapp\\rdf\\notes.rdf"), "RDF/JSON");
+			this.model.write(new FileWriter("src\\main\\webapp\\rdf\\notes.rdf"), "RDF/XML");
 			//this.model.write(new FileWriter("/tmp/deployment/application/ROOT/rdf/notes.rdf"), "RDF/JSON"); //AMAZON
 			
 		} catch (IOException e) {

@@ -1,45 +1,8 @@
-{ 
-  "http://xmlns.com/foaf/0.1/IBS Software Services@en" : { 
-    "http://prabhakar.com/notes" : [ { 
-      "type" : "literal" ,
-      "value" : "IBM is a prospective Customer"
-    }
-     ]
-  }
-   ,
-  "http://xmlns.com/foaf/0.1/IBA-Moscow@en" : { 
-    "http://prabhakar.com/notes" : [ { 
-      "type" : "literal" ,
-      "value" : "great"
-    }
-     ]
-  }
-   ,
-  "http://xmlns.com/foaf/0.1/iBank@en" : { 
-    "http://prabhakar.com/notes" : [ { 
-      "type" : "literal" ,
-      "value" : "awesome"
-    }
-    , { 
-      "type" : "literal" ,
-      "value" : "adsfdasl;jl"
-    }
-     ]
-  }
-   ,
-  "http://xmlns.com/foaf/0.1/Microsoft Japan Co. Ltd.,@en" : { 
-    "http://prabhakar.com/notes" : [ { 
-      "type" : "literal" ,
-      "value" : "Microsoft is a prospective japan"
-    }
-    , { 
-      "type" : "literal" ,
-      "value" : "lets try now"
-    }
-    , { 
-      "type" : "literal" ,
-      "value" : "microsfotdeee"
-    }
-     ]
-  }
-}
+<?xml version="1.0" encoding="windows-1252"?>
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:j.0="http://prabhakar.com/" > 
+  <rdf:Description rdf:about="file:///C:/Prabhakar/softwares/twinkle-2.0-bin/#rubys">
+    <j.0:notes>-++++++++++++------</j.0:notes>
+  </rdf:Description>
+</rdf:RDF>
