@@ -10,12 +10,12 @@
 	</head>
 	<body>		
 		<header>			
-			<img id="imgsematiclogo" src="images/SEO.jpg"/>
+			<img id="imgsematiclogo" src="images/RDFa.jpg"/>
 			<h2 style="text-align: center ; color: blue ; text-shadow: 1px 1px blue">Company Profile Search - A Semantic approach</h2>
 			<p style="text-align: center ; color: grey">
 				<em>Sophisticated Search of a Company's Profile. Powered with WikiPedia-DBPedia's Data</em>
 			</p>			
-			<img id="imagwikipedia" alt="" src="images/wikipedia.png"/>
+			<img id="imagwikipedia" src="images/sparql.jpg"/>
 		</header>
 
 		<article ng-controller="CompanySearchController">
@@ -92,8 +92,7 @@
 									<td>
 										<b>Country : </b> <input ng-model="country" type="text"  />	
 									</td>
-								</tr>				
-												
+								</tr>
 								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="reset" >Reset</button>&nbsp;&nbsp; 
 								<button type="submit" ng-click="multipleOptionSearch();">Submit</button>								
 							</tbody>
@@ -134,15 +133,15 @@
 								<th>Index</th>
 								<th>Company Name</th>
 								<th>Country</th>
-								<th>Key Executives</th>
+								<th>Key Executives</th>								
 							</tr>
 						</thead>
 						<tbody vocab="http://schema.org/" typeof="Organization">
 							<tr ng-repeat="company in companies">
 								<td>{{$index + 1}}</td>
-								<td><a ng-click="getCompanyInfo(company.url);">{{company.name}}</a></td>
-								<td>{{company.locationCountry}}</td>
-								<td>{{company.keyPeople}}</a></td>
+								<td><span property="legalName"><a ng-click="getCompanyInfo(company.url);">{{company.name}}</a></span></td>
+								<td><span property="locationCountry">{{company.locationCountry}}</span></td>
+								<td><span property="keyPeople">{{company.keyPeople}}</a></span></td>
 							</tr>
 						</tbody>						
 					</table>
@@ -158,57 +157,58 @@
 							</tr>
 							<tr>
 								<td><b>City</b></td>
-								<td><span property="description">{{company.locationCity}}</span></td>
+								<td><span property="locationCity">{{company.locationCity}}</span></td>
 							</tr>
 							<tr>
 								<td><b>Country</b></td>
-								<td><span property="description">{{company.locationCountry}}</span></td>
+								<td><span property="locationCountry">{{company.locationCountry}}</span></td>
 							</tr>
 							
 							<tr>
 								<td><b>Key Executives</b></td>
-								<td><span property="description">{{company.keyPeople}}</span></td>
+								<td><span property="keyPeople">{{company.keyPeople}}</span></td>
 							</tr>
 							<tr>
 								<td><b>Stock Symbol</b></td>
-								<td><span property="description">{{company.symbol}}</span></td>
+								<td><span property="symbol">{{company.symbol}}</span></td>
 							</tr>
 							<tr>
 								<td><b>Description</b></td>
-								<td><span property="description">{{company.aabstract}}</span></td>
+								<td><span property="aabstract">{{company.aabstract}}</span></td>
 							</tr>
 							<tr>
 								<td><b>Revenue</b></td>
-								<td><span property="description">{{company.revenue}}</span></td>
+								<td><span property="revenue">{{company.revenue}}</span></td>
 							</tr>
 							<tr>
 								<td><b>Net Income</b></td>
-								<td><span property="description">{{company.netIncome}}</span></td>
+								<td><span property="netIncome">{{company.netIncome}}</span></td>
 							</tr>
 							<tr>
 								<td><b>Founded By</b></td>
-								<td><span property="description">{{company.foundedBy}}</span></td>
+								<td><span property="foundedBy">{{company.foundedBy}}</span></td>
 							</tr>
 							<tr>
 								<td><b>Founding Date</b></td>
-								<td><span property="description">{{company.foundingDate}}</span></td>
+								<td><span property="foundingDate">{{company.foundingDate}}</span></td>
 							</tr>
 							<tr>
 								<td><b>Number of Employees</b></td>
-								<td><span property="description">{{company.numEmployees}}</span></td>
+								<td><span property="numEmployees">{{company.numEmployees}}</span></td>
 							</tr>
 							<tr>
 								<td><b>Wikipedia URL</b></td>
-								<td><span property="url">{{company.isPrimaryTopicOf}}</span></td>
+								<td><span property="isPrimaryTopicOf">{{company.isPrimaryTopicOf}} <br/> {{company.dataSourceUrl}}  </span></td>
 							</tr>
 							<tr>
 								<td><b>Notes</b></td>
 								<td>
+									<span property="notes">{{company.notes}}</span>
 									<input style="width:500px; height:50px" ng-model="notes"></input>
 									<br/>
-									<button type="submit" ng-click="updateNotes(company.name);">Save Notes</button>
+									<button type="submit" ng-click="updateNotes(company.dataSourceUrl);">Save Notes</button>
 									<br/>
-									<b ng-show="isNotesUpdated" style="color:brown;padding-left: 50px">The Notes is Updated in the local RDF data store</b>									
+									<b ng-show="isNotesUpdated" style="color:brown;padding-left: 50px">The Notes is Updated in the local RDF data store for <b style="color:blue">{{company.name}}</b></b>									
 								</td> 								
 							</tr>							
 						</tbody>						

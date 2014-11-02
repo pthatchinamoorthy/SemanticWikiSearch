@@ -8,9 +8,13 @@ public class Company {
 
 	// @JsonProperty("foaf:url")
 	private String url = null;
+	
+	private String dataSourceUrl = null;
 
 	// @JsonProperty("dbpedia-owl:isPrimaryTopicOf")
 	private String isPrimaryTopicOf = null;
+	
+	private String notes =  "";
 
 	// @JsonProperty("foaf:abstract")
 	private String aabstract = null;
@@ -146,6 +150,22 @@ public class Company {
 
 	public void setSameAs(String sameAs) {
 		this.sameAs = sameAs;
+	}
+	
+	public String getDataSourceUrl() {
+		return dataSourceUrl;
+	}
+
+	public void setDataSourceUrl(String dataSourceUrl) {
+		this.dataSourceUrl = dataSourceUrl;
+	}
+	
+	public String getNotes() {
+		return notes;
+	}
+
+	public void setNotes(String notes) {
+		this.notes = notes;
 	}
 
 }

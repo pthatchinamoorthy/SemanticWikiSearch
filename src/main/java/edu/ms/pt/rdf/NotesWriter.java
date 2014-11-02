@@ -2,15 +2,17 @@ package edu.ms.pt.rdf;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
-import com.hp.hpl.jena.sparql.vocabulary.FOAF;
 
 public class NotesWriter {
 	
 	private Model model; 	public Model getModel() {return model;}
+	
+	private static final boolean DEPLOY_ENV_AMAZAON = false;
 
 	public NotesWriter(Model model) {
 		super();
@@ -21,22 +23,24 @@ public class NotesWriter {
 		super();
 		this.model = ModelFactory.createDefaultModel();
 		
-		java.nio.file.Path path = Paths.get("src\\main\\webapp\\rdf", "notes.rdf");
-		//java.nio.file.Path path = Paths.get("/tmp/deployment/application/ROOT/rdf", "notes.rdf"); //AMAZON
+		Path path =  null;
+		if (DEPLOY_ENV_AMAZAON)
+			path = Paths.get("/tmp/deployment/application/ROOT/rdf", "notes.rdf"); 
+		else
+			path = Paths.get("src\\main\\webapp\\rdf", "notes.rdf");
 		
 		this.model.read(path.toUri().toString(), null, "RDF/XML");
 	}
 	
-	public void createNotes(String resourceName, String notes) {
+	public void createNotes(String organizationIdentifier, String notes) {
 		Model newModel = ModelFactory.createDefaultModel();
-		newModel.createResource(FOAF.NS + resourceName).addProperty(model.createProperty("http://prabhakar.com/" , "notes"), model.createLiteral(notes));
-		
+		newModel.createResource(organizationIdentifier).addProperty(model.createProperty("http://prabhakar.com/" , "notes"), model.createLiteral(notes));
 		try {
 			this.model.add(newModel);
-			
-			this.model.write(new FileWriter("src\\main\\webapp\\rdf\\notes.rdf"), "RDF/XML");
-			//this.model.write(new FileWriter("/tmp/deployment/application/ROOT/rdf/notes.rdf"), "RDF/JSON"); //AMAZON
-			
+			if(DEPLOY_ENV_AMAZAON)
+				this.model.write(new FileWriter("/tmp/deployment/application/ROOT/rdf/notes.rdf"), "RDF/JSON");
+			else
+				this.model.write(new FileWriter("src\\main\\webapp\\rdf\\notes.rdf"), "RDF/XML");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

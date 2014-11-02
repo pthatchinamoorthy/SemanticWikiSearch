@@ -2,7 +2,5 @@
 <rdf:RDF
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
     xmlns:j.0="http://prabhakar.com/" > 
-  <rdf:Description rdf:about="file:///C:/Prabhakar/softwares/twinkle-2.0-bin/#rubys">
-    <j.0:notes>-++++++++++++------</j.0:notes>
-  </rdf:Description>
+
 </rdf:RDF>
