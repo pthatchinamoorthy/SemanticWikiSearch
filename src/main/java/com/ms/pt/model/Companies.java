@@ -1,4 +1,4 @@
-package edu.ms.pt.sparql.access;
+package com.ms.pt.model;
 
 import java.util.List;
 

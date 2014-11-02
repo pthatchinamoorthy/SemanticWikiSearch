@@ -11,7 +11,7 @@ import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.rdf.model.StmtIterator;
 import com.hp.hpl.jena.vocabulary.VCARD;
 
-import edu.ms.pt.rdf.RdfApiSamples;
+import edu.ms.pt.sparql.access.RdfApiSamples;
 
 
 public class RdfApiSamplesTest {

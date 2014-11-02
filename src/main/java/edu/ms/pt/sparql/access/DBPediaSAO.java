@@ -18,15 +18,20 @@ import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.rdf.model.RDFNode;
 import com.hp.hpl.jena.sparql.core.Var;
+import com.hp.hpl.jena.sparql.expr.E_Equals;
+import com.hp.hpl.jena.sparql.expr.E_GreaterThan;
+import com.hp.hpl.jena.sparql.expr.E_LessThan;
 import com.hp.hpl.jena.sparql.expr.E_Regex;
 import com.hp.hpl.jena.sparql.expr.Expr;
 import com.hp.hpl.jena.sparql.expr.ExprVar;
+import com.hp.hpl.jena.sparql.expr.nodevalue.NodeValueDouble;
+import com.hp.hpl.jena.sparql.expr.nodevalue.NodeValueInteger;
 import com.hp.hpl.jena.sparql.expr.nodevalue.NodeValueString;
 import com.hp.hpl.jena.sparql.syntax.ElementFilter;
 import com.hp.hpl.jena.sparql.syntax.ElementGroup;
 import com.hp.hpl.jena.sparql.syntax.ElementTriplesBlock;
-
-import edu.ms.pt.resource.CompanySearchResource;
+import com.ms.pt.model.Companies;
+import com.ms.pt.model.Company;
 
 public class DBPediaSAO {
 	private static final Logger LOGGER = Logger.getLogger(DBPediaSAO.class);
@@ -36,12 +41,170 @@ public class DBPediaSAO {
 	
 	private static final int RECORD_LIMIT = 10;
 	private static final boolean DEPLOY_ENV_AMAZAON = false;
+	
+	/*
+		SELECT ?name ?foundedBy ?foundingDate ?locationCity ?locationCountry ?keyPeople ?symbol ?revenue ?netIncome ?numEmployees
+		WHERE
+			{
+			   ?organization <http://xmlns.com/foaf/0.1/name> ?name.
+			   FILTER (?name="")
+			   ?organization <http://dbpedia.org/ontology/foundedBy> ?foundedBy.
+			   FILTER (?foundedBy="")
+			   ?organization <http://dbpedia.org/ontology/foundingDate> ?foundingDate.
+			   FILTER (?foundingDate="")
+			   ?organization <http://dbpedia.org/property/locationCity> ?locationCity.
+			   FILTER (?locationCity="")
+			   ?organization <http://dbpedia.org/property/locationCountry> ?locationCountry.
+			   FILTER (?locationCountry="")
+			   ?organization <http://dbpedia.org/property/keyPeople> ?keyPeople.
+			   FILTER (?keyPeople="")
+			   ?organization <http://dbpedia.org/property/symbol> ?symbol.
+			   FILTER (?symbol="")
+			   ?organization <http://dbpedia.org/property/revenue> ?revenue.
+			   FILTER (?revenue="")
+			   ?organization <http://dbpedia.org/property/netIncome> ?netIncome.
+			   FILTER (?netIncome="")
+			   ?organization <http://dbpedia.org/property/numEmployees> ?numEmployees.
+			   FILTER (?foundedBy>"")
+			}
+		LIMIT 10
+	 */
+	/**
+	 * @param searchKeyword
+	 * @param uriInfo 
+	 */
+	public Companies searchCompanyByOption(String name, String industry,
+										   String symbol, String keyPeople, 
+										   String greatThanNumEmployees, String lesserThanNumEmployees,  
+										   String foundedBy, String foundingDate, 
+										   String locationCity, String locationCountry, 
+										   String revenue, String netIncome
+										   , UriInfo uriInfo) {	
+		ElementGroup queryBody = new ElementGroup();
+		ElementTriplesBlock tripleBlock = new ElementTriplesBlock();
+		queryBody.addElement(tripleBlock);
+		Query query = QueryFactory.make();
+		query.setQuerySelectType();
+		query.setQueryPattern(queryBody);
+		query.addResultVar("organization");
+		query.setLimit(RECORD_LIMIT);
+		
+		query.addResultVar("name");
+		tripleBlock.addTriple(Triple.create(Var.alloc("organization"), NodeFactory.createURI(FOAF_NS + "name") , Var.alloc("name")));
+		if(name!=null && !name.isEmpty())	{
+			ElementFilter nameFilter = new ElementFilter(new E_Equals(new ExprVar("name"), new NodeValueString(name)));
+			queryBody.addElementFilter(nameFilter);
+		}
+		
+		if (industry!=null && !industry.isEmpty()) {
+			tripleBlock.addTriple(Triple.create(Var.alloc("organization"), NodeFactory.createURI(DBPEDIA_ONT_NS + "industry") , Var.alloc("industry")));				
+			ElementFilter industryFilter = new ElementFilter(new E_Equals(new ExprVar("industry"), new NodeValueString(industry)));
+			queryBody.addElement(industryFilter);
+		}
+		
+		if (symbol!=null && !symbol.isEmpty()) {
+			tripleBlock.addTriple(Triple.create(Var.alloc("organization"), NodeFactory.createURI(DBPEDIA_PROP_NS + "symbol") , Var.alloc("symbol")));
+			ElementFilter symbolFilter = new ElementFilter(new E_Equals(new ExprVar("symbol"), new NodeValueString(symbol)));
+			queryBody.addElement(symbolFilter);
+		}
+		
+		query.addResultVar("keyPeople");
+		tripleBlock.addTriple(Triple.create(Var.alloc("organization"), NodeFactory.createURI(DBPEDIA_PROP_NS + "keyPeople") , Var.alloc("keyPeople")));
+		if (keyPeople != null && !keyPeople.isEmpty()) {
+			ElementFilter keyPeopleFilter = new ElementFilter(new E_Equals(new ExprVar("keyPeople"), new NodeValueString(keyPeople)));
+			queryBody.addElement(keyPeopleFilter);
+		}
+		
+		if (greatThanNumEmployees != null && !greatThanNumEmployees.isEmpty()) {
+			tripleBlock.addTriple(Triple.create(Var.alloc("organization"), NodeFactory.createURI(DBPEDIA_ONT_NS + "numberOfEmployees") , Var.alloc("numberOfEmployees")));				
+			ElementFilter greatThanNumEmployeesFilter = new ElementFilter(new E_GreaterThan(new ExprVar("numberOfEmployees"), new NodeValueInteger(Long.parseLong(greatThanNumEmployees))));
+			queryBody.addElementFilter(greatThanNumEmployeesFilter);
+		}
+		
+		if (lesserThanNumEmployees != null && !lesserThanNumEmployees.isEmpty()) {
+			tripleBlock.addTriple(Triple.create(Var.alloc("organization"), NodeFactory.createURI(DBPEDIA_ONT_NS + "numberOfEmployees") , Var.alloc("numberOfEmployees")));				
+			ElementFilter lesserThanNumEmployeesFilter = new ElementFilter(new E_LessThan(new ExprVar("numberOfEmployees"), new NodeValueInteger(Long.parseLong(greatThanNumEmployees))));
+			queryBody.addElementFilter(lesserThanNumEmployeesFilter);
+		}
+		
+		if (foundedBy !=null && !foundedBy.isEmpty()) {			
+			tripleBlock.addTriple(Triple.create(Var.alloc("organization"), NodeFactory.createURI(DBPEDIA_ONT_NS + "foundedBy") , Var.alloc("foundedBy")));				
+			ElementFilter foundedByFilter = new ElementFilter(new E_Equals(new ExprVar("foundedBy"), new NodeValueString(foundedBy)));
+			queryBody.addElementFilter(foundedByFilter);	
+		}
+		
+		if (foundingDate != null && !foundingDate.isEmpty()) {
+			query.addResultVar("foundingDate");
+			tripleBlock.addTriple(Triple.create(Var.alloc("organization"), NodeFactory.createURI(DBPEDIA_ONT_NS + "foundingDate") , Var.alloc("foundingDate")));				
+			ElementFilter foundingDateFilter = new ElementFilter(new E_Equals(new ExprVar("foundingDate"), new NodeValueString(foundingDate)));
+			queryBody.addElementFilter(foundingDateFilter);
+		}
+		
+		if (locationCity != null && locationCity.isEmpty()) {
+			query.addResultVar("locationCity");
+			tripleBlock.addTriple(Triple.create(Var.alloc("organization"), NodeFactory.createURI(DBPEDIA_PROP_NS + "locationCity") , Var.alloc("locationCity")));	
+			ElementFilter locationCityFilter = new ElementFilter(new E_Equals(new ExprVar("locationCity"), new NodeValueString(locationCity)));
+			queryBody.addElement(locationCityFilter);
+		}
+		
+		query.addResultVar("locationCountry");
+		tripleBlock.addTriple(Triple.create(Var.alloc("organization"), NodeFactory.createURI(DBPEDIA_PROP_NS + "locationCountry") , Var.alloc("locationCountry")));
+		if (locationCountry != null && !locationCountry.isEmpty()) {
+			ElementFilter locationCountryFilter = new ElementFilter(new E_Equals(new ExprVar("locationCountry"), new NodeValueString(locationCountry)));
+			queryBody.addElement(locationCountryFilter);
+		}
+		
+		if (revenue !=null && !revenue.isEmpty()) {
+			query.addResultVar("revenue");
+			tripleBlock.addTriple(Triple.create(Var.alloc("organization"), NodeFactory.createURI(DBPEDIA_PROP_NS + "revenue") , Var.alloc("revenue")));	
+			ElementFilter revenueFilter = new ElementFilter(new E_GreaterThan(new ExprVar("revenue"), new NodeValueDouble(Double.parseDouble(revenue))));
+			queryBody.addElement(revenueFilter);
+		}
+		
+		if (netIncome!= null && !netIncome.isEmpty()) {
+			query.addResultVar("netIncome");
+			tripleBlock.addTriple(Triple.create(Var.alloc("organization"), NodeFactory.createURI(DBPEDIA_PROP_NS + "netIncome") , Var.alloc("netIncome")));	
+			ElementFilter netIncomeFilter = new ElementFilter(new E_GreaterThan(new ExprVar("netIncome"), new NodeValueDouble(Double.parseDouble(netIncome))));
+			queryBody.addElement(netIncomeFilter);
+		}
+		
+		QueryExecution queryExecution = QueryExecutionFactory.sparqlService("" + "http://dbpedia.org/sparql", query);
+		ResultSet resultSet = queryExecution.execSelect();
+		
+		List<Company> companyList = new ArrayList<Company>();
+		
+		while(resultSet.hasNext()) {
+			QuerySolution result = resultSet.next();
+			RDFNode organizationIdentifierNode = result.get("organization");
+			RDFNode nameNode = result.get("name");
+			RDFNode countryNode = result.get("locationCountry");
+			RDFNode keyPeopleNode = result.get("keyPeople");
+			
+			Company company = new Company();
+			company.setName(nameNode.toString());
+			company.setLocationCountry(countryNode != null ? countryNode.toString() : "-");
+			company.setKeyPeople(keyPeopleNode != null ? keyPeopleNode.toString() : "-");
+			company.setDataSourceUrl(organizationIdentifierNode !=  null ? organizationIdentifierNode.toString() : null);
+			
+			if (DEPLOY_ENV_AMAZAON)
+				company.setUrl(organizationIdentifierNode.toString().replace(
+												"http://dbpedia.org/resource/", 
+												"http://" + uriInfo.getRequestUri().getHost() + "/company/name/"));
+			else
+				company.setUrl(organizationIdentifierNode.toString().replace(
+												"http://dbpedia.org/resource/", 
+												"http://" + uriInfo.getRequestUri().getHost() + ":8080/SmartWikiSearch/company/name/"));
+			companyList.add(company);
+		}	
+		return new Companies(companyList);
+	}
+					
 
 	/**
 	 * @param searchKeyword
 	 * @param uriInfo 
 	 */
-	public Companies searchCompanyInfo(String searchKeyword, UriInfo uriInfo) {	
+	public Companies searchCompanyByKeyword(String searchKeyword, UriInfo uriInfo) {	
 		
 		
 		ElementTriplesBlock tripleBlock = new ElementTriplesBlock();
@@ -90,11 +253,11 @@ public class DBPediaSAO {
 			if (DEPLOY_ENV_AMAZAON)
 				company.setUrl(organizationIdentifier.toString().replace(
 												"http://dbpedia.org/resource/", 
-												"http://" + uriInfo.getRequestUri().getHost() + "/company/"));
+												"http://" + uriInfo.getRequestUri().getHost() + "/company/name/"));
 			else
 				company.setUrl(organizationIdentifier.toString().replace(
 												"http://dbpedia.org/resource/", 
-												"http://" + uriInfo.getRequestUri().getHost() + ":8080/SmartWikiSearch/company/"));
+												"http://" + uriInfo.getRequestUri().getHost() + ":8080/SmartWikiSearch/company/name/"));
 			companyList.add(company);
 		}	
 		return new Companies(companyList);
@@ -146,59 +309,13 @@ public class DBPediaSAO {
 			company.setSymbol(result.get("symbol") != null ? result.get("symbol").toString() : "-");
 			company.setRevenue(result.get("revenue") != null ? result.get("revenue").toString() : "-");
 			company.setNetIncome(result.get("netIncome") != null ? result.get("netIncome").toString() : "-") ;
-			company.setNotes(result.get("notes") != null ? company.getNotes() +". " + result.get("notes").toString() : "No Saved Notes for this company");			
+			company.setNotes(result.get("notes") != null 
+									? (company.getNotes().contains(result.get("notes").toString())  
+											? result.get("notes").toString() 
+											: company.getNotes() + "." + result.get("notes").toString()) 
+									: "No Saved Notes for this company");			
 		}	
 		return company;
 	}
-	
-	/*public Company getCompanyInfo(String organisationIdentifier, UriInfo uriInfo) {
-		Triple triple = Triple.create(NodeFactory.createURI("http://dbpedia.org/resource/" + organisationIdentifier), Var.alloc("property"), Var.alloc("value"));
-		Triple graphTriple = Triple.create(NodeFactory.createURI("http://dbpedia.org/resource/" + organisationIdentifier), NodeFactory.createURI("http://prabhakar.com/notes"), Var.alloc("notes"));
-		
-		ElementTriplesBlock tripleBlock = new ElementTriplesBlock();
-		tripleBlock.addTriple(triple);
-		
-		
-		ElementGroup queryBody = new ElementGroup();
-		queryBody.addElement(tripleBlock);
-		
-		
-		Query query = QueryFactory.make();
-		query.setQuerySelectType();
-		query.addResultVar("property");
-		query.addResultVar("value");
-		query.addGraphURI("http://dbpedia.org/resource/" + organisationIdentifier);
-		query.addNamedGraphURI("file:///C:/Users/thatchinamoorthyp/git/SemanticWikiSearch/src/main/webapp/rdf/notes.rdf");
-		query.setQueryPattern(queryBody);
-		
-		QueryExecution queryExecution = QueryExecutionFactory.create(query);
-		ResultSet resultSet = queryExecution.execSelect();
-		Company company = new Company();
-		
-		while(resultSet.hasNext()) {
-			QuerySolution result = resultSet.next();
-			RDFNode property = result.get("property");
-			RDFNode value = result.get("value");
-			RDFNode notes = result.get("notes");
-			
-			if (property.toString().equals(FOAF_NS + "name")) company.setName(value.toString());
-			if (property.toString().equals(FOAF_NS + "isPrimaryTopicOf")) company.setIsPrimaryTopicOf(value.toString());
-			if (property.toString().equals(DBPEDIA_ONT_NS + "abstract")) company.setAabstract(value.toString());
-			if (property.toString().equals(DBPEDIA_PROP_NS + "locationCity")) company.setLocationCity(value.toString());
-			if (property.toString().equals(DBPEDIA_PROP_NS + "locationCountry")) company.setLocationCountry(value.toString());
-			if (property.toString().equals(DBPEDIA_PROP_NS + "keyPeople")) company.setKeyPeople(value.toString());
-			if (property.toString().equals(DBPEDIA_PROP_NS + "symbol")) company.setSymbol(value.toString());
-			if (property.toString().equals(DBPEDIA_PROP_NS + "revenue")) company.setRevenue(value.toString());
-			if (property.toString().equals(DBPEDIA_PROP_NS + "netIncome")) company.setNetIncome(value.toString());
-			
-			if (property.toString().equals(DBPEDIA_ONT_NS + "foundedBy")) company.setFoundedBy(value.toString());
-			if (property.toString().equals(DBPEDIA_ONT_NS + "foundingDate")) company.setFoundingDate(value.toString());
-			if (property.toString().equals(DBPEDIA_PROP_NS + "numEmployees")) company.setNumEmployees(value.toString());
-			
-			company.setDataSourceUrl("http://dbpedia.org/resource/" + organisationIdentifier);
-			company.setNotes(notes != null ? notes.toString() : "No Saved Notes for this company");
-		}	
-		return company;
-	}*/
 	
 }

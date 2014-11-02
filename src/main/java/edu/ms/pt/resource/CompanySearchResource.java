@@ -9,7 +9,8 @@ import javax.ws.rs.core.Response;
 
 import org.apache.log4j.Logger;
 
-import edu.ms.pt.sparql.access.Companies;
+import com.ms.pt.model.Companies;
+
 import edu.ms.pt.sparql.access.DBPediaSAO;
 
 @Path("search/{company_keyword}")
@@ -19,11 +20,8 @@ public class CompanySearchResource extends Resource{
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response searchCompany(@PathParam("company_keyword") String companyKeyword) {
-		LOGGER.info("The control is now CompanySearch Servlet");
-		
-		Companies companies = new DBPediaSAO().searchCompanyInfo(companyKeyword, uriInfo);
-		
+	public Response searchCompanyByKeyword(@PathParam("company_keyword") String companyKeyword) {
+		Companies companies = new DBPediaSAO().searchCompanyByKeyword(companyKeyword, uriInfo);
 		return Response.ok().entity(companies).build();
-	}
+	}	
 }

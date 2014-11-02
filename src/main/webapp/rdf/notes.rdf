@@ -2,5 +2,51 @@
 <rdf:RDF
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
     xmlns:j.0="http://prabhakar.com/" > 
-
+  <rdf:Description rdf:about="http://dbpedia.org/resource/http://dbpedia.org/resource/http://dbpedia.org/resource/IBS_Software_Services">
+    <j.0:notes>lets see</j.0:notes>
+    <j.0:notes>cccc</j.0:notes>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://dbpedia.org/resource/IBS_Software_Services">
+    <j.0:notes>awesome</j.0:notes>
+    <j.0:notes>This is my supplier</j.0:notes>
+    <j.0:notes>lets see</j.0:notes>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://dbpedia.org/resource/http://dbpedia.org/resource/Iberdrola_Renovables">
+    <j.0:notes>lllllllaaaa</j.0:notes>
+    <j.0:notes>lllllllaaaaddd</j.0:notes>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://dbpedia.org/resource/http://dbpedia.org/resource/http://dbpedia.org/resource/Iberdrola_Renovables">
+    <j.0:notes>awesome</j.0:notes>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://dbpedia.org/resource/http://dbpedia.org/resource/http://dbpedia.org/resource/http://dbpedia.org/resource/http://dbpedia.org/resource/http://dbpedia.org/resource/http://dbpedia.org/resource/http://dbpedia.org/resource/IBS_Software_Services">
+    <j.0:notes>cccc</j.0:notes>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://dbpedia.org/resource/http://dbpedia.org/resource/http://dbpedia.org/resource/http://dbpedia.org/resource/http://dbpedia.org/resource/IBS_Software_Services">
+    <j.0:notes>cccc</j.0:notes>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://dbpedia.org/resource/Volkswagen_Group">
+    <j.0:notes>awesome</j.0:notes>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://dbpedia.org/resource/http://dbpedia.org/resource/IBS_Software_Services">
+    <j.0:notes>lets see</j.0:notes>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://dbpedia.org/resource/http://dbpedia.org/resource/http://dbpedia.org/resource/http://dbpedia.org/resource/IBS_Software_Services">
+    <j.0:notes>cccc</j.0:notes>
+    <j.0:notes>lets seeawesome</j.0:notes>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://dbpedia.org/resource/http://dbpedia.org/resource/http://dbpedia.org/resource/http://dbpedia.org/resource/Iberdrola_Renovables">
+    <j.0:notes>lets see</j.0:notes>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://dbpedia.org/resource/Iberdrola_Renovables">
+    <j.0:notes>lllllll</j.0:notes>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://dbpedia.org/resource/http://dbpedia.org/resource/http://dbpedia.org/resource/http://dbpedia.org/resource/http://dbpedia.org/resource/http://dbpedia.org/resource/IBS_Software_Services">
+    <j.0:notes>cccc</j.0:notes>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://dbpedia.org/resource/Microsoft_Japan">
+    <j.0:notes>Awesome</j.0:notes>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://dbpedia.org/resource/http://dbpedia.org/resource/http://dbpedia.org/resource/http://dbpedia.org/resource/http://dbpedia.org/resource/http://dbpedia.org/resource/http://dbpedia.org/resource/IBS_Software_Services">
+    <j.0:notes>cccc</j.0:notes>
+  </rdf:Description>
 </rdf:RDF>

@@ -8,9 +8,10 @@ import javax.ws.rs.core.Response;
 
 import org.apache.log4j.Logger;
 
-import edu.ms.pt.rdf.NotesWriter;
-import edu.ms.pt.sparql.access.Company;
+import com.ms.pt.model.Company;
+
 import edu.ms.pt.sparql.access.DBPediaSAO;
+import edu.ms.pt.sparql.access.NotesWriter;
 
 @Path("/notes/{organizationIdenfier:.+}")
 public class NotesResource extends Resource{

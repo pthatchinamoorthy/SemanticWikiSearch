@@ -1,4 +1,4 @@
-package edu.ms.pt.rdf;
+package edu.ms.pt.sparql.access;
 
 import java.io.FileWriter;
 import java.io.IOException;
