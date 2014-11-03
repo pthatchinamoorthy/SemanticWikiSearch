@@ -22,7 +22,7 @@
 	
 	<servlet-mapping>
 		<servlet-name>CompanySearch</servlet-name>
-		<url-pattern>/company/*</url-pattern>
+		<url-pattern>/rest/*</url-pattern>
 	</servlet-mapping>
 	
 	<welcome-file-list>

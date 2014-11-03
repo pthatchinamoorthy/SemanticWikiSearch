@@ -13,7 +13,7 @@ import com.ms.pt.model.Companies;
 
 import edu.ms.pt.sparql.access.DBPediaSAO;
 
-@Path("search/{company_keyword}")
+@Path("company/search/{company_keyword}")
 public class CompanySearchResource extends Resource{
 	
 	private static final Logger LOGGER = Logger.getLogger(CompanySearchResource.class);

@@ -13,7 +13,7 @@ import com.ms.pt.model.Company;
 import edu.ms.pt.sparql.access.DBPediaSAO;
 import edu.ms.pt.sparql.access.NotesWriter;
 
-@Path("/notes/{organizationIdenfier:.+}")
+@Path("company/notes/{organizationIdenfier}")
 public class NotesResource extends Resource{
 	
 	private static final Logger LOGGER = Logger.getLogger(NotesResource.class);

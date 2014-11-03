@@ -1,10 +1,12 @@
-function CompanySearchController($scope, $http) {
+var myApp = angular.module('SemanticWikiSearchApp',[]);
+  
+myApp.controller('CompanySearchController', ['$scope', '$http', function($scope, $http) {
 						
 	$scope.keywordSearch = function(){
 		$scope.ajax=1;
 		$scope.company=null;
 		//$http.get('json/company.json').
-		$http.get('company/search/' + $scope.keyword).										
+		$http.get('rest/company/search/' + $scope.keyword).										
 			success(function (data) {							
 				$scope.companies = data.companies;
 			}
@@ -40,7 +42,6 @@ function CompanySearchController($scope, $http) {
 			if (typeof $scope.country !== "undefined")
 				multipleOptionURL = multipleOptionURL + "&country=" + $scope.country;
 			
-			alert(multipleOptionURL);																  
 			$http.get(multipleOptionURL).									
 			success(function (data) {
 					$scope.companies = data.companies;
@@ -60,11 +61,9 @@ function CompanySearchController($scope, $http) {
 			);
 	}
 				
-	$scope.getCompanyInfo = function(companyUrl){		
-		$scope.companies = null;
-		var companyUrl = companyUrl.substring(38); 
-		//var companyUrl = companyUrl.substring(48);				 // AMAZON
-		$http.get(companyUrl).									
+	$scope.getCompanyInfo = function(id){		
+		$scope.companies = null;		
+		$http.get('rest/company/id/' + id).									
 			success(function (data) {
 				$scope.company = data;
 				$scope.isNotesUpdated = false;
@@ -73,7 +72,7 @@ function CompanySearchController($scope, $http) {
 	}
 	
 	$scope.updateNotes = function(organizationIdentifier){		
-		$http.put('company/notes/' + organizationIdentifier + "?notes=" + $scope.notes).
+		$http.put('rest/company/notes/' + organizationIdentifier + "?notes=" + $scope.notes).
 		success(function (data) {
 			$scope.company = data;
 			$scope.isNotesUpdated = true;			
@@ -81,4 +80,4 @@ function CompanySearchController($scope, $http) {
 		);
 	}
 	
-}
+}]);

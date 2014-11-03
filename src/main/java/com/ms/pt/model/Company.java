@@ -5,6 +5,8 @@ public class Company {
 
 	// @JsonProperty("foaf:name")
 	private String name = null;
+	
+	private String resourceIdentifier = null;
 
 	// @JsonProperty("foaf:url")
 	private String url = null;
@@ -167,5 +169,12 @@ public class Company {
 	public void setNotes(String notes) {
 		this.notes = notes;
 	}
+	
+	public String getResourceIdentifier() {
+		return resourceIdentifier;
+	}
 
+	public void setResourceIdentifier(String resourceIdentifier) {
+		this.resourceIdentifier = resourceIdentifier;
+	}
 }

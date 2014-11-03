@@ -1,4 +1,4 @@
-package edu.ms.pt.rdf;
+package edu.ms.pt.sparql.access;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -10,8 +10,6 @@ import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.rdf.model.StmtIterator;
 import com.hp.hpl.jena.vocabulary.VCARD;
-
-import edu.ms.pt.sparql.access.RdfApiSamples;
 
 
 public class RdfApiSamplesTest {
@@ -26,7 +24,7 @@ public class RdfApiSamplesTest {
 	}
 	
 	
-	@Test
+	//@Test
 	public void test_createPT(){
 		dbPedia.createPT();
 		Resource ptResource = dbPedia.getModel().getResource(personURI);
@@ -34,7 +32,7 @@ public class RdfApiSamplesTest {
 		Assert.assertEquals(personURI, ptResource.getURI());
 	}
 	
-	@Test
+	//@Test
 	public void test_listResources(){
 		StmtIterator statements = dbPedia.getModel().listStatements();
 		while (statements.hasNext()){
@@ -47,6 +45,12 @@ public class RdfApiSamplesTest {
 			System.out.println("Predicate: "+ predicate);
 			System.out.println("Object: " + object);
 		}
+	}
+	
+	@Test
+	public void test_awesome() {
+		String resourceIdentifier = "http://dbpedia.org/resource/Microsoft";
+		System.out.println(resourceIdentifier.substring(28));
 	}
 	
 }

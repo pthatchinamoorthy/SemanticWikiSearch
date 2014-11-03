@@ -34,7 +34,7 @@ public class NotesWriter {
 	
 	public void createNotes(String organizationIdentifier, String notes) {
 		Model newModel = ModelFactory.createDefaultModel();
-		newModel.createResource(organizationIdentifier).addProperty(model.createProperty("http://prabhakar.com/" , "notes"), model.createLiteral(notes));
+		newModel.createResource("http://dbpedia.org/resource/" + organizationIdentifier).addProperty(model.createProperty("http://prabhakar.com/" , "notes"), model.createLiteral(notes));
 		try {
 			this.model.add(newModel);
 			if(DEPLOY_ENV_AMAZAON)

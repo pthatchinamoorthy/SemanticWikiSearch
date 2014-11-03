@@ -14,7 +14,7 @@ import com.ms.pt.model.Companies;
 
 import edu.ms.pt.sparql.access.DBPediaSAO;
 
-@Path("search/mutilple-option-search")
+@Path("company/search/mutilple-option-search")
 public class CompanyMultipleOptionSearchResource extends Resource{
 	
 	private static final Logger LOGGER = Logger.getLogger(CompanyMultipleOptionSearchResource.class);
@@ -29,7 +29,20 @@ public class CompanyMultipleOptionSearchResource extends Resource{
 			@QueryParam("city") String locationCity, @QueryParam("country") String locationCountry, 
 			@QueryParam("revenue") String revenue, @QueryParam("income") String netIncome) {
 		
-		LOGGER.log(Priority.INFO, "multiple option search -------->");
+		
+		LOGGER.log(Priority.INFO, "multiple option search -------->" + 
+											   "companyName=" + name +
+											   "industryName=" + industry +
+											   "stockSymbol=" + symbol +
+											   "keyPeople=" + keyPeople +
+											   "greaterThanEmployeeSize=" + greatThanNumEmployees +
+											   "lesserThanEmployeeSize=" + lesserThanNumEmployees +
+											   "foundedBy=" + foundedBy +
+											   "foundingDate=" + foundingDate +
+											   "city=" + locationCity +
+											   "country=" + locationCountry +
+											   "revenue=" + revenue +
+											   "income=" + netIncome);
 		Companies companies = new DBPediaSAO().searchCompanyByOption( name,  industry,
 				   symbol,  keyPeople, 
 				    greatThanNumEmployees,  lesserThanNumEmployees,  

@@ -13,15 +13,15 @@ import com.ms.pt.model.Company;
 
 import edu.ms.pt.sparql.access.DBPediaSAO;
 
-@Path("/name/{name}")
+@Path("company/id/{id}")
 public class CompanyResource extends Resource{
 	
 	private static final Logger LOGGER = Logger.getLogger(CompanyResource.class);
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getCompanyInfo(@PathParam("name") String name) {
-		Company company = new DBPediaSAO().getCompanyInfo(name);
+	public Response getCompanyInfo(@PathParam("id") String id) {
+		Company company = new DBPediaSAO().getCompanyInfo(id);
 		return Response.ok().entity(company).build();
 	}
 	

@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" ng-app>
+<html lang="en" ng-app="SemanticWikiSearchApp">
 	<head>		
 		<title>SemanticWikiSearch</title>
 		
 		<link rel="stylesheet" type="text/css" href="css/wiki-search.css"></link>
 		
-		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.js"></script>
 		<script type="text/javascript" src="js/wiki-search.js"></script>
 	</head>
 	<body>		
@@ -139,7 +139,7 @@
 						<tbody vocab="http://schema.org/" typeof="Organization">
 							<tr ng-repeat="company in companies">
 								<td>{{$index + 1}}</td>
-								<td><span property="legalName"><a ng-click="getCompanyInfo(company.url);">{{company.name}}</a></span></td>
+								<td><span property="legalName"><a ng-click="getCompanyInfo(company.resourceIdentifier);">{{company.name}}</a></span></td>
 								<td><span property="locationCountry">{{company.locationCountry}}</span></td>
 								<td><span property="keyPeople">{{company.keyPeople}}</a></span></td>
 							</tr>
@@ -206,7 +206,7 @@
 									<span property="notes">{{company.notes}}</span>
 									<input style="width:500px; height:50px" ng-model="notes"></input>
 									<br/>
-									<button type="submit" ng-click="updateNotes(company.dataSourceUrl);">Save Notes</button>
+									<button type="submit" ng-click="updateNotes(company.resourceIdentifier);">Save Notes</button>
 									<br/>
 									<b ng-show="isNotesUpdated" style="color:brown;padding-left: 50px">The Notes is Updated in the local RDF data store for <b style="color:blue">{{company.name}}</b></b>									
 								</td> 								

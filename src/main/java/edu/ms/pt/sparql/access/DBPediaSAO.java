@@ -123,7 +123,7 @@ public class DBPediaSAO {
 		
 		if (lesserThanNumEmployees != null && !lesserThanNumEmployees.isEmpty()) {
 			tripleBlock.addTriple(Triple.create(Var.alloc("organization"), NodeFactory.createURI(DBPEDIA_ONT_NS + "numberOfEmployees") , Var.alloc("numberOfEmployees")));				
-			ElementFilter lesserThanNumEmployeesFilter = new ElementFilter(new E_LessThan(new ExprVar("numberOfEmployees"), new NodeValueInteger(Long.parseLong(greatThanNumEmployees))));
+			ElementFilter lesserThanNumEmployeesFilter = new ElementFilter(new E_LessThan(new ExprVar("numberOfEmployees"), new NodeValueInteger(Long.parseLong(lesserThanNumEmployees))));
 			queryBody.addElementFilter(lesserThanNumEmployeesFilter);
 		}
 		
@@ -168,6 +168,7 @@ public class DBPediaSAO {
 			queryBody.addElement(netIncomeFilter);
 		}
 		
+		LOGGER.log(Priority.INFO, query.toString());
 		QueryExecution queryExecution = QueryExecutionFactory.sparqlService("" + "http://dbpedia.org/sparql", query);
 		ResultSet resultSet = queryExecution.execSelect();
 		
@@ -231,6 +232,7 @@ public class DBPediaSAO {
 		query.setQueryPattern(queryBody);
 		query.setLimit(RECORD_LIMIT);
 		
+		LOGGER.log(Priority.INFO, query.toString());
 		QueryExecution queryExecution = QueryExecutionFactory.sparqlService("" + "http://dbpedia.org/sparql", query);
 		ResultSet resultSet = queryExecution.execSelect();
 		
@@ -248,59 +250,63 @@ public class DBPediaSAO {
 			company.setName(name.toString());
 			company.setLocationCountry(country != null ? country.toString() : "-");
 			company.setKeyPeople(keyPeople != null ? keyPeople.toString() : "-");
-			company.setDataSourceUrl(organizationIdentifier !=  null ? organizationIdentifier.toString() : null);
+			String dataSourceUrl = organizationIdentifier !=  null ? organizationIdentifier.toString() : null;
+			company.setDataSourceUrl(dataSourceUrl);
+			company.setResourceIdentifier(dataSourceUrl.substring(28));
 			
-			if (DEPLOY_ENV_AMAZAON)
+			/*if (DEPLOY_ENV_AMAZAON)
 				company.setUrl(organizationIdentifier.toString().replace(
 												"http://dbpedia.org/resource/", 
 												"http://" + uriInfo.getRequestUri().getHost() + "/company/name/"));
 			else
 				company.setUrl(organizationIdentifier.toString().replace(
 												"http://dbpedia.org/resource/", 
-												"http://" + uriInfo.getRequestUri().getHost() + ":8080/SmartWikiSearch/company/name/"));
+												"http://" + uriInfo.getRequestUri().getHost() + ":8080/SmartWikiSearch/company/name/"));*/
 			companyList.add(company);
 		}	
 		return new Companies(companyList);
 	}	
 	
 	public Company getCompanyInfo(String organisationIdentifier) {
-		String organization = organisationIdentifier.contains("http") ? organisationIdentifier : "http://dbpedia.org/resource/" + organisationIdentifier;
 		String sparqlQuery = 
 				"SELECT ?name ?notes ?isPrimaryTopicOf ?abstract ?foundedBy ?foundingDate ?locationCity ?locationCountry ?keyPeople ?symbol ?revenue ?netIncome ?numEmployees" +
-					" FROM <" + organization  + ">" +
+					" FROM <" + "http://dbpedia.org/resource/" + organisationIdentifier  + ">" +
 							" FROM NAMED <file:///C:/Users/thatchinamoorthyp/git/SemanticWikiSearch/src/main/webapp/rdf/notes.rdf>" +
 							" WHERE" + 
 							" {" +
-								" OPTIONAL{ <" + organization + "> ?property ?value.}" +
-								" OPTIONAL{ <" + organization + "> <http://xmlns.com/foaf/0.1/name> ?name.}" +
-								" OPTIONAL{<" + organization + "> <http://xmlns.com/foaf/0.1/isPrimaryTopicOf> ?isPrimaryTopicOf.}" + 
-								" OPTIONAL{ <" + organization + "> <http://dbpedia.org/ontology/abstract> ?abstract.}" +
-								" OPTIONAL{ <" + organization + "> <http://dbpedia.org/ontology/foundedBy> ?foundedBy.}" +
-								" OPTIONAL{ <" + organization + "> <http://dbpedia.org/ontology/foundingDate> ?foundingDate.}" +
-								" OPTIONAL{ <" + organization + "> <http://dbpedia.org/property/locationCity> ?locationCity.}" +
-								" OPTIONAL{ <" + organization + "> <http://dbpedia.org/property/locationCountry> ?locationCountry.}" +
-								" OPTIONAL{ <" + organization + "> <http://dbpedia.org/property/keyPeople> ?keyPeople.}" +
-								" OPTIONAL{ <" + organization + "> <http://dbpedia.org/property/symbol> ?symbol.}" +
-								" OPTIONAL{ <" + organization + "> <http://dbpedia.org/property/revenue> ?revenue.}" +
-								" OPTIONAL{ <" + organization + "> <http://dbpedia.org/property/netIncome> ?netIncome.}" +
-								" OPTIONAL{ <" + organization + "> <http://dbpedia.org/property/numEmployees> ?numEmployees.}" +
+								" OPTIONAL{ <" + "http://dbpedia.org/resource/" + organisationIdentifier + "> ?property ?value.}" +
+								" OPTIONAL{ <" + "http://dbpedia.org/resource/" + organisationIdentifier + "> <http://xmlns.com/foaf/0.1/name> ?name.}" +
+								" OPTIONAL{<" + "http://dbpedia.org/resource/" + organisationIdentifier + "> <http://xmlns.com/foaf/0.1/isPrimaryTopicOf> ?isPrimaryTopicOf.}" + 
+								" OPTIONAL{ <" + "http://dbpedia.org/resource/" + organisationIdentifier + "> <http://dbpedia.org/ontology/abstract> ?abstract.}" +
+								" OPTIONAL{ <" + "http://dbpedia.org/resource/" + organisationIdentifier + "> <http://dbpedia.org/ontology/foundedBy> ?foundedBy.}" +
+								" OPTIONAL{ <" + "http://dbpedia.org/resource/" + organisationIdentifier + "> <http://dbpedia.org/ontology/foundingDate> ?foundingDate.}" +
+								" OPTIONAL{ <" + "http://dbpedia.org/resource/" + organisationIdentifier + "> <http://dbpedia.org/property/locationCity> ?locationCity.}" +
+								" OPTIONAL{ <" + "http://dbpedia.org/resource/" + organisationIdentifier + "> <http://dbpedia.org/property/locationCountry> ?locationCountry.}" +
+								" OPTIONAL{ <" + "http://dbpedia.org/resource/" + organisationIdentifier + "> <http://dbpedia.org/property/keyPeople> ?keyPeople.}" +
+								" OPTIONAL{ <" + "http://dbpedia.org/resource/" + organisationIdentifier + "> <http://dbpedia.org/property/symbol> ?symbol.}" +
+								" OPTIONAL{ <" + "http://dbpedia.org/resource/" + organisationIdentifier + "> <http://dbpedia.org/property/revenue> ?revenue.}" +
+								" OPTIONAL{ <" + "http://dbpedia.org/resource/" + organisationIdentifier + "> <http://dbpedia.org/property/netIncome> ?netIncome.}" +
+								" OPTIONAL{ <" + "http://dbpedia.org/resource/" + organisationIdentifier + "> <http://dbpedia.org/property/numEmployees> ?numEmployees.}" +
 								" OPTIONAL {" +
 									"GRAPH <file:///C:/Users/thatchinamoorthyp/git/SemanticWikiSearch/src/main/webapp/rdf/notes.rdf> " +
-										" {<" + organization + "> <http://prabhakar.com/notes> ?notes.}" +
+										" {<" + "http://dbpedia.org/resource/" + organisationIdentifier + "> <http://prabhakar.com/notes> ?notes.}" +
 								"}" +
 							"}" +
-							" LIMIT 10";
-		LOGGER.log(Priority.INFO, sparqlQuery);
+							" LIMIT 5";
+		LOGGER.log(Priority.INFO, "SPARQL Query -->" + sparqlQuery);
 		
 		QueryExecution queryExecution = QueryExecutionFactory.create(sparqlQuery);
 		ResultSet resultSet = queryExecution.execSelect();
 		Company company = new Company();
 		
+		company.setResourceIdentifier(organisationIdentifier);
 		company.setDataSourceUrl("http://dbpedia.org/resource/" + organisationIdentifier);
+		
 		while(resultSet.hasNext()) {
 			QuerySolution result = resultSet.next();
 			company.setName(result.get("name") !=null ? result.get("name").toString() : "-");
 			company.setIsPrimaryTopicOf(result.get("isPrimaryTopicOf") != null ? result.get("isPrimaryTopicOf").toString() : "-");
+			company.setAabstract(result.get("abstract") != null ? result.get("abstract").toString() : "-");
 			company.setFoundedBy(result.get("foundedBy") != null ? result.get("foundedBy").toString() : "-");
 			company.setFoundingDate(result.get("foundingDate") != null ? result.get("foundingDate").toString() : "-");
 			company.setLocationCity(result.get("locationCity") != null ? result.get("locationCity").toString() : "-");
@@ -309,9 +315,10 @@ public class DBPediaSAO {
 			company.setSymbol(result.get("symbol") != null ? result.get("symbol").toString() : "-");
 			company.setRevenue(result.get("revenue") != null ? result.get("revenue").toString() : "-");
 			company.setNetIncome(result.get("netIncome") != null ? result.get("netIncome").toString() : "-") ;
+			company.setNumEmployees(result.get("numEmployees") != null ? result.get("numEmployees").toString() : "-") ;
 			company.setNotes(result.get("notes") != null 
 									? (company.getNotes().contains(result.get("notes").toString())  
-											? result.get("notes").toString() 
+											? company.getNotes() 
 											: company.getNotes() + "." + result.get("notes").toString()) 
 									: "No Saved Notes for this company");			
 		}	
