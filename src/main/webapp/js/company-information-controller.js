@@ -9,6 +9,5 @@ semanticWikiSearchApp.controller('CompanyInformationController', function($scope
 	
 	$scope.updateNotes = function(organizationIdentifier){		
 		$location.path("/company/notes/" + organizationIdentifier + "?notes=" + $scope.notes);
-		
 	}
 });

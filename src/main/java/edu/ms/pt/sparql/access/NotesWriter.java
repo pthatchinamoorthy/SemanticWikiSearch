@@ -12,7 +12,7 @@ public class NotesWriter {
 	
 	private Model model; 	public Model getModel() {return model;}
 	
-	private static final boolean DEPLOY_ENV_AMAZAON = false;
+	private static final boolean DEPLOY_ENV_AMAZAON = true;
 
 	public NotesWriter(Model model) {
 		super();
@@ -25,7 +25,7 @@ public class NotesWriter {
 		
 		Path path =  null;
 		if (DEPLOY_ENV_AMAZAON)
-			path = Paths.get("/tmp/deployment/application/ROOT/rdf", "notes.rdf"); 
+			path = Paths.get("webapps/ROOT/rdf", "notes.rdf"); 
 		else
 			path = Paths.get("src\\main\\webapp\\rdf", "notes.rdf");
 		
@@ -38,7 +38,7 @@ public class NotesWriter {
 		try {
 			this.model.add(newModel);
 			if(DEPLOY_ENV_AMAZAON)
-				this.model.write(new FileWriter("/tmp/deployment/application/ROOT/rdf/notes.rdf"), "RDF/JSON");
+				this.model.write(new FileWriter("webapps/ROOT/rdf/notes.rdf"), "RDF/XML");
 			else
 				this.model.write(new FileWriter("src\\main\\webapp\\rdf\\notes.rdf"), "RDF/XML");
 		} catch (IOException e) {

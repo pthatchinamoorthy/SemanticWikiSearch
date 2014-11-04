@@ -40,7 +40,7 @@ public class DBPediaSAO {
 	private static final String FOAF_NS = "http://xmlns.com/foaf/0.1/";
 	
 	private static final int RECORD_LIMIT = 10;
-	private static final boolean DEPLOY_ENV_AMAZAON = false;
+	private static final boolean DEPLOY_ENV_AMAZAON = true;
 	
 	/*
 		SELECT ?name ?foundedBy ?foundingDate ?locationCity ?locationCountry ?keyPeople ?symbol ?revenue ?netIncome ?numEmployees
@@ -171,6 +171,7 @@ public class DBPediaSAO {
 		LOGGER.log(Priority.INFO, query.toString());
 		QueryExecution queryExecution = QueryExecutionFactory.sparqlService("" + "http://dbpedia.org/sparql", query);
 		ResultSet resultSet = queryExecution.execSelect();
+		LOGGER.log(Priority.INFO, resultSet.toString());
 		
 		List<Company> companyList = new ArrayList<Company>();
 		
@@ -188,16 +189,8 @@ public class DBPediaSAO {
 			String dataSourceUrl = organizationIdentifierNode !=  null ? organizationIdentifierNode.toString() : null;
 			company.setDataSourceUrl(dataSourceUrl);
 			company.setResourceIdentifier(dataSourceUrl.substring(28));
-			
-			/*if (DEPLOY_ENV_AMAZAON)
-				company.setUrl(organizationIdentifierNode.toString().replace(
-												"http://dbpedia.org/resource/", 
-												"http://" + uriInfo.getRequestUri().getHost() + "/company/name/"));
-			else
-				company.setUrl(organizationIdentifierNode.toString().replace(
-												"http://dbpedia.org/resource/", 
-												"http://" + uriInfo.getRequestUri().getHost() + ":8080/SmartWikiSearch/company/name/"));
-	*/		companyList.add(company);
+
+			companyList.add(company);
 		}	
 		return new Companies(companyList);
 	}
@@ -237,7 +230,7 @@ public class DBPediaSAO {
 		LOGGER.log(Priority.INFO, query.toString());
 		QueryExecution queryExecution = QueryExecutionFactory.sparqlService("" + "http://dbpedia.org/sparql", query);
 		ResultSet resultSet = queryExecution.execSelect();
-		
+		LOGGER.log(Priority.INFO, resultSet.toString());
 		
 		List<Company> companyList = new ArrayList<Company>();
 		
@@ -256,21 +249,13 @@ public class DBPediaSAO {
 			company.setDataSourceUrl(dataSourceUrl);
 			company.setResourceIdentifier(dataSourceUrl.substring(28));
 			
-			/*if (DEPLOY_ENV_AMAZAON)
-				company.setUrl(organizationIdentifier.toString().replace(
-												"http://dbpedia.org/resource/", 
-												"http://" + uriInfo.getRequestUri().getHost() + "/company/name/"));
-			else
-				company.setUrl(organizationIdentifier.toString().replace(
-												"http://dbpedia.org/resource/", 
-												"http://" + uriInfo.getRequestUri().getHost() + ":8080/SmartWikiSearch/company/name/"));*/
 			companyList.add(company);
 		}	
 		return new Companies(companyList);
 	}	
 	
 	public Company getCompanyInfo(String organisationIdentifier) {
-		String rdfStore= DEPLOY_ENV_AMAZAON ? "file:////tmp/deployment/application/ROOT/rdf/notes.rdf" : "file:///C:/Users/thatchinamoorthyp/git/SemanticWikiSearch/src/main/webapp/rdf/notes.rdf";
+		String rdfStore= DEPLOY_ENV_AMAZAON ? "file:///var/lib/tomcat7/webapps/ROOT/rdf/notes.rdf" : "file:///C:/Users/thatchinamoorthyp/git/SemanticWikiSearch/src/main/webapp/rdf/notes.rdf";
 		String sparqlQuery = 
 				"SELECT ?name ?notes ?isPrimaryTopicOf ?abstract ?foundedBy ?foundingDate ?locationCity ?locationCountry ?keyPeople ?symbol ?revenue ?netIncome ?numEmployees" +
 							" FROM <" + "http://dbpedia.org/resource/" + organisationIdentifier  + ">" +
@@ -296,10 +281,12 @@ public class DBPediaSAO {
 								"}" +
 							"}" +
 							" LIMIT 5";
-		LOGGER.log(Priority.INFO, "SPARQL Query -->" + sparqlQuery);
 		
+		LOGGER.log(Priority.INFO, "SPARQL Query -->" + sparqlQuery);
 		QueryExecution queryExecution = QueryExecutionFactory.create(sparqlQuery);
 		ResultSet resultSet = queryExecution.execSelect();
+		LOGGER.log(Priority.INFO, resultSet.toString());
+		
 		Company company = new Company();
 		
 		company.setResourceIdentifier(organisationIdentifier);

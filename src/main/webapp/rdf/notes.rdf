@@ -8,13 +8,17 @@
   <rdf:Description rdf:about="http://dbpedia.org/resource/IBA-Moscow">
     <j.0:notes>awesome</j.0:notes>
   </rdf:Description>
-  <rdf:Description rdf:about="http://dbpedia.org/resource/IBM_jStart">
-    <j.0:notes>Prabhakara added notes</j.0:notes>
-    <j.0:notes>save notes</j.0:notes>
-    <j.0:notes>save another notes</j.0:notes>
+  <rdf:Description rdf:about="http://dbpedia.org/resource/General_Dynamics">
+    <j.0:notes>awesome</j.0:notes>
+    <j.0:notes>prabhakar</j.0:notes>
   </rdf:Description>
   <rdf:Description rdf:about="http://dbpedia.org/resource/Microsoft_Japan">
     <j.0:notes>awesome</j.0:notes>
     <j.0:notes>Awesome</j.0:notes>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://dbpedia.org/resource/IBM_jStart">
+    <j.0:notes>Prabhakara added notes</j.0:notes>
+    <j.0:notes>save notes</j.0:notes>
+    <j.0:notes>save another notes</j.0:notes>
   </rdf:Description>
 </rdf:RDF>
