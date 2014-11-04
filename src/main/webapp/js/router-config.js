@@ -12,7 +12,7 @@ semanticWikiSearchApp.config(['$routeProvider', function($routeProvider) {
 		   }).
 	       when('/company/id/:id', {
 	         templateUrl: 'html/company_information.html',
-	         controller: 'CompanyInformationController',
+	         controller: 'CompanyInformationController'
 	       }).
 	       when('/company/notes/:identifierAndNotes', {
 		         templateUrl: 'html/company_information.html',
