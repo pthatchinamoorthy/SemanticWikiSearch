@@ -185,9 +185,11 @@ public class DBPediaSAO {
 			company.setName(nameNode.toString());
 			company.setLocationCountry(countryNode != null ? countryNode.toString() : "-");
 			company.setKeyPeople(keyPeopleNode != null ? keyPeopleNode.toString() : "-");
-			company.setDataSourceUrl(organizationIdentifierNode !=  null ? organizationIdentifierNode.toString() : null);
+			String dataSourceUrl = organizationIdentifierNode !=  null ? organizationIdentifierNode.toString() : null;
+			company.setDataSourceUrl(dataSourceUrl);
+			company.setResourceIdentifier(dataSourceUrl.substring(28));
 			
-			if (DEPLOY_ENV_AMAZAON)
+			/*if (DEPLOY_ENV_AMAZAON)
 				company.setUrl(organizationIdentifierNode.toString().replace(
 												"http://dbpedia.org/resource/", 
 												"http://" + uriInfo.getRequestUri().getHost() + "/company/name/"));
@@ -195,7 +197,7 @@ public class DBPediaSAO {
 				company.setUrl(organizationIdentifierNode.toString().replace(
 												"http://dbpedia.org/resource/", 
 												"http://" + uriInfo.getRequestUri().getHost() + ":8080/SmartWikiSearch/company/name/"));
-			companyList.add(company);
+	*/		companyList.add(company);
 		}	
 		return new Companies(companyList);
 	}
@@ -268,10 +270,11 @@ public class DBPediaSAO {
 	}	
 	
 	public Company getCompanyInfo(String organisationIdentifier) {
+		String rdfStore= DEPLOY_ENV_AMAZAON ? "file:////tmp/deployment/application/ROOT/rdf/notes.rdf" : "file:///C:/Users/thatchinamoorthyp/git/SemanticWikiSearch/src/main/webapp/rdf/notes.rdf";
 		String sparqlQuery = 
 				"SELECT ?name ?notes ?isPrimaryTopicOf ?abstract ?foundedBy ?foundingDate ?locationCity ?locationCountry ?keyPeople ?symbol ?revenue ?netIncome ?numEmployees" +
-					" FROM <" + "http://dbpedia.org/resource/" + organisationIdentifier  + ">" +
-							" FROM NAMED <file:///C:/Users/thatchinamoorthyp/git/SemanticWikiSearch/src/main/webapp/rdf/notes.rdf>" +
+							" FROM <" + "http://dbpedia.org/resource/" + organisationIdentifier  + ">" +
+							" FROM NAMED <" + rdfStore + ">" +
 							" WHERE" + 
 							" {" +
 								" OPTIONAL{ <" + "http://dbpedia.org/resource/" + organisationIdentifier + "> ?property ?value.}" +
@@ -288,7 +291,7 @@ public class DBPediaSAO {
 								" OPTIONAL{ <" + "http://dbpedia.org/resource/" + organisationIdentifier + "> <http://dbpedia.org/property/netIncome> ?netIncome.}" +
 								" OPTIONAL{ <" + "http://dbpedia.org/resource/" + organisationIdentifier + "> <http://dbpedia.org/property/numEmployees> ?numEmployees.}" +
 								" OPTIONAL {" +
-									"GRAPH <file:///C:/Users/thatchinamoorthyp/git/SemanticWikiSearch/src/main/webapp/rdf/notes.rdf> " +
+									"GRAPH <" + rdfStore + "> " +
 										" {<" + "http://dbpedia.org/resource/" + organisationIdentifier + "> <http://prabhakar.com/notes> ?notes.}" +
 								"}" +
 							"}" +

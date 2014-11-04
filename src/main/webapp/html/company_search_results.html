@@ -1,5 +1,7 @@
-<h3>Company Search Results</h3>
-<table>
+<h2 ng-hide="companies" style="color:blue"><br/><br/>Pulling Results ........</h2>
+
+<h3 ng-show="companies">Company Search Results</h3>
+<table ng-show="companies">
 	<thead>
 		<tr>
 			<th>Index</th>

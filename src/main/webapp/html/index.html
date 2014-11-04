@@ -8,7 +8,12 @@
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.js"></script>
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular-route.js"></script>
 		
-		<script type="text/javascript" src="js/wiki-search.js"></script>
+		<script type="text/javascript" src="js/router-config.js"></script>
+		<script type="text/javascript" src="js/main-controller.js"></script>
+		<script type="text/javascript" src="js/keyword-searchresults-controller.js"></script>
+		<script type="text/javascript" src="js/multipleoption-searchresults-controller.js"></script>
+		<script type="text/javascript" src="js/company-information-controller.js"></script>
+		<script type="text/javascript" src="js/update-notes-controller.js"></script>
 	</head>
 	<body>		
 		<header>			
@@ -114,6 +119,7 @@
 						<span style="color:green" ng-show="companyName">companyName : <span style="color:blue" ng-show="companyName">{{companyName}}  </span></span>&nbsp;&nbsp;&nbsp;						
 						<span style="color:green" ng-show="industryName">industryName : <span style="color:blue" ng-show="industryName"> {{industryName}}  </span></span>&nbsp;&nbsp;&nbsp;
 						<span style="color:green" ng-show="stockSymbol">stockSymbol : <span style="color:blue" ng-show="stockSymbol">{{stockSymbol}} </span> </span>&nbsp;&nbsp;&nbsp;
+						<span style="color:green" ng-show="keyPeople">keyPeople : <span style="color:blue" ng-show="keyPeople">{{keyPeople}} </span> </span>&nbsp;&nbsp;&nbsp;
 						<span style="color:green" ng-show="greaterThanEmployeeSize">greaterThanEmployeeSize : <span style="color:blue" ng-show="greaterThanEmployeeSize">{{greaterThanEmployeeSize}} </span> </span>&nbsp;&nbsp;&nbsp;
 						<span style="color:green" ng-show="lesserThanEmployeeSize">lesserThanEmployeeSize : <span style="color:blue" ng-show="lesserThanEmployeeSize">{{lesserThanEmployeeSize}}  </span></span>&nbsp;&nbsp;&nbsp;
 						<span style="color:green" ng-show=foundedBy>foundedBy : <span style="color:blue" ng-show=foundedBy>{{foundedBy}}  </span></span>&nbsp;&nbsp;&nbsp;
@@ -121,13 +127,13 @@
 						<span style="color:green" ng-show="income">income : <span style="color:blue" ng-show="income">{{income}} </span> </span>&nbsp;&nbsp;&nbsp;
 						<span style="color:green" ng-show="revenue">revenue : <span style="color:blue" ng-show="revenue"> {{revenue}}  </span></span>&nbsp;&nbsp;&nbsp;
 						<span style="color:green" ng-show="city">city : <span style="color:blue" ng-show="city">{{city}}  </span></span>&nbsp;&nbsp;&nbsp;		
-						<span style="color:green" ng-show="state">state : <span style="color:blue" ng-show="state">{{state}} </span> </span>&nbsp;&nbsp;&nbsp;
-						<span style="color:green" ng-show="country">country : <span style="color:blue" ng-show="country">{{country}}  </span></span>&nbsp;&nbsp;&nbsp;
-						<span style="color:green" ng-show="xxx">xxx : <span style="color:blue" ng-show="xxx">{{xxx}}  </span></span>&nbsp;&nbsp;&nbsp;				
+						<span style="color:green" ng-show="country">country : <span style="color:blue" ng-show="country">{{country}}  </span></span>&nbsp;&nbsp;&nbsp;								
 					</p>
 				</div>
 				
-				<div ng-view></div>
+				<div ng-view>
+				</div>
+				
 			</section>			
 		</article>
 
