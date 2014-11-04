@@ -1,0 +1,20 @@
+<h3>Company Search Results</h3>
+<table>
+	<thead>
+		<tr>
+			<th>Index</th>
+			<th>Company Name</th>
+			<th>Country</th>
+			<th>Key Executives</th>
+		</tr>
+	</thead>
+	<tbody vocab="http://schema.org/" typeof="Organization">
+		<tr ng-repeat="company in companies">
+			<td>{{$index + 1}}</td>
+			<td><span property="legalName"><a
+					ng-click="getCompanyInfo(company.resourceIdentifier);">{{company.name}}</a></span></td>
+			<td><span property="locationCountry">{{company.locationCountry}}</span></td>
+			<td><span property="keyPeople">{{company.keyPeople}}</a></span></td>
+		</tr>
+	</tbody>
+</table>

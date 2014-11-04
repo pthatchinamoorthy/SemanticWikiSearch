@@ -1,0 +1,69 @@
+<h4>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<b><em>Detailed Information</em></b>
+</h4>
+<table>
+	<tbody vocab="http://schema.org/" typeof="Organization">
+		<tr>
+			<td><b>Company Name</b></td>
+			<td style="color: blue"><span property="legalName">{{company.name}}</span></td>
+		</tr>
+		<tr>
+			<td><b>City</b></td>
+			<td><span property="locationCity">{{company.locationCity}}</span></td>
+		</tr>
+		<tr>
+			<td><b>Country</b></td>
+			<td><span property="locationCountry">{{company.locationCountry}}</span></td>
+		</tr>
+		<tr>
+			<td><b>Key Executives</b></td>
+			<td><span property="keyPeople">{{company.keyPeople}}</span></td>
+		</tr>
+		<tr>
+			<td><b>Stock Symbol</b></td>
+			<td><span property="symbol">{{company.symbol}}</span></td>
+		</tr>
+		<tr>
+			<td><b>Description</b></td>
+			<td><span property="aabstract">{{company.aabstract}}</span></td>
+		</tr>
+		<tr>
+			<td><b>Revenue</b></td>
+			<td><span property="revenue">{{company.revenue}}</span></td>
+		</tr>
+		<tr>
+			<td><b>Net Income</b></td>
+			<td><span property="netIncome">{{company.netIncome}}</span></td>
+		</tr>
+		<tr>
+			<td><b>Founded By</b></td>
+			<td><span property="foundedBy">{{company.foundedBy}}</span></td>
+		</tr>
+		<tr>
+			<td><b>Founding Date</b></td>
+			<td><span property="foundingDate">{{company.foundingDate}}</span></td>
+		</tr>
+		<tr>
+			<td><b>Number of Employees</b></td>
+			<td><span property="numEmployees">{{company.numEmployees}}</span></td>
+		</tr>
+		<tr>
+			<td><b>Wikipedia URL</b></td>
+			<td><span property="isPrimaryTopicOf">{{company.isPrimaryTopicOf}}
+					<br /> {{company.dataSourceUrl}}
+			</span></td>
+		</tr>
+		<tr>
+			<td><b>Notes</b></td>
+			<td><span property="notes">{{company.notes}}</span> <input
+				style="width: 500px; height: 50px" ng-model="notes"></input> <br />
+				<button type="submit"
+					ng-click="updateNotes(company.resourceIdentifier);">Save
+					Notes</button> <br /> <b ng-show="isNotesUpdated"
+				style="color: brown; padding-left: 50px">The Notes is Updated in
+					the local RDF data store for <b style="color: blue">{{company.name}}</b>
+			</b></td>
+		</tr>
+	</tbody>
+</table>

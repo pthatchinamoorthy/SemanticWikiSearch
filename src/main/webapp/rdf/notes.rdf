@@ -3,26 +3,29 @@
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
     xmlns:j.0="http://prabhakar.com/" > 
   <rdf:Description rdf:about="http://dbpedia.org/resource/Apple_Boutique">
-    <j.0:notes>Call this done. ???</j.0:notes>
-    <j.0:notes>Third Notes</j.0:notes>
-    <j.0:notes>first notes</j.0:notes>
-    <j.0:notes>second notes</j.0:notes>
     <j.0:notes>fourth Notes</j.0:notes>
+    <j.0:notes>second notes</j.0:notes>
+    <j.0:notes>first notes</j.0:notes>
+    <j.0:notes>Third Notes</j.0:notes>
+    <j.0:notes>Call this done. ???</j.0:notes>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://dbpedia.org/resource/Microsoft">
+    <j.0:notes>awesome</j.0:notes>
   </rdf:Description>
   <rdf:Description rdf:about="http://dbpedia.org/resource/IBS_Software_Services">
-    <j.0:notes>This is awesome</j.0:notes>
-    <j.0:notes>awseome. lets try another one. lets try one more</j.0:notes>
-    <j.0:notes>awseome</j.0:notes>
-    <j.0:notes>awseome. lets try another one</j.0:notes>
-    <j.0:notes>This is insane</j.0:notes>
-    <j.0:notes>Check this one</j.0:notes>
     <j.0:notes>lets check</j.0:notes>
+    <j.0:notes>Check this one</j.0:notes>
+    <j.0:notes>This is insane</j.0:notes>
+    <j.0:notes>awseome. lets try another one</j.0:notes>
+    <j.0:notes>awseome</j.0:notes>
+    <j.0:notes>awseome. lets try another one. lets try one more</j.0:notes>
+    <j.0:notes>This is awesome</j.0:notes>
   </rdf:Description>
   <rdf:Description rdf:about="http://dbpedia.org/resource/Microsoft_Japan">
     <j.0:notes>essss</j.0:notes>
   </rdf:Description>
   <rdf:Description rdf:about="http://dbpedia.org/resource/Apple_Inc.">
-    <j.0:notes>This is my second note</j.0:notes>
     <j.0:notes>Alisa is my cubcle mate</j.0:notes>
+    <j.0:notes>This is my second note</j.0:notes>
   </rdf:Description>
 </rdf:RDF>
