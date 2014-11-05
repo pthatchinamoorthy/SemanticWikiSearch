@@ -1,7 +1,11 @@
 semanticWikiSearchApp.controller('MainController', function($scope, $http, $location) {
+	$scope.searchOption="StartsWith";
 	
-	$scope.keywordSearch = function(){		
-		$location.path("company/search/" + $scope.keyword);		
+	$scope.keywordSearch = function(){
+		var params = $scope.keyword
+		if (typeof $scope.searchOption !== "undefined")
+			params = params + "?&search_option=" + $scope.searchOption;
+		$location.path("company/search/" + params);		
 	}
 	
 	$scope.multipleOptionSearch = function(){	

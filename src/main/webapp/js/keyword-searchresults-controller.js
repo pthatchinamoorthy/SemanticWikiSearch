@@ -1,6 +1,6 @@
 semanticWikiSearchApp.controller('KeywordSearchResultsController', function($scope, $http, $location, $routeParams) {	
 	$scope.company=null;
-	
+	$scope.error=false;
 	$scope.keyword=$routeParams.keyword;
 	$http.get("rest/company/search/" + $routeParams.keyword).	 		//$http.get('json/company.json').
 		success(function (data) {							
@@ -20,10 +20,9 @@ semanticWikiSearchApp.controller('KeywordSearchResultsController', function($sco
 			$scope.city = undefined;
 			$scope.country = undefined;
 			$scope.notes = null;
-			$scope.searching=false;
 		}).
 		error(function(data, status, headers, config) {
-			    $scope.searchingComplete = undefined;
+			    $scope.searchingComplete = true;
 			    $scope.error=true;
 		});	
 	

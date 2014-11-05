@@ -38,6 +38,10 @@
 					<h2 style="color:white">Keyword Search</h2>
 					<form action="" name="Keyword Search">
 						<b>Company Keyword : </b> <input ng-model="keyword" type="search"></input>
+						<br/>
+						<input type="radio" ng-model="searchOption" value="Exact">Exact Match<br/>
+  						<input type="radio" ng-model="searchOption" value="Contains">Contains<br/>
+  						<input type="radio" ng-model="searchOption" value="StartsWith">Starts With<br/>
 						<br />
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<button type="submit" ng-click="keywordSearch();">Submit</button>
