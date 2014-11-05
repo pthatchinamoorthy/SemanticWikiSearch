@@ -12,7 +12,7 @@ public class NotesWriter {
 	
 	private Model model; 	public Model getModel() {return model;}
 	
-	private static final boolean DEPLOY_ENV_AMAZAON = true;
+	private static final boolean DEPLOY_ENV_AMAZAON = false;
 
 	public NotesWriter(Model model) {
 		super();

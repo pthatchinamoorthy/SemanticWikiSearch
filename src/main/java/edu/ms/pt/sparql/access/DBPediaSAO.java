@@ -40,7 +40,7 @@ public class DBPediaSAO {
 	private static final String FOAF_NS = "http://xmlns.com/foaf/0.1/";
 	
 	private static final int RECORD_LIMIT = 10;
-	private static final boolean DEPLOY_ENV_AMAZAON = true;
+	private static final boolean DEPLOY_ENV_AMAZAON = false;
 	
 	/*
 		SELECT ?name ?foundedBy ?foundingDate ?locationCity ?locationCountry ?keyPeople ?symbol ?revenue ?netIncome ?numEmployees

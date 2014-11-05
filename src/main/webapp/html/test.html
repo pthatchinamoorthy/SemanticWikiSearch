@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN" "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd">
+<html lang="en">
+<head>
+<title>Index</title>
+<script type="text/javascript" src="js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript" src="js/jquery.json-2.4.min.js"></script>
+<script type="text/javascript" src="js/jquery.rdfquery.core.min-1.0.js"></script>
+<script type="text/javascript" src="js/jquery.rdfquery.rdfa.min-1.0.js"></script>
+<script type="text/javascript">
+		function test() {
+			alert($.toJSON($("#content").rdf().databank.dump()));
+		}
+	</script>
+</head>
+<body>
+
+	<div id="content">
+		<table ng-show="company">
+			<tbody>
+				<tr>
+					<td><b>Company Name</b></td>
+					<td style="color: blue"><span xmlns:schema="http://schema.org/Organization/" property="schema:legalName">ibm</span></span></td>
+				</tr>
+				<tr>
+					<td><b>City</b></td>
+					<td><span property="locationCity">austin</span></td>
+				</tr>
+
+			</tbody>
+		</table>
+
+	</div>
+	<input type="submit" onclick="test();">rdfa
+	</input>
+
+</body>
+</html>
