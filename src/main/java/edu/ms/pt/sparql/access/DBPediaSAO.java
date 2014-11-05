@@ -34,41 +34,16 @@ import com.ms.pt.model.Companies;
 import com.ms.pt.model.Company;
 
 public class DBPediaSAO {
+
+	public static final boolean DEPLOY_ENV_AMAZAON = false;
+	
 	private static final Logger LOGGER = Logger.getLogger(DBPediaSAO.class);
 	private static final String DBPEDIA_ONT_NS = "http://dbpedia.org/ontology/";
 	private static final String DBPEDIA_PROP_NS = "http://dbpedia.org/property/";
 	private static final String FOAF_NS = "http://xmlns.com/foaf/0.1/";
 	
 	private static final int RECORD_LIMIT = 10;
-	private static final boolean DEPLOY_ENV_AMAZAON = false;
 	
-	/*
-		SELECT ?name ?foundedBy ?foundingDate ?locationCity ?locationCountry ?keyPeople ?symbol ?revenue ?netIncome ?numEmployees
-		WHERE
-			{
-			   ?organization <http://xmlns.com/foaf/0.1/name> ?name.
-			   FILTER (?name="")
-			   ?organization <http://dbpedia.org/ontology/foundedBy> ?foundedBy.
-			   FILTER (?foundedBy="")
-			   ?organization <http://dbpedia.org/ontology/foundingDate> ?foundingDate.
-			   FILTER (?foundingDate="")
-			   ?organization <http://dbpedia.org/property/locationCity> ?locationCity.
-			   FILTER (?locationCity="")
-			   ?organization <http://dbpedia.org/property/locationCountry> ?locationCountry.
-			   FILTER (?locationCountry="")
-			   ?organization <http://dbpedia.org/property/keyPeople> ?keyPeople.
-			   FILTER (?keyPeople="")
-			   ?organization <http://dbpedia.org/property/symbol> ?symbol.
-			   FILTER (?symbol="")
-			   ?organization <http://dbpedia.org/property/revenue> ?revenue.
-			   FILTER (?revenue="")
-			   ?organization <http://dbpedia.org/property/netIncome> ?netIncome.
-			   FILTER (?netIncome="")
-			   ?organization <http://dbpedia.org/property/numEmployees> ?numEmployees.
-			   FILTER (?foundedBy>"")
-			}
-		LIMIT 10
-	 */
 	/**
 	 * @param searchKeyword
 	 * @param uriInfo 
@@ -80,6 +55,178 @@ public class DBPediaSAO {
 										   String locationCity, String locationCountry, 
 										   String revenue, String netIncome
 										   , UriInfo uriInfo) {	
+		String sparqlQuery = "SELECT ?organization ?name ?locationCountry ?keyPeople " +
+							 "WHERE { " +
+							 "?organization <http://xmlns.com/foaf/0.1/name> ?name. " +
+							 "?organization <http://dbpedia.org/property/keyPeople> ?keyPeople. " +
+							 "?organization <http://dbpedia.org/property/locationCountry> ?locationCountry. ";
+		
+		if (name != null)
+			sparqlQuery = sparqlQuery + " FILTER (str(?name)='" + name + "')";
+		if (keyPeople != null)
+			sparqlQuery =  sparqlQuery + " FILTER (?keyPeople=\"\")";
+		if (locationCountry != null)
+			sparqlQuery = sparqlQuery +  " FILTER (?locationCountry=\"\")";
+		
+		if (industry != null) 
+			sparqlQuery = sparqlQuery + "?organization <http://dbpedia.org/ontology/industry> ?industry. FILTER (?industry=\"\")";
+		if (symbol != null)
+			sparqlQuery = sparqlQuery + "?organization <http://dbpedia.org/property/symbol> ?symbol. FILTER (?symbol=\"\")";
+		if (greatThanNumEmployees != null)
+			sparqlQuery = sparqlQuery + "?organization <http://dbpedia.org/property/numEmployees> ?numEmployees. FILTER (?numEmployees > \"\")";
+		if (lesserThanNumEmployees != null)
+			sparqlQuery = sparqlQuery + "?organization <http://dbpedia.org/property/numEmployees> ?numEmployees. FILTER (?numEmployees < \"\")";
+		if (foundedBy != null)
+			sparqlQuery = sparqlQuery + "?organization <http://dbpedia.org/ontology/foundedBy> ?foundedBy. FILTER (?foundedBy=\"\")";
+		if (foundingDate != null)
+			sparqlQuery = sparqlQuery + "?organization <http://dbpedia.org/ontology/foundingDate> ?foundingDate. FILTER (?foundingDate=\"\")";
+		if (locationCity != null)
+			sparqlQuery = sparqlQuery + "?organization <http://dbpedia.org/property/locationCity> ?locationCity. FILTER (?locationCity=\"\")";
+		if (revenue != null)
+			sparqlQuery = sparqlQuery + "?organization <http://dbpedia.org/property/revenue> ?revenue. FILTER (?revenue=\"\")";
+		if (netIncome != null)
+			sparqlQuery = sparqlQuery + "?organization <http://dbpedia.org/property/netIncome> ?netIncome. FILTER (?netIncome=\"\")";
+		sparqlQuery = sparqlQuery + " }";
+		sparqlQuery = sparqlQuery + " LIMIT 10";
+		
+		LOGGER.log(Priority.INFO, sparqlQuery);
+		QueryExecution queryExecution = QueryExecutionFactory.sparqlService("http://dbpedia.org/sparql", sparqlQuery);
+		ResultSet resultSet = queryExecution.execSelect();
+		LOGGER.log(Priority.INFO, resultSet.toString());
+		
+		List<Company> companyList = new ArrayList<Company>();
+		
+		while(resultSet.hasNext()) {
+			QuerySolution result = resultSet.next();
+			RDFNode organizationIdentifierNode = result.get("organization");
+			RDFNode nameNode = result.get("name");
+			RDFNode countryNode = result.get("locationCountry");
+			RDFNode keyPeopleNode = result.get("keyPeople");
+			
+			Company company = new Company();
+			company.setName(nameNode.toString());
+			company.setLocationCountry(countryNode != null ? countryNode.toString() : "-");
+			company.setKeyPeople(keyPeopleNode != null ? keyPeopleNode.toString() : "-");
+			String dataSourceUrl = organizationIdentifierNode !=  null ? organizationIdentifierNode.toString() : null;
+			company.setDataSourceUrl(dataSourceUrl);
+			company.setResourceIdentifier(dataSourceUrl.substring(28));
+
+			companyList.add(company);
+		}	
+		return new Companies(companyList);
+	}
+
+
+	/**
+	 * @param searchKeyword
+	 * @param uriInfo 
+	 */
+	public Companies searchCompanyByKeyword(String searchKeyword, UriInfo uriInfo) {	
+		
+		
+		String sparqlQuery = "SELECT ?organization ?name ?locationCountry ?keyPeople " +
+							  "WHERE { " +
+							  "?organization <http://xmlns.com/foaf/0.1/name> ?name. " +
+							  "?organization <http://dbpedia.org/property/keyPeople> ?keyPeople. " +
+							  "?organization <http://dbpedia.org/property/locationCountry> ?locationCountry. " +
+							  "FILTER (regex(?name, '^" + searchKeyword + "*'" + ", 'i')) " +
+							  "} " +
+							  "LIMIT 10";
+		
+		LOGGER.log(Priority.INFO, sparqlQuery);
+		QueryExecution queryExecution = QueryExecutionFactory.sparqlService("http://dbpedia.org/sparql", sparqlQuery);
+		ResultSet resultSet = queryExecution.execSelect();
+		LOGGER.log(Priority.INFO, resultSet.toString());
+		
+		List<Company> companyList = new ArrayList<Company>();
+		
+		while(resultSet.hasNext()) {
+			QuerySolution result = resultSet.next();
+			RDFNode organizationIdentifier = result.get("organization");
+			RDFNode name = result.get("name");
+			RDFNode country = result.get("locationCountry");
+			RDFNode keyPeople = result.get("keyPeople");
+			
+			Company company = new Company();
+			company.setName(name.toString());
+			company.setLocationCountry(country != null ? country.toString() : "-");
+			company.setKeyPeople(keyPeople != null ? keyPeople.toString() : "-");
+			String dataSourceUrl = organizationIdentifier !=  null ? organizationIdentifier.toString() : null;
+			company.setDataSourceUrl(dataSourceUrl);
+			company.setResourceIdentifier(dataSourceUrl.substring(28));
+			
+			companyList.add(company);
+		}	
+		return new Companies(companyList);
+	}	
+	
+	public Company getCompanyInfo(String organisationIdentifier) {
+		String rdfStore= DEPLOY_ENV_AMAZAON ? "file:///var/lib/tomcat7/webapps/ROOT/rdf/notes.rdf" : "file:///C:/Users/thatchinamoorthyp/git/SemanticWikiSearch/src/main/webapp/rdf/notes.rdf";
+		String sparqlQuery = 
+				"SELECT ?name ?notes ?isPrimaryTopicOf ?abstract ?foundedBy ?foundingDate ?locationCity ?locationCountry ?keyPeople ?symbol ?revenue ?netIncome ?numEmployees" +
+							" FROM <" + "http://dbpedia.org/resource/" + organisationIdentifier  + ">" +
+							" FROM NAMED <" + rdfStore + ">" +
+							" WHERE" + 
+							" {" +
+								" OPTIONAL{ <" + "http://dbpedia.org/resource/" + organisationIdentifier + "> ?property ?value.}" +
+								" OPTIONAL{ <" + "http://dbpedia.org/resource/" + organisationIdentifier + "> <http://xmlns.com/foaf/0.1/name> ?name.}" +
+								" OPTIONAL{<" + "http://dbpedia.org/resource/" + organisationIdentifier + "> <http://xmlns.com/foaf/0.1/isPrimaryTopicOf> ?isPrimaryTopicOf.}" + 
+								" OPTIONAL{ <" + "http://dbpedia.org/resource/" + organisationIdentifier + "> <http://dbpedia.org/ontology/abstract> ?abstract.}" +
+								" OPTIONAL{ <" + "http://dbpedia.org/resource/" + organisationIdentifier + "> <http://dbpedia.org/ontology/foundedBy> ?foundedBy.}" +
+								" OPTIONAL{ <" + "http://dbpedia.org/resource/" + organisationIdentifier + "> <http://dbpedia.org/ontology/foundingDate> ?foundingDate.}" +
+								" OPTIONAL{ <" + "http://dbpedia.org/resource/" + organisationIdentifier + "> <http://dbpedia.org/property/locationCity> ?locationCity.}" +
+								" OPTIONAL{ <" + "http://dbpedia.org/resource/" + organisationIdentifier + "> <http://dbpedia.org/property/locationCountry> ?locationCountry.}" +
+								" OPTIONAL{ <" + "http://dbpedia.org/resource/" + organisationIdentifier + "> <http://dbpedia.org/property/keyPeople> ?keyPeople.}" +
+								" OPTIONAL{ <" + "http://dbpedia.org/resource/" + organisationIdentifier + "> <http://dbpedia.org/property/symbol> ?symbol.}" +
+								" OPTIONAL{ <" + "http://dbpedia.org/resource/" + organisationIdentifier + "> <http://dbpedia.org/property/revenue> ?revenue.}" +
+								" OPTIONAL{ <" + "http://dbpedia.org/resource/" + organisationIdentifier + "> <http://dbpedia.org/property/netIncome> ?netIncome.}" +
+								" OPTIONAL{ <" + "http://dbpedia.org/resource/" + organisationIdentifier + "> <http://dbpedia.org/property/numEmployees> ?numEmployees.}" +
+								" OPTIONAL {" +
+									"GRAPH <" + rdfStore + "> " +
+										" {<" + "http://dbpedia.org/resource/" + organisationIdentifier + "> <http://prabhakar.com/notes> ?notes.}" +
+								"}" +
+							"}" +
+							" LIMIT 5";
+		
+		LOGGER.log(Priority.INFO, "SPARQL Query -->" + sparqlQuery);
+		QueryExecution queryExecution = QueryExecutionFactory.create(sparqlQuery);
+		ResultSet resultSet = queryExecution.execSelect();
+		LOGGER.log(Priority.INFO, resultSet.toString());
+		
+		Company company = new Company();
+		
+		company.setResourceIdentifier(organisationIdentifier);
+		company.setDataSourceUrl("http://dbpedia.org/resource/" + organisationIdentifier);
+		
+		while(resultSet.hasNext()) {
+			QuerySolution result = resultSet.next();
+			company.setName(result.get("name") !=null ? result.get("name").toString() : "-");
+			company.setIsPrimaryTopicOf(result.get("isPrimaryTopicOf") != null ? result.get("isPrimaryTopicOf").toString() : "-");
+			company.setAabstract(result.get("abstract") != null ? result.get("abstract").toString() : "-");
+			company.setFoundedBy(result.get("foundedBy") != null ? result.get("foundedBy").toString() : "-");
+			company.setFoundingDate(result.get("foundingDate") != null ? result.get("foundingDate").toString() : "-");
+			company.setLocationCity(result.get("locationCity") != null ? result.get("locationCity").toString() : "-");
+			company.setLocationCountry(result.get("locationCountry") != null ? result.get("locationCountry").toString() : "-");
+			company.setKeyPeople(result.get("keyPeople") != null ? result.get("keyPeople").toString() : "-");
+			company.setSymbol(result.get("symbol") != null ? result.get("symbol").toString() : "-");
+			company.setRevenue(result.get("revenue") != null ? result.get("revenue").toString() : "-");
+			company.setNetIncome(result.get("netIncome") != null ? result.get("netIncome").toString() : "-") ;
+			company.setNumEmployees(result.get("numEmployees") != null ? result.get("numEmployees").toString() : "-") ;
+			company.setNotes(result.get("notes") != null 
+									? (company.getNotes().contains(result.get("notes").toString())  
+											? company.getNotes() 
+											: company.getNotes() + "." + result.get("notes").toString()) 
+									: "No Saved Notes for this company");			
+		}	
+		return company;
+	}
+	
+	
+	private Query buildMultipleOptionQueryViaARQ(String name, String industry,
+			String symbol, String keyPeople, String greatThanNumEmployees,
+			String lesserThanNumEmployees, String foundedBy,
+			String foundingDate, String locationCity, String locationCountry,
+			String revenue, String netIncome) {
 		ElementGroup queryBody = new ElementGroup();
 		ElementTriplesBlock tripleBlock = new ElementTriplesBlock();
 		queryBody.addElement(tripleBlock);
@@ -167,152 +314,7 @@ public class DBPediaSAO {
 			ElementFilter netIncomeFilter = new ElementFilter(new E_GreaterThan(new ExprVar("netIncome"), new NodeValueDouble(Double.parseDouble(netIncome))));
 			queryBody.addElement(netIncomeFilter);
 		}
-		
-		LOGGER.log(Priority.INFO, query.toString());
-		QueryExecution queryExecution = QueryExecutionFactory.sparqlService("" + "http://dbpedia.org/sparql", query);
-		ResultSet resultSet = queryExecution.execSelect();
-		LOGGER.log(Priority.INFO, resultSet.toString());
-		
-		List<Company> companyList = new ArrayList<Company>();
-		
-		while(resultSet.hasNext()) {
-			QuerySolution result = resultSet.next();
-			RDFNode organizationIdentifierNode = result.get("organization");
-			RDFNode nameNode = result.get("name");
-			RDFNode countryNode = result.get("locationCountry");
-			RDFNode keyPeopleNode = result.get("keyPeople");
-			
-			Company company = new Company();
-			company.setName(nameNode.toString());
-			company.setLocationCountry(countryNode != null ? countryNode.toString() : "-");
-			company.setKeyPeople(keyPeopleNode != null ? keyPeopleNode.toString() : "-");
-			String dataSourceUrl = organizationIdentifierNode !=  null ? organizationIdentifierNode.toString() : null;
-			company.setDataSourceUrl(dataSourceUrl);
-			company.setResourceIdentifier(dataSourceUrl.substring(28));
-
-			companyList.add(company);
-		}	
-		return new Companies(companyList);
-	}
-					
-
-	/**
-	 * @param searchKeyword
-	 * @param uriInfo 
-	 */
-	public Companies searchCompanyByKeyword(String searchKeyword, UriInfo uriInfo) {	
-		
-		
-		ElementTriplesBlock tripleBlock = new ElementTriplesBlock();
-		Triple nameTriple = Triple.create(Var.alloc("organization"), NodeFactory.createURI(FOAF_NS + "name") , Var.alloc("name"));
-		tripleBlock.addTriple(nameTriple);				
-		Triple locationCountryTriple = Triple.create(Var.alloc("organization"), NodeFactory.createURI(DBPEDIA_PROP_NS + "locationCountry") , Var.alloc("locationCountry"));
-		tripleBlock.addTriple(locationCountryTriple);		
-		Triple keyPeopleTriple = Triple.create(Var.alloc("organization"), NodeFactory.createURI(DBPEDIA_PROP_NS + "keyPeople") , Var.alloc("keyPeople"));
-		tripleBlock.addTriple(keyPeopleTriple);
-		
-		Expr e = new E_Regex(new ExprVar("name"), new NodeValueString("^" + searchKeyword + "*"), new NodeValueString("i"));
-		ElementFilter filter = new ElementFilter(e);
-		
-		ElementGroup queryBody = new ElementGroup();
-		queryBody.addElement(tripleBlock);
-		queryBody.addElementFilter(filter);
-		
-		Query query = QueryFactory.make();
-		query.setQuerySelectType();
-		query.addResultVar("organization");
-		query.addResultVar("name");
-		query.addResultVar("locationCountry");
-		query.addResultVar("keyPeople");
-		query.setQueryPattern(queryBody);
-		query.setLimit(RECORD_LIMIT);
-		
-		LOGGER.log(Priority.INFO, query.toString());
-		QueryExecution queryExecution = QueryExecutionFactory.sparqlService("" + "http://dbpedia.org/sparql", query);
-		ResultSet resultSet = queryExecution.execSelect();
-		LOGGER.log(Priority.INFO, resultSet.toString());
-		
-		List<Company> companyList = new ArrayList<Company>();
-		
-		while(resultSet.hasNext()) {
-			QuerySolution result = resultSet.next();
-			RDFNode organizationIdentifier = result.get("organization");
-			RDFNode name = result.get("name");
-			RDFNode country = result.get("locationCountry");
-			RDFNode keyPeople = result.get("keyPeople");
-			
-			Company company = new Company();
-			company.setName(name.toString());
-			company.setLocationCountry(country != null ? country.toString() : "-");
-			company.setKeyPeople(keyPeople != null ? keyPeople.toString() : "-");
-			String dataSourceUrl = organizationIdentifier !=  null ? organizationIdentifier.toString() : null;
-			company.setDataSourceUrl(dataSourceUrl);
-			company.setResourceIdentifier(dataSourceUrl.substring(28));
-			
-			companyList.add(company);
-		}	
-		return new Companies(companyList);
-	}	
-	
-	public Company getCompanyInfo(String organisationIdentifier) {
-		String rdfStore= DEPLOY_ENV_AMAZAON ? "file:///var/lib/tomcat7/webapps/ROOT/rdf/notes.rdf" : "file:///C:/Users/thatchinamoorthyp/git/SemanticWikiSearch/src/main/webapp/rdf/notes.rdf";
-		String sparqlQuery = 
-				"SELECT ?name ?notes ?isPrimaryTopicOf ?abstract ?foundedBy ?foundingDate ?locationCity ?locationCountry ?keyPeople ?symbol ?revenue ?netIncome ?numEmployees" +
-							" FROM <" + "http://dbpedia.org/resource/" + organisationIdentifier  + ">" +
-							" FROM NAMED <" + rdfStore + ">" +
-							" WHERE" + 
-							" {" +
-								" OPTIONAL{ <" + "http://dbpedia.org/resource/" + organisationIdentifier + "> ?property ?value.}" +
-								" OPTIONAL{ <" + "http://dbpedia.org/resource/" + organisationIdentifier + "> <http://xmlns.com/foaf/0.1/name> ?name.}" +
-								" OPTIONAL{<" + "http://dbpedia.org/resource/" + organisationIdentifier + "> <http://xmlns.com/foaf/0.1/isPrimaryTopicOf> ?isPrimaryTopicOf.}" + 
-								" OPTIONAL{ <" + "http://dbpedia.org/resource/" + organisationIdentifier + "> <http://dbpedia.org/ontology/abstract> ?abstract.}" +
-								" OPTIONAL{ <" + "http://dbpedia.org/resource/" + organisationIdentifier + "> <http://dbpedia.org/ontology/foundedBy> ?foundedBy.}" +
-								" OPTIONAL{ <" + "http://dbpedia.org/resource/" + organisationIdentifier + "> <http://dbpedia.org/ontology/foundingDate> ?foundingDate.}" +
-								" OPTIONAL{ <" + "http://dbpedia.org/resource/" + organisationIdentifier + "> <http://dbpedia.org/property/locationCity> ?locationCity.}" +
-								" OPTIONAL{ <" + "http://dbpedia.org/resource/" + organisationIdentifier + "> <http://dbpedia.org/property/locationCountry> ?locationCountry.}" +
-								" OPTIONAL{ <" + "http://dbpedia.org/resource/" + organisationIdentifier + "> <http://dbpedia.org/property/keyPeople> ?keyPeople.}" +
-								" OPTIONAL{ <" + "http://dbpedia.org/resource/" + organisationIdentifier + "> <http://dbpedia.org/property/symbol> ?symbol.}" +
-								" OPTIONAL{ <" + "http://dbpedia.org/resource/" + organisationIdentifier + "> <http://dbpedia.org/property/revenue> ?revenue.}" +
-								" OPTIONAL{ <" + "http://dbpedia.org/resource/" + organisationIdentifier + "> <http://dbpedia.org/property/netIncome> ?netIncome.}" +
-								" OPTIONAL{ <" + "http://dbpedia.org/resource/" + organisationIdentifier + "> <http://dbpedia.org/property/numEmployees> ?numEmployees.}" +
-								" OPTIONAL {" +
-									"GRAPH <" + rdfStore + "> " +
-										" {<" + "http://dbpedia.org/resource/" + organisationIdentifier + "> <http://prabhakar.com/notes> ?notes.}" +
-								"}" +
-							"}" +
-							" LIMIT 5";
-		
-		LOGGER.log(Priority.INFO, "SPARQL Query -->" + sparqlQuery);
-		QueryExecution queryExecution = QueryExecutionFactory.create(sparqlQuery);
-		ResultSet resultSet = queryExecution.execSelect();
-		LOGGER.log(Priority.INFO, resultSet.toString());
-		
-		Company company = new Company();
-		
-		company.setResourceIdentifier(organisationIdentifier);
-		company.setDataSourceUrl("http://dbpedia.org/resource/" + organisationIdentifier);
-		
-		while(resultSet.hasNext()) {
-			QuerySolution result = resultSet.next();
-			company.setName(result.get("name") !=null ? result.get("name").toString() : "-");
-			company.setIsPrimaryTopicOf(result.get("isPrimaryTopicOf") != null ? result.get("isPrimaryTopicOf").toString() : "-");
-			company.setAabstract(result.get("abstract") != null ? result.get("abstract").toString() : "-");
-			company.setFoundedBy(result.get("foundedBy") != null ? result.get("foundedBy").toString() : "-");
-			company.setFoundingDate(result.get("foundingDate") != null ? result.get("foundingDate").toString() : "-");
-			company.setLocationCity(result.get("locationCity") != null ? result.get("locationCity").toString() : "-");
-			company.setLocationCountry(result.get("locationCountry") != null ? result.get("locationCountry").toString() : "-");
-			company.setKeyPeople(result.get("keyPeople") != null ? result.get("keyPeople").toString() : "-");
-			company.setSymbol(result.get("symbol") != null ? result.get("symbol").toString() : "-");
-			company.setRevenue(result.get("revenue") != null ? result.get("revenue").toString() : "-");
-			company.setNetIncome(result.get("netIncome") != null ? result.get("netIncome").toString() : "-") ;
-			company.setNumEmployees(result.get("numEmployees") != null ? result.get("numEmployees").toString() : "-") ;
-			company.setNotes(result.get("notes") != null 
-									? (company.getNotes().contains(result.get("notes").toString())  
-											? company.getNotes() 
-											: company.getNotes() + "." + result.get("notes").toString()) 
-									: "No Saved Notes for this company");			
-		}	
-		return company;
+		return query;
 	}
 	
 }

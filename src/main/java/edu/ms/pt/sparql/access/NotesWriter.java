@@ -4,16 +4,14 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-
+import static edu.ms.pt.sparql.access.DBPediaSAO.DEPLOY_ENV_AMAZAON;
 import com.hp.hpl.jena.rdf.model.Model;
-import com.hp.hpl.jena.rdf.model.ModelFactory;
+import com.hp.hpl.jena.rdf.model.ModelFactory; 
 
 public class NotesWriter {
 	
 	private Model model; 	public Model getModel() {return model;}
 	
-	private static final boolean DEPLOY_ENV_AMAZAON = false;
-
 	public NotesWriter(Model model) {
 		super();
 		this.model = model;
@@ -34,7 +32,10 @@ public class NotesWriter {
 	
 	public void createNotes(String organizationIdentifier, String notes) {
 		Model newModel = ModelFactory.createDefaultModel();
-		newModel.createResource("http://dbpedia.org/resource/" + organizationIdentifier).addProperty(model.createProperty("http://prabhakar.com/" , "notes"), model.createLiteral(notes));
+		newModel.createResource("http://dbpedia.org/resource/" + organizationIdentifier).
+						addProperty(model.createProperty("http://prabhakar.com/" , "notes"),
+											model.createLiteral(notes));
+		
 		try {
 			this.model.add(newModel);
 			if(DEPLOY_ENV_AMAZAON)
@@ -42,7 +43,6 @@ public class NotesWriter {
 			else
 				this.model.write(new FileWriter("src\\main\\webapp\\rdf\\notes.rdf"), "RDF/XML");
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}		
 	}

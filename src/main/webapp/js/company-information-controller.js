@@ -3,6 +3,7 @@ semanticWikiSearchApp.controller('CompanyInformationController', function($scope
 	$http.get('rest/company/id/' + $routeParams.id).									
 		success(function (data) {
 				$scope.company = data;
+				$scope.searchingComplete = true;
 				$scope.isNotesUpdated = false;
 			}
 		);
