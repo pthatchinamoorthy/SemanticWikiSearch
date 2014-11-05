@@ -58,15 +58,16 @@
 			</span></td>
 		</tr>
 		<tr>
-			<td><b>Notes</b></td>
-			<td><span property="notes">{{company.notes}}</span> <input
-				style="width: 500px; height: 50px" ng-model="notes"></input> <br />
-				<button type="submit"
-					ng-click="updateNotes(company.resourceIdentifier);">Save
-					Notes</button> <br /> <b ng-show="isNotesUpdated"
-				style="color: brown; padding-left: 50px">The Notes is Updated in
-					the local RDF data store for <b style="color: blue">{{company.name}}</b>
-			</b></td>
+			<td style="color: brown"><b>Personalized Notes <br/><span style="color: blue"> -- Stored in local RDF data store -- </span></b></td>
+			<td style="color: brown">
+				<span property="notes">{{company.notes}}</span> 
+				<input style="width: 500px; height: 50px" ng-model="notes"></input> <br />
+				<button type="submit" ng-click="updateNotes(company.resourceIdentifier);">Save Notes</button> 
+				<br/> 
+				<b ng-show="isNotesUpdated" style="color: brown; padding-left: 50px">
+					The Notes is Updated in the local RDF data store for <b style="color: blue">{{company.name}}</b>
+				</b>
+			</td>
 		</tr>
 	</tbody>
 </table>
