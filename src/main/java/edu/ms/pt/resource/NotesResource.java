@@ -8,8 +8,8 @@ import javax.ws.rs.core.Response;
 
 import org.apache.log4j.Logger;
 
-import com.ms.pt.model.Company;
 
+import edu.ms.pt.model.Company;
 import edu.ms.pt.sparql.access.DBPediaSAO;
 import edu.ms.pt.sparql.access.NotesWriter;
 

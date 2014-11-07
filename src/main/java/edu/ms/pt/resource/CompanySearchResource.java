@@ -10,8 +10,8 @@ import javax.ws.rs.core.Response;
 
 import org.apache.log4j.Logger;
 
-import com.ms.pt.model.Companies;
 
+import edu.ms.pt.model.Companies;
 import edu.ms.pt.sparql.access.DBPediaSAO;
 
 @Path("company/search/{company_keyword}")

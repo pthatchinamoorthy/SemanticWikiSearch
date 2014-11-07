@@ -14,7 +14,7 @@
 	<tbody vocab="http://schema.org/" typeof="Organization">
 		<tr ng-repeat="company in companies">
 			<td>{{$index + 1}}</td>
-			<td style="color:blue; cursor:pointer"><span property="legalName"><a ng-click="getCompanyInfo(company.resourceIdentifier);">{{company.name}}</a></span></td>
+			<td style="color:blue; cursor:pointer"><span property="legalName"><b><a ng-click="getCompanyInfo(company.resourceIdentifier);">{{company.name}}</a></b></span></td>
 			<td><span property="locationCountry">{{company.locationCountry}}</span></td>
 			<td><span property="keyPeople">{{company.keyPeople}}</a></span></td>
 		</tr>

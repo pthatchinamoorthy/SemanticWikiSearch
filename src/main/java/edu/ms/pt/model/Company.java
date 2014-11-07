@@ -1,4 +1,4 @@
-package com.ms.pt.model;
+package edu.ms.pt.model;
 
 //@JsonSerialize(include=Inclusion.NON_NULL)
 public class Company {

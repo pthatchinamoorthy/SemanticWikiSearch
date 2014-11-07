@@ -6,7 +6,7 @@
 	<tbody vocab="http://schema.org/" typeof="Organization">
 		<tr>
 			<td style="background-color: teal; color: white;"><b>Company Name</b></td>
-			<td style="color: blue"><span property="legalName">{{company.name}}</span></td>
+			<td><span property="legalName"><b>{{company.name}}</b></span></td>
 		</tr>
 		<tr>
 			<td style="background-color: teal; color: white;"><b>City</b></td>
@@ -63,12 +63,13 @@
 				</b>
 			</td>
 			<td >
-				<span property="notes">{{company.notes}}</span> 
+				<br/>
+				<span property="notes" style="color:maroon"><b>{{company.notes}}</b></span>
 				<br/>
 				<input style="width: 500px; height: 50px" ng-model="notes"></input>
 				<button type="submit" ng-click="updateNotes(company.resourceIdentifier);">Add Personalized Notes</button> 
 				<br/> 
-				<b ng-show="isNotesUpdated" style="color:white ;padding-left: 50px">
+				<b ng-show="isNotesUpdated" style="color:maroon ;padding-left: 50px">
 					The Notes is Updated in the local RDF data store for {{company.name}}
 				</b>
 			</td>

@@ -10,8 +10,8 @@ import javax.ws.rs.core.Response;
 import org.apache.log4j.Logger;
 import org.apache.log4j.Priority;
 
-import com.ms.pt.model.Companies;
 
+import edu.ms.pt.model.Companies;
 import edu.ms.pt.sparql.access.DBPediaSAO;
 
 @Path("company/search/mutilple-option-search")

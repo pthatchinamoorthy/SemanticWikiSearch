@@ -1,4 +1,4 @@
-package com.ms.pt.model;
+package edu.ms.pt.model;
 
 import java.util.List;
 

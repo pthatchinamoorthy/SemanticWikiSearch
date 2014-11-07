@@ -30,8 +30,9 @@ import com.hp.hpl.jena.sparql.expr.nodevalue.NodeValueString;
 import com.hp.hpl.jena.sparql.syntax.ElementFilter;
 import com.hp.hpl.jena.sparql.syntax.ElementGroup;
 import com.hp.hpl.jena.sparql.syntax.ElementTriplesBlock;
-import com.ms.pt.model.Companies;
-import com.ms.pt.model.Company;
+
+import edu.ms.pt.model.Companies;
+import edu.ms.pt.model.Company;
 
 public class DBPediaSAO {
 
