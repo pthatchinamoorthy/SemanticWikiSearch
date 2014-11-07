@@ -1,46 +1,68 @@
-body {
-	background-color: white;
+body{
+	background-color: whitesmoke;
 }
-
 header {
-	border: solid;
-	height: 90px;
-	width: 100%;
-	position: absolute;
-	top: 0px;
-	left: 0px;
-	right: 0px;
-	bottom: 0px;
-	background-color: white;
+	position:absolute;
+	top:0px; left:0px;right:0px;height:90px;	
+	text-align: center;
+	background-color: whitesmoke;	
 }
-
-article {
-	border: double;
-	position: absolute;
-	left: 0px;
-	top: 90px;
-	bottom: 90px;
-	width: 100%;
+nav1 {
+	position:absolute;
+    top:92px; left:0px; right :0px; height:50px;				
+	background-color: teal;
+	color:white;
+	text-align:center;
+	border: 2px solid grey; border-radius: 25px;	
 }
-
-nav {
-	padding: 2px;
-	position: absolute;
-	border: double;
-	width: 400px;
-	height: 100%;
-	background-color: olive;
+nav2 {
+	position:absolute;
+    top:148px; bottom:0px; left:0px; width: 330px;    
+	height:480px;
+	background-color: teal;
+	color:white;
+	text-align:center;	
+	border: 2px solid grey; border-radius: 25px;    
 }
-
 section {
-	border: double;
-	height: 100%;
-	padding-left: 420px;
-	padding-right: 20px;
-	right: 5px;
-	background-color: white;
+	padding:5px;
+    position:absolute;
+   	top:148px;	bottom:0px; left:332px; right:0px;
+	height:100%;	
+	background-color: whitesmoke;
 }
 
+table {
+	width: 100%;
+	height: 100%;
+}
+th {
+	background-color: teal;
+	color:white;
+	padding: 4px;
+	border:solid 1px grey;
+}
+td {
+	text-align:left;
+	background-color: white;
+	color:black; 
+	border:solid 1px grey;
+	padding:4px;
+}
+#multipleOptionTable td{
+	background-color:teal; 
+	color:white;
+	border:none;
+}
+
+#imgRDFa {
+	position: absolute;
+	top:15px; left: 10px;
+}
+#imagSPARQL {
+	position: absolute;
+	top:15px; right: 10px; 
+}
 footer {
 	position: absolute;
 	bottom: 0px;
@@ -51,51 +73,12 @@ footer {
 	border: double
 }
 
-table {
-	border-collapse: collapse;
-	padding: 10px;
-	width: 100%;
-	height: 100%;
-}
-
-table,th,td {
-	border: 1px solid black;
-}
-
-th {
-	background-color: olive;
-	color: white;
-	padding: 4px;
-}
-
-td {
-	background-color: white;
-	color: black;
-	padding: 4px;
-}
-
-#imgsematiclogo {
-	position: absolute;
-	top: 0px;
-	left: 0px;
-	height: 90px;
-	width: 300px;
-}
-
 #imagsemantic {
 	position: absolute;
 	top: 0px;
 	right: 0px;
 	height: 90px;
-	width: 200px;
-}
-
-#imagwikipedia {
-	position: absolute;
-	top: 0px;
-	right: 0px;
-	height: 90px;
-	width: 250px;
+	width: 300px;
 }
 
 #imagcognizant {

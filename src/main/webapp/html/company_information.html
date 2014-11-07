@@ -1,71 +1,75 @@
-<h2 ng-hide="searchingComplete" style="color:brown"><br/><br/>Pulling Results ...........</h2>
-
-
-<h4 ng-show="company">
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	<b><em>Detailed Information</em></b>
-</h4>
+<h2 ng-hide="searchingComplete" style="text-align:center;"><br/><br/>Pulling Results ...........</h2>
+<h3 ng-show="company">
+	<em>Detailed Information</em>
+</h3>
 <table ng-show="company">
 	<tbody vocab="http://schema.org/" typeof="Organization">
 		<tr>
-			<td><b>Company Name</b></td>
+			<td style="background-color: teal; color: white;"><b>Company Name</b></td>
 			<td style="color: blue"><span property="legalName">{{company.name}}</span></td>
 		</tr>
 		<tr>
-			<td><b>City</b></td>
+			<td style="background-color: teal; color: white;"><b>City</b></td>
 			<td><span property="locationCity">{{company.locationCity}}</span></td>
 		</tr>
 		<tr>
-			<td><b>Country</b></td>
+			<td style="background-color: teal; color: white;"><b>Country</b></td>
 			<td><span property="locationCountry">{{company.locationCountry}}</span></td>
 		</tr>
 		<tr>
-			<td><b>Key Executives</b></td>
+			<td style="background-color: teal; color: white;"><b>Key Executives</b></td>
 			<td><span property="keyPeople">{{company.keyPeople}}</span></td>
 		</tr>
 		<tr>
-			<td><b>Stock Symbol</b></td>
+			<td style="background-color: teal; color: white;"><b>Stock Symbol</b></td>
 			<td><span property="symbol">{{company.symbol}}</span></td>
 		</tr>
 		<tr>
-			<td><b>Description</b></td>
+			<td style="background-color: teal; color: white;"><b>Description</b></td>
 			<td><span property="aabstract">{{company.aabstract}}</span></td>
 		</tr>
 		<tr>
-			<td><b>Revenue</b></td>
+			<td style="background-color: teal; color: white;"><b>Revenue</b></td>
 			<td><span property="revenue">{{company.revenue}}</span></td>
 		</tr>
 		<tr>
-			<td><b>Net Income</b></td>
+			<td style="background-color: teal; color: white;"><b>Net Income</b></td>
 			<td><span property="netIncome">{{company.netIncome}}</span></td>
 		</tr>
 		<tr>
-			<td><b>Founded By</b></td>
+			<td style="background-color: teal; color: white;"><b>Founded By</b></td>
 			<td><span property="foundedBy">{{company.foundedBy}}</span></td>
 		</tr>
 		<tr>
-			<td><b>Founding Date</b></td>
+			<td style="background-color: teal; color: white;"><b>Founding Date</b></td>
 			<td><span property="foundingDate">{{company.foundingDate}}</span></td>
 		</tr>
 		<tr>
-			<td><b>Number of Employees</b></td>
+			<td style="background-color: teal; color: white;"><b>Number of Employees</b></td>
 			<td><span property="numEmployees">{{company.numEmployees}}</span></td>
 		</tr>
 		<tr>
-			<td><b>Wikipedia URL</b></td>
+			<td style="background-color: teal; color: white;"><b>Wikipedia URL</b></td>
 			<td><span property="isPrimaryTopicOf">{{company.isPrimaryTopicOf}}
 					<br /> {{company.dataSourceUrl}}
 			</span></td>
 		</tr>
 		<tr>
-			<td style="color: brown"><b>Personalized Notes <br/><span style="color: blue"> -- Stored in local RDF data store -- </span></b></td>
-			<td style="color: brown">
+			<td style="background-color: teal; color: white">
+				<b>
+					Personalized Notes 
+					<br/>
+					<b style="color:#FFFF99">Stored in local RDF data store</b> 
+				</b>
+			</td>
+			<td >
 				<span property="notes">{{company.notes}}</span> 
-				<input style="width: 500px; height: 50px" ng-model="notes"></input> <br />
-				<button type="submit" ng-click="updateNotes(company.resourceIdentifier);">Save Notes</button> 
+				<br/>
+				<input style="width: 500px; height: 50px" ng-model="notes"></input>
+				<button type="submit" ng-click="updateNotes(company.resourceIdentifier);">Add Personalized Notes</button> 
 				<br/> 
-				<b ng-show="isNotesUpdated" style="color: brown; padding-left: 50px">
-					The Notes is Updated in the local RDF data store for <b style="color: blue">{{company.name}}</b>
+				<b ng-show="isNotesUpdated" style="color:white ;padding-left: 50px">
+					The Notes is Updated in the local RDF data store for {{company.name}}
 				</b>
 			</td>
 		</tr>

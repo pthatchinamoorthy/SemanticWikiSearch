@@ -1,5 +1,5 @@
-<h2 ng-hide="searchingComplete" style="color:brown"><br/><br/>Pulling Results ........</h2>
-<h2 ng-show="error" style="color:brown"><br/><br/>Error : Something has gone wrong ...........</h2>
+<h2 ng-hide="searchingComplete" style="text-align:center;"><br/><br/>Pulling Results ........</h2>
+<h2 ng-show="error" style="text-align:center;"><br/><br/>Error : Something has gone wrong ...........</h2>
 
 <h3 ng-show="companies">Company Search Results</h3>
 <table ng-show="companies">
@@ -14,8 +14,7 @@
 	<tbody vocab="http://schema.org/" typeof="Organization">
 		<tr ng-repeat="company in companies">
 			<td>{{$index + 1}}</td>
-			<td><span property="legalName"><a
-					ng-click="getCompanyInfo(company.resourceIdentifier);">{{company.name}}</a></span></td>
+			<td style="color:blue; cursor:pointer"><span property="legalName"><a ng-click="getCompanyInfo(company.resourceIdentifier);">{{company.name}}</a></span></td>
 			<td><span property="locationCountry">{{company.locationCountry}}</span></td>
 			<td><span property="keyPeople">{{company.keyPeople}}</a></span></td>
 		</tr>

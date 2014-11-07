@@ -14,150 +14,182 @@
 		<script type="text/javascript" src="js/multipleoption-searchresults-controller.js"></script>
 		<script type="text/javascript" src="js/company-information-controller.js"></script>
 		<script type="text/javascript" src="js/update-notes-controller.js"></script>
-		
 	</head>
-	<body>		
-		<header>			
-			<img id="imgsematiclogo" src="images/RDFa.jpg"/>
-			<h2 style="text-align: center ; color: blue ; text-shadow: 1px 1px blue">Company Profile Search - A Semantic approach</h2>
-			<p style="text-align: center ; color: grey">
-				<em>Sophisticated Search of a Company's Profile. Powered with WikiPedia-DBPedia's Data</em>				
-			</p>			
-			<img id="imagwikipedia" src="images/sparql.jpg"/>
-		</header>
-
-		<article ng-controller="MainController">
-			<nav>
-				<h2 style="color:white">
-						<input type="checkbox" ng-model="keywordSearchRadio">Keyword Search</input>
-						<br/>
-						<input type="checkbox" ng-model="multipleOptionSearchRadio">Multiple Option Search</input>
-				</h2>
-				
-				<div style="border: double; padding:5px" ng-show="keywordSearchRadio">
-					<h2 style="color:white">Keyword Search</h2>
-					<form action="" name="Keyword Search">
-						<b>Company Keyword : </b> <input ng-model="keyword" type="search"></input>
-						<br/>
-						<input type="radio" ng-model="searchOption" value="Exact">Exact Match<br/>
-  						<input type="radio" ng-model="searchOption" value="Contains">Contains<br/>
-  						<input type="radio" ng-model="searchOption" value="StartsWith">Starts With<br/>
-						<br />
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<button type="submit" ng-click="keywordSearch();">Submit</button>
-					</form>
-				</div>
-				
-				<br/>
-				<div style="border: double ; padding:5px ;" ng-show="multipleOptionSearchRadio">
-					<h2 style="color:white; width: 100%">Multiple Option Search</h2>
-					<form action="" name="Multi Option Search" style="right:5px">
-						<table>
-							<tbody>
-								<tr>
-									<td>
-										<b>Company Name :</b> <input ng-model="companyName" type="text"  />
-									</td>
-									<td>
-										<b>Industry Name :</b> <input ng-model="industryName" type="text"  />
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<b>Stock Symbol :</b> <input ng-model="stockSymbol" type="text"  />
-									</td>
-									<td>
-										<b>key People :</b> <input ng-model="keyPeople" type="text"  />	
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<b>Employee Size > </b> 
-										<input ng-model="greaterThanEmployeeSize" name=empsize1-test type=range min=1000 max=1000000 step=1000 onchange="this.form.empsize1.value=this.value;">						
-										<output name=empsize1 for=range-test value=0></output>
-									</td>								
-									<td>
-									<b>Employee Size < </b>
-									<input ng-model="lesserThanEmployeeSize" name=empsize2-test type=range min=1000 max=1000000 step=1000 onchange="this.form.empsize2.value=this.value;">
-									<output name=empsize2 for=range-test value=0></output>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<b>Founded Date > :</b> <input ng-model="foundingDate" type="date"  />
-									</td>
-									<td>
-										<b>Founded By :</b> <input ng-model="foundedBy" type="text"  />
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<b>Income > </b> <input ng-model="income" type="number"  />	
-									</td>
-									<td>
-										<b>Revenue > </b> <input ng-model="revenue" type="number"  />		
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<b>City : </b><input ng-model="city" type="text"  />	
-									</td>
-									<td>
-										<b>Country : </b> <input ng-model="country" type="text"  />	
-									</td>
-								</tr>
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="reset" >Reset</button>&nbsp;&nbsp; 
-								<button type="submit" ng-click="multipleOptionSearch();">Submit</button>								
-							</tbody>
-						</table>				
-					</form>
-				</div>
-			</nav>
 	
-			<section>				
-				<div ng-hide="company">
-					<h3 ng-show="keyword || companyName || industryName || stockSymbol || greaterThanEmployeeSize
-									|| lesserThanEmployeeSize || foundedBy || foundedDate || income ||
-									 revenue || city || state || country || xxx" >Input Search Criteria</h3>
-					<p style="color:green">
-						<span style="color:green" ng-show="keyword">Company Keyword : <span style="color:blue" ng-show="keyword">{{keyword}} </span></span>&nbsp;&nbsp;&nbsp;
-						<span style="color:green" ng-show="companyName">companyName : <span style="color:blue" ng-show="companyName">{{companyName}}  </span></span>&nbsp;&nbsp;&nbsp;						
-						<span style="color:green" ng-show="industryName">industryName : <span style="color:blue" ng-show="industryName"> {{industryName}}  </span></span>&nbsp;&nbsp;&nbsp;
-						<span style="color:green" ng-show="stockSymbol">stockSymbol : <span style="color:blue" ng-show="stockSymbol">{{stockSymbol}} </span> </span>&nbsp;&nbsp;&nbsp;
-						<span style="color:green" ng-show="keyPeople">keyPeople : <span style="color:blue" ng-show="keyPeople">{{keyPeople}} </span> </span>&nbsp;&nbsp;&nbsp;
-						<span style="color:green" ng-show="greaterThanEmployeeSize">greaterThanEmployeeSize : <span style="color:blue" ng-show="greaterThanEmployeeSize">{{greaterThanEmployeeSize}} </span> </span>&nbsp;&nbsp;&nbsp;
-						<span style="color:green" ng-show="lesserThanEmployeeSize">lesserThanEmployeeSize : <span style="color:blue" ng-show="lesserThanEmployeeSize">{{lesserThanEmployeeSize}}  </span></span>&nbsp;&nbsp;&nbsp;
-						<span style="color:green" ng-show=foundedBy>foundedBy : <span style="color:blue" ng-show=foundedBy>{{foundedBy}}  </span></span>&nbsp;&nbsp;&nbsp;
-						<span style="color:green" ng-show="foundedDate">foundedDate : <span style="color:blue" ng-show="foundedDate"> {{foundedDate}}  </span></span>&nbsp;&nbsp;&nbsp;
-						<span style="color:green" ng-show="income">income : <span style="color:blue" ng-show="income">{{income}} </span> </span>&nbsp;&nbsp;&nbsp;
-						<span style="color:green" ng-show="revenue">revenue : <span style="color:blue" ng-show="revenue"> {{revenue}}  </span></span>&nbsp;&nbsp;&nbsp;
-						<span style="color:green" ng-show="city">city : <span style="color:blue" ng-show="city">{{city}}  </span></span>&nbsp;&nbsp;&nbsp;		
-						<span style="color:green" ng-show="country">country : <span style="color:blue" ng-show="country">{{country}}  </span></span>&nbsp;&nbsp;&nbsp;								
-					</p>
-				</div>
-				
-				<div ng-view>
-				</div>
-				
-			</section>			
-		</article>
+	<body ng-controller="MainController">		
+		<header>			
+			<img id="imgRDFa" src="images/RDFa.jpg"/>
+			<h2>Company Profile Search - A Semantic approach</h2>
+			<p>
+				<b style="color:grey"><em>Sophisticated Search of a Company's Profile. Powered with WikiPedia-DBPedia's Data</em></b>
+				<br/>			
+			</p>			
+			<img id="imagSPARQL" src="images/sparql.jpg"/>
+		</header>
+		
+		<nav1>
+			<div>
+				<br/>
+				<form action="" name="Keyword Search">			
+					<b>Keyword Search : </b> <input ng-model="keyword" type="search"></input>			
+					<input type="radio" ng-model="searchOption" value="Exact">Exact Match
+					<input type="radio" ng-model="searchOption" value="Contains">Contains
+					<input type="radio" ng-model="searchOption" value="StartsWith">Starts With
+					&nbsp;&nbsp;
+					<button type="submit" ng-click="keywordSearch();">Submit</button>
+				</form>
+			</div>
+		</nav1>
+		
+		<nav2>
+			<br/>		
+			<div>
+				<b>Multiple Option Search</b>
+				<form action="" name="Multi Option Search">
+					<table id="multipleOptionTable">
+						<tbody>
+							<tr>
+								<td>
+									<b>Company Name</b> 
+								</td>								
+								<td>
+									<input ng-model="companyName" type="text"  />
+								</td>
+							</tr>
+							<tr  >
+								<td>
+									<b>Industry Name </b> 
+								</td>
+								<td>
+									<input ng-model="industryName" type="text"  />
+								</td>
+							</tr>
+							<tr  >
+								<td>
+									<b>Stock Symbol</b> 
+								</td>
+								<td>
+									<input ng-model="stockSymbol" type="text"  />
+									</td>
+							</tr>
+							<tr  >
+								<td>
+									<b>key People </b> 
+								</td>
+								<td>
+									<input ng-model="keyPeople" type="text"  />	
+								</td>
+							</tr>
+							<tr  >
+								<td>
+									<b>Employee Size > </b> 
+								</td>
+								<td>
+									<input ng-model="greaterThanEmployeeSize" name=empsize1-test type=range min=1000 max=1000000 step=1000 onchange="this.form.empsize1.value=this.value;">						
+									<output name=empsize1 for=range-test value=0></output>
+								</td>	
+							</tr>
+							<tr  >						
+								<td>
+									<b>Employee Size < </b>
+								</td>
+								<td>
+								<input ng-model="lesserThanEmployeeSize" name=empsize2-test type=range min=1000 max=1000000 step=1000 onchange="this.form.empsize2.value=this.value;">
+								<output name=empsize2 for=range-test value=0></output>
+								</td>
+							</tr>
+							<tr  >
+								<td>
+									<b>Founded Date > </b> 
+								</td>
+								<td>
+									<input ng-model="foundingDate" type="date"  />
+								</td>
+								</tr>
+							<tr  >
+								<td>
+									<b>Founded By </b> 
+								</td>
+								<td>
+								<input ng-model="foundedBy" type="text"  />
+								</td>
+							</tr>
+							<tr  >
+								<td>
+									<b>Income > </b>
+								</td>
+								<td>
+								 <input ng-model="income" type="number"  />	
+								</td>
+							</tr>
+							<tr  >
+								<td>
+									<b>Revenue > </b> </td>
+								<td><input ng-model="revenue" type="number"  />		
+								</td>
+							</tr>
+							<tr >
+								<td>
+									<b>City  </b></td>
+								<td><input ng-model="city" type="text"  />	
+								</td>
+								</tr>
+							<tr >
+								<td>
+									<b>Country  </b> </td>
+								<td><input ng-model="country" type="text"  />	
+								</td>
+							</tr>
+							<br/>
+							&nbsp;&nbsp;
+							<button type="reset" >Reset</button>
+							&nbsp;&nbsp; 
+							<button type="submit" ng-click="multipleOptionSearch();">Submit</button>					
+														
+						</tbody>
+					</table>				
+				</form>
+			</div>
+			<!--div ng-hide="company">
+				<br/>
+				<b ng-show="keyword || companyName || industryName || stockSymbol || greaterThanEmployeeSize || lesserThanEmployeeSize 
+									|| foundedBy || foundedDate || income || revenue || city || state || country" >
+					Input Search Criteria
+				</b>
+				<br/>
+				<span style="" ng-show="keyword">Company Keyword : <span style="color:black" ng-show="keyword">{{keyword}} </span></span>&nbsp;&nbsp;&nbsp;
+				<span style="" ng-show="companyName">companyName : <span style="color:black" ng-show="companyName">{{companyName}}  </span></span>&nbsp;&nbsp;&nbsp;						
+				<span style="" ng-show="industryName">industryName : <span style="color:black" ng-show="industryName"> {{industryName}}  </span></span>&nbsp;&nbsp;&nbsp;
+				<span style="" ng-show="stockSymbol">stockSymbol : <span style="color:black" ng-show="stockSymbol">{{stockSymbol}} </span> </span>&nbsp;&nbsp;&nbsp;
+				<span style="" ng-show="keyPeople">keyPeople : <span style="color:black" ng-show="keyPeople">{{keyPeople}} </span> </span>&nbsp;&nbsp;&nbsp;
+				<span style="" ng-show="greaterThanEmployeeSize">greaterThanEmployeeSize : <span style="color:black" ng-show="greaterThanEmployeeSize">{{greaterThanEmployeeSize}} </span> </span>&nbsp;&nbsp;&nbsp;
+				<span style="" ng-show="lesserThanEmployeeSize">lesserThanEmployeeSize : <span style="color:black" ng-show="lesserThanEmployeeSize">{{lesserThanEmployeeSize}}  </span></span>&nbsp;&nbsp;&nbsp;
+				<span style="" ng-show=foundedBy>foundedBy : <span style="color:black" ng-show=foundedBy>{{foundedBy}}  </span></span>&nbsp;&nbsp;&nbsp;
+				<span style="" ng-show="foundedDate">foundedDate : <span style="color:black" ng-show="foundedDate"> {{foundedDate}}  </span></span>&nbsp;&nbsp;&nbsp;
+				<span style="" ng-show="income">income : <span style="color:black" ng-show="income">{{income}} </span> </span>&nbsp;&nbsp;&nbsp;
+				<span style="" ng-show="revenue">revenue : <span style="color:black" ng-show="revenue"> {{revenue}}  </span></span>&nbsp;&nbsp;&nbsp;
+				<span style="" ng-show="city">city : <span style="color:black" ng-show="city">{{city}}  </span></span>&nbsp;&nbsp;&nbsp;		
+				<span style="" ng-show="country">country : <span style="color:black" ng-show="country">{{country}}  </span></span>&nbsp;&nbsp;&nbsp;								
+			</div-->
+		</nav2>
+	
+		<section>				
+			<div ng-view>
+			</div>
+		</section>					
 
-		<footer>
+		<!--footer>
 			<img id="imagcognizant" alt="" src="images/cognizant.jpg">
 			<p style="padding-left: 100px ; padding-right:100px ; color: blue; text-align: center;">
 				<b>This is a research project submitted for BITS MS-Software Engineering Thesis - demonstrating the capabilities of Semantic Technologies - SPARQL, RDFa and Semantic Markups</b>				
 				<br/>
 				<span style="color: grey">
-					 @ <b><em>Guide</em></b>  : Raghul Nandagopal
-					 <br/>
-					 @ <b><em>Student Name</em></b> : Prabhakaran . T
-					 -----  
-					 @ <b><em>BITS ID</em></b> : 2012HZ78383
+					 @ <b><em>Guide</em></b>  : Raghul Nandagopal   ------ @ <b><em>Student Name</em></b> : Prabhakaran . T  -----   @ <b><em>BITS ID</em></b> : 2012HZ78383
 					 <br/>
 					 <a href="html/documentation.html" style="color: grey">Documentation</a>
 				</span>
 			</p>			
 			<img id="imagbits" alt="" src="images/bits.gif">
-		</footer>				
+		</footer-->				
 	</body>
 </html>

@@ -4,6 +4,7 @@ semanticWikiSearchApp.controller('CompanyInformationNotesUpdateController', func
 	success(function (data) {
 			$scope.company = data;
 			$scope.isNotesUpdated = true;
+			$scope.searchingComplete = true;
 		}
 	);
 	
