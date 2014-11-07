@@ -9,7 +9,7 @@ header {
 }
 nav1 {
 	position:absolute;
-    top:92px; left:0px; right :0px; height:50px;				
+    top:92px; left:0px; right :0px; height:60px;				
 	background-color: teal;
 	color:white;
 	text-align:center;
@@ -17,7 +17,7 @@ nav1 {
 }
 nav2 {
 	position:absolute;
-    top:148px; bottom:0px; left:0px; width: 330px;    
+    top:158px; bottom:0px; left:0px; width: 330px;    
 	height:480px;
 	background-color: teal;
 	color:white;
@@ -27,7 +27,7 @@ nav2 {
 section {
 	padding:5px;
     position:absolute;
-   	top:148px;	bottom:0px; left:332px; right:0px;
+   	top:158px;	bottom:0px; left:332px; right:0px;
 	height:100%;	
 	background-color: whitesmoke;
 }

@@ -1,6 +1,6 @@
 <h2 ng-hide="searchingComplete" style="text-align:center;"><br/><br/>Pulling Results ...........</h2>
-<h3 ng-show="company">
-	<em>Detailed Information</em>
+<h3 ng-show="company" style="text-align:center">
+	Detailed Information
 </h3>
 <table ng-show="company">
 	<tbody vocab="http://schema.org/" typeof="Organization">
@@ -62,16 +62,23 @@
 					<b style="color:#FFFF99">Stored in local RDF data store</b> 
 				</b>
 			</td>
-			<td >
-				<br/>
+			<td >				
 				<span property="notes" style="color:maroon"><b>{{company.notes}}</b></span>
-				<br/>
-				<input style="width: 500px; height: 50px" ng-model="notes"></input>
-				<button type="submit" ng-click="updateNotes(company.resourceIdentifier);">Add Personalized Notes</button> 
-				<br/> 
-				<b ng-show="isNotesUpdated" style="color:maroon ;padding-left: 50px">
-					The Notes is Updated in the local RDF data store for {{company.name}}
-				</b>
+			</td>
+		</tr>
+		<tr>			
+			<td style="text-align:center;" colspan="2">
+				<form action="" name="Update Notes">
+					<input placeholder="         Add Notes about this company" style="padding:2px ; background-color:cornsilk ; height:50px ; width: 500px; border:1px solid grey; border-radius:25px;" ng-model="notes" ></input>
+					<br/> <br/>
+					<button type="submit" ng-click="updateNotes(company.resourceIdentifier);">
+						Add Personalized Notes
+					</button> 
+					<br/>  
+					<b ng-show="isNotesUpdated" style="color:maroon;">
+						The Notes is Updated in the local RDF data store for {{company.name}}
+					</b>
+				</form>
 			</td>
 		</tr>
 	</tbody>
