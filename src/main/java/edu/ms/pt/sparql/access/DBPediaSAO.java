@@ -32,20 +32,18 @@ public class DBPediaSAO {
 		
 		String sparqlQuery = "SELECT ?organization ?name ?locationCountry ?keyPeople " +
 							  "WHERE { " +
-							  "?organization <http://xmlns.com/foaf/0.1/name> ?name. " +
-							  "?organization <http://dbpedia.org/property/keyPeople> ?keyPeople. " +
-							  "?organization <http://dbpedia.org/property/locationCountry> ?locationCountry. ";
+							  "OPTIONAL { ?organization <http://xmlns.com/foaf/0.1/name> ?name. } ";
 		
-		
-		String filter =  "";
 		if ("Exact".equals(searchOption)) 
-			filter = "FILTER (str(?name)='" + searchKeyword + "')";
+			sparqlQuery += "FILTER (str(?name)='" + searchKeyword + "')";
 		else if ("Contains".equals(searchOption))
-			filter = "FILTER (regex(?name, '" + searchKeyword + "*'" + ", 'i')) ";
+			sparqlQuery += "FILTER (regex(?name, '" + searchKeyword + "*'" + ", 'i')) ";
 		else
-			filter = "FILTER (regex(?name, '^" + searchKeyword + "*'" + ", 'i')) ";
-		LOGGER.log(Priority.INFO, "searchFilter --------->" + filter);
-		sparqlQuery = sparqlQuery + filter + "} " + "LIMIT 10";
+			sparqlQuery += "FILTER (regex(?name, '^" + searchKeyword + "*'" + ", 'i')) ";
+		
+		sparqlQuery += "OPTIONAL { ?organization <http://dbpedia.org/property/keyPeople> ?keyPeople. }" +
+					   "OPTIONAL { ?organization <http://dbpedia.org/property/locationCountry> ?locationCountry. }" +
+						"} " + "LIMIT 15";
 		
 		LOGGER.log(Priority.INFO, sparqlQuery);
 		QueryExecution queryExecution = QueryExecutionFactory.sparqlService("http://dbpedia.org/sparql", sparqlQuery);
@@ -88,37 +86,41 @@ public class DBPediaSAO {
 										   , UriInfo uriInfo) {	
 		String sparqlQuery = "SELECT ?organization ?name ?locationCountry ?keyPeople " +
 							 "WHERE { " +
-							 "?organization <http://xmlns.com/foaf/0.1/name> ?name. " +
-							 "?organization <http://dbpedia.org/property/keyPeople> ?keyPeople. " +
-							 "?organization <http://dbpedia.org/property/locationCountry> ?locationCountry. ";
+							 "OPTIONAL { ?organization <http://xmlns.com/foaf/0.1/name> ?name. } ";
+		
+		
+							 
 		
 		if (name != null)
-			sparqlQuery =  sparqlQuery + " FILTER (regex(?name, '" + name + "*', 'i')) ";			
-		if (keyPeople != null)
-			sparqlQuery =  sparqlQuery + " FILTER (regex(?keyPeople, '" + keyPeople + "*', 'i')) ";
-		if (locationCountry != null)
-			sparqlQuery =  sparqlQuery + " FILTER (regex(?locationCountry, '" + locationCountry + "*', 'i')) ";
+			sparqlQuery +=  " FILTER (regex(?name, '" + name + "*', 'i')) ";
 		
 		if (industry != null) 
-			sparqlQuery = sparqlQuery + "?organization <http://dbpedia.org/ontology/industry> ?industry. FILTER (regex(?industry, '" + industry + "*', 'i')) ";
+			sparqlQuery += "?organization <http://dbpedia.org/ontology/industry> ?industry. FILTER (regex(?industry, '" + industry + "*', 'i')) ";
 		if (symbol != null)
-			sparqlQuery = sparqlQuery + "?organization <http://dbpedia.org/property/symbol> ?symbol. FILTER (str(?symbol)='" + symbol + "')";
+			sparqlQuery += "?organization <http://dbpedia.org/property/symbol> ?symbol. FILTER (str(?symbol)='" + symbol + "')";
 		if (greatThanNumEmployees != null)
-			sparqlQuery = sparqlQuery + "?organization <http://dbpedia.org/property/numEmployees> ?numEmployees. FILTER (?numEmployees > " + greatThanNumEmployees + ")";
+			sparqlQuery += "?organization <http://dbpedia.org/property/numEmployees> ?numEmployees. FILTER (?numEmployees > " + greatThanNumEmployees + ")";
 		if (lesserThanNumEmployees != null)
-			sparqlQuery = sparqlQuery + "?organization <http://dbpedia.org/property/numEmployees> ?numEmployees. FILTER (?numEmployees < " + lesserThanNumEmployees + ")";
+			sparqlQuery += "?organization <http://dbpedia.org/property/numEmployees> ?numEmployees. FILTER (?numEmployees < " + lesserThanNumEmployees + ")";
 		if (foundedBy != null)
-			sparqlQuery = sparqlQuery + "?organization <http://dbpedia.org/ontology/foundedBy> ?foundedBy. FILTER (regex(?foundedBy, '" + foundedBy + "*', 'i')) ";
+			sparqlQuery += "?organization <http://dbpedia.org/ontology/foundedBy> ?foundedBy. FILTER (regex(?foundedBy, '" + foundedBy + "*', 'i')) ";
 		if (foundingDate != null)
-			sparqlQuery = sparqlQuery + "?organization <http://dbpedia.org/ontology/foundingDate> ?foundingDate. FILTER (str(?foundingDate)='" + foundingDate + "')";
+			sparqlQuery += "?organization <http://dbpedia.org/ontology/foundingDate> ?foundingDate. FILTER (str(?foundingDate)='" + foundingDate + "')";
 		if (locationCity != null)
-			sparqlQuery = sparqlQuery + "?organization <http://dbpedia.org/property/locationCity> ?locationCity. FILTER (regex(?locationCity, '" + locationCity + "*', 'i')) ";
+			sparqlQuery += "?organization <http://dbpedia.org/property/locationCity> ?locationCity. FILTER (regex(?locationCity, '" + locationCity + "*', 'i')) ";
 		if (revenue != null)
-			sparqlQuery = sparqlQuery + "?organization <http://dbpedia.org/property/revenue> ?revenue. FILTER (?revenue > " + revenue + ")";
+			sparqlQuery += "?organization <http://dbpedia.org/property/revenue> ?revenue. FILTER (?revenue > " + revenue + ")";
 		if (netIncome != null)
-			sparqlQuery = sparqlQuery + "?organization <http://dbpedia.org/property/netIncome> ?netIncome. FILTER (?netIncome > " + netIncome + ")";
-		sparqlQuery = sparqlQuery + " }";
-		sparqlQuery = sparqlQuery + " LIMIT 10";
+			sparqlQuery += "?organization <http://dbpedia.org/property/netIncome> ?netIncome. FILTER (?netIncome > " + netIncome + ")";
+		
+		sparqlQuery += "OPTIONAL { ?organization <http://dbpedia.org/property/keyPeople> ?keyPeople. }";
+		if (keyPeople != null)
+			sparqlQuery += " FILTER (regex(?keyPeople, '" + keyPeople + "*', 'i')) ";
+		 sparqlQuery += "OPTIONAL { ?organization <http://dbpedia.org/property/locationCountry> ?locationCountry. } ";
+		if (locationCountry != null)
+			sparqlQuery += " FILTER (regex(?locationCountry, '" + locationCountry + "*', 'i')) ";
+		
+		sparqlQuery += " } LIMIT 15";
 		
 		LOGGER.log(Priority.INFO, sparqlQuery);
 		QueryExecution queryExecution = QueryExecutionFactory.sparqlService("http://dbpedia.org/sparql", sparqlQuery);
