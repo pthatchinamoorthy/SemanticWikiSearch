@@ -26,6 +26,8 @@ public class Company {
 	private String locationCity = null;
 
 	private String locationCountry = null;
+	
+	private String industry = null;
 
 	private String revenue = null;
 	
@@ -40,6 +42,16 @@ public class Company {
 	private String foundingDate = null;
 	
 	private String sameAs = null;
+	
+	private String sparqlQuery = null;
+
+	public String getSparqlQuery() {
+		return sparqlQuery;
+	}
+
+	public void setSparqlQuery(String sparqlQuery) {
+		this.sparqlQuery = sparqlQuery;
+	}
 
 	public String getFoundingDate() {
 		return foundingDate;
@@ -176,5 +188,13 @@ public class Company {
 
 	public void setResourceIdentifier(String resourceIdentifier) {
 		this.resourceIdentifier = resourceIdentifier;
+	}
+	
+	public String getIndustry() {
+		return industry;
+	}
+
+	public void setIndustry(String industry) {
+		this.industry = industry;
 	}
 }

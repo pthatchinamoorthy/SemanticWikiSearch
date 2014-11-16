@@ -8,6 +8,24 @@
   <rdf:Description rdf:about="http://dbpedia.org/resource/IBS_Software_Services">
     <j.0:notes>awesome</j.0:notes>
   </rdf:Description>
+  <rdf:Description rdf:about="http://dbpedia.org/resource/Deldoul,_Adrar">
+    <j.0:notes>awesome</j.0:notes>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://dbpedia.org/resource/Apple_Inc.">
+    <j.0:notes>see it ... get it</j.0:notes>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://dbpedia.org/resource/Deldoul,_Djelfa">
+    <j.0:notes>awesome</j.0:notes>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://dbpedia.org/resource/British_Railways_DP1">
+    <j.0:notes>Notes</j.0:notes>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://dbpedia.org/resource/Deluxe_Distribution">
+    <j.0:notes>ndtv</j.0:notes>
+    <j.0:notes>lk;saf</j.0:notes>
+    <j.0:notes>This is awesome</j.0:notes>
+    <j.0:notes>Lets see</j.0:notes>
+  </rdf:Description>
   <rdf:Description rdf:about="http://dbpedia.org/resource/IBA-Moscow">
     <j.0:notes>awesome</j.0:notes>
   </rdf:Description>
@@ -15,14 +33,14 @@
     <j.0:notes>prabhakar</j.0:notes>
     <j.0:notes>awesome</j.0:notes>
   </rdf:Description>
-  <rdf:Description rdf:about="http://dbpedia.org/resource/Microsoft_Japan">
-    <j.0:notes>Awesome</j.0:notes>
-    <j.0:notes>awesome</j.0:notes>
-  </rdf:Description>
   <rdf:Description rdf:about="http://dbpedia.org/resource/IBM_jStart">
     <j.0:notes>save another notes</j.0:notes>
     <j.0:notes>save notes</j.0:notes>
     <j.0:notes>Prabhakara added notes</j.0:notes>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://dbpedia.org/resource/Microsoft_Japan">
+    <j.0:notes>Awesome</j.0:notes>
+    <j.0:notes>awesome</j.0:notes>
   </rdf:Description>
   <rdf:Description rdf:about="http://dbpedia.org/resource/Delcam">
     <j.0:notes>Sathish</j.0:notes>
@@ -40,11 +58,5 @@
   </rdf:Description>
   <rdf:Description rdf:about="http://dbpedia.org/resource/Amazonen-Werke">
     <j.0:notes>awesome</j.0:notes>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://dbpedia.org/resource/Deluxe_Distribution">
-    <j.0:notes>ndtv</j.0:notes>
-    <j.0:notes>lk;saf</j.0:notes>
-    <j.0:notes>This is awesome</j.0:notes>
-    <j.0:notes>Lets see</j.0:notes>
   </rdf:Description>
 </rdf:RDF>

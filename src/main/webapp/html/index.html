@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="SemanticWikiSearchApp">
 	<head>		
-		<title>SemanticWikiSearch</title>
+		<title>Semantic Wiki Search</title>
 		
 		<link rel="stylesheet" type="text/css" href="css/wiki-search.css"></link>		
 		
-		<script type="text/javascript" src="js/thirdparty/angular.js"></script>
-		<script type="text/javascript" src="js/thirdparty/angular-route.js"></script>
-		
+		<script type="text/javascript" src="js/angular.js"></script>
+		<script type="text/javascript" src="js/angular-route.js"></script>
 		<script type="text/javascript" src="js/router-config.js"></script>
 		<script type="text/javascript" src="js/main-controller.js"></script>
 		<script type="text/javascript" src="js/keyword-searchresults-controller.js"></script>
@@ -19,14 +18,12 @@
 	<body ng-controller="MainController">		
 		<header>			
 			<img id="imagcts" src="images/cts.jpg">
-			<!--img id="imgRDFa" src="images/RDFa.jpg"/-->		
 			<h2>Company Profile Search - A Semantic approach</h2>
 			<p>
 				<b style="color:grey">
 					<em>Sophisticated Search of a Company's Profile. Powered with WikiPedia-DBPedia's Data</em>
 				</b>
 			</p>
-			<!--img id="imagSPARQL" src="images/sparql.jpg"/-->
 			<img id="imagbits" src="images/bits.gif">
 		</header>
 		
@@ -38,8 +35,7 @@
 					<input type="radio" ng-model="searchOption" value="Exact">Exact Match
 					<input type="radio" ng-model="searchOption" value="Contains">Contains
 					<input type="radio" ng-model="searchOption" value="StartsWith">Starts With
-					&nbsp;&nbsp;
-					<button type="submit" ng-click="keywordSearch();">Submit</button>					
+					&nbsp;&nbsp;<button type="submit" ng-click="keywordSearch();">Submit</button>					
 				</form>
 			</div>
 		</nav1>
@@ -153,46 +149,11 @@
 					</table>				
 				</form>
 			</div>
-			<!--div ng-hide="company">
-				<br/>
-				<b ng-show="keyword || companyName || industryName || stockSymbol || greaterThanEmployeeSize || lesserThanEmployeeSize 
-									|| foundedBy || foundedDate || income || revenue || city || state || country" >
-					Input Search Criteria
-				</b>
-				<br/>
-				<span style="" ng-show="keyword">Company Keyword : <span style="color:black" ng-show="keyword">{{keyword}} </span></span>&nbsp;&nbsp;&nbsp;
-				<span style="" ng-show="companyName">companyName : <span style="color:black" ng-show="companyName">{{companyName}}  </span></span>&nbsp;&nbsp;&nbsp;						
-				<span style="" ng-show="industryName">industryName : <span style="color:black" ng-show="industryName"> {{industryName}}  </span></span>&nbsp;&nbsp;&nbsp;
-				<span style="" ng-show="stockSymbol">stockSymbol : <span style="color:black" ng-show="stockSymbol">{{stockSymbol}} </span> </span>&nbsp;&nbsp;&nbsp;
-				<span style="" ng-show="keyPeople">keyPeople : <span style="color:black" ng-show="keyPeople">{{keyPeople}} </span> </span>&nbsp;&nbsp;&nbsp;
-				<span style="" ng-show="greaterThanEmployeeSize">greaterThanEmployeeSize : <span style="color:black" ng-show="greaterThanEmployeeSize">{{greaterThanEmployeeSize}} </span> </span>&nbsp;&nbsp;&nbsp;
-				<span style="" ng-show="lesserThanEmployeeSize">lesserThanEmployeeSize : <span style="color:black" ng-show="lesserThanEmployeeSize">{{lesserThanEmployeeSize}}  </span></span>&nbsp;&nbsp;&nbsp;
-				<span style="" ng-show=foundedBy>foundedBy : <span style="color:black" ng-show=foundedBy>{{foundedBy}}  </span></span>&nbsp;&nbsp;&nbsp;
-				<span style="" ng-show="foundedDate">foundedDate : <span style="color:black" ng-show="foundedDate"> {{foundedDate}}  </span></span>&nbsp;&nbsp;&nbsp;
-				<span style="" ng-show="income">income : <span style="color:black" ng-show="income">{{income}} </span> </span>&nbsp;&nbsp;&nbsp;
-				<span style="" ng-show="revenue">revenue : <span style="color:black" ng-show="revenue"> {{revenue}}  </span></span>&nbsp;&nbsp;&nbsp;
-				<span style="" ng-show="city">city : <span style="color:black" ng-show="city">{{city}}  </span></span>&nbsp;&nbsp;&nbsp;		
-				<span style="" ng-show="country">country : <span style="color:black" ng-show="country">{{country}}  </span></span>&nbsp;&nbsp;&nbsp;								
-			</div-->
 		</nav2>
 	
-		<section>				
+		<article>				
 			<div ng-view>
 			</div>
-		</section>					
-
-		<!--footer>
-			<img id="imagcognizant" alt="" src="images/cognizant.jpg">
-			<p style="padding-left: 100px ; padding-right:100px ; color: blue; text-align: center;">
-				<b>This is a research project submitted for BITS MS-Software Engineering Thesis - demonstrating the capabilities of Semantic Technologies - SPARQL, RDFa and Semantic Markups</b>				
-				<br/>
-				<span style="color: grey">
-					 @ <b><em>Guide</em></b>  : Raghul Nandagopal   ------ @ <b><em>Student Name</em></b> : Prabhakaran . T  -----   @ <b><em>BITS ID</em></b> : 2012HZ78383
-					 <br/>
-					 <a href="html/documentation.html" style="color: grey">Documentation</a>
-				</span>
-			</p>			
-			<img id="imagbits" alt="" src="images/bits.gif">
-		</footer-->				
+		</article>			
 	</body>
 </html>

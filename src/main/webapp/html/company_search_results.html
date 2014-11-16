@@ -1,23 +1,32 @@
-<h2 ng-hide="searchingComplete" style="text-align:center;"><br/><br/>Pulling Results ........</h2>
-<h2 ng-show="companies.length == 0" style="text-align:center;"><br/><br/>No Companies found. Please try the "Advanced Search" option</h2>
+<h2 ng-hide="searchingComplete" style="text-align:center;"><br/><br/>SPARQLing <em>WikiPedia RDF Store</em>..............</h2>
+<h2 ng-show="result.companies.length == 0" style="text-align:center;"><br/><br/>No Companies found. Please try the "Advanced Search" option</h2>
 <h2 ng-show="error" style="text-align:center;"><br/><br/>Error : Something has gone wrong ...........</h2>
 
-<h3 ng-show="companies" style="text-align:center">Company Search Results</h3>
-<table ng-show="companies">
+<h3 ng-show="result.companies" style="text-align:center">Company Search Results</h3>
+<table ng-show="result.companies">
 	<thead>
 		<tr>
 			<th>Index</th>
 			<th>Company Name</th>
+			<th>Industry</th>
 			<th>Country</th>
 			<th>Key Executives</th>
 		</tr>
 	</thead>
 	<tbody vocab="http://schema.org/" typeof="Organization">
-		<tr ng-repeat="company in companies">
+		<tr ng-repeat="company in result.companies">
 			<td>{{$index + 1}}</td>
 			<td style="color:blue; cursor:pointer"><span property="legalName"><b><a ng-click="getCompanyInfo(company.resourceIdentifier);">{{company.name}}</a></b></span></td>
-			<td><span property="locationCountry">{{company.locationCountry}}</span></td>
-			<td><span property="keyPeople">{{company.keyPeople}}</a></span></td>
+			<td><span property="industry">{{company.industry}}</a></span></td>
+			<td><span property="addressCountry">{{company.locationCountry}}</span></td>
+			<td><span property="contactPoint">{{company.keyPeople}}</a></span></td>
 		</tr>
 	</tbody>
 </table>
+
+<br/>
+<br/>
+<div ng-show="result.companies" style="border-style:groove;">
+		<b>SPARQL Query:</b><br/> 
+		{{result.sparqlQuery}}
+</div>

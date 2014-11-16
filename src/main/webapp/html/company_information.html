@@ -1,4 +1,4 @@
-<h2 ng-hide="searchingComplete" style="text-align:center;"><br/><br/>Pulling Results ...........</h2>
+<h2 ng-hide="searchingComplete" style="text-align:center;"><br/><br/>SPARQLing WikiPedia RDF And Local RDF Notes  Data Stores..................</h2>
 <h3 ng-show="company" style="text-align:center">
 	Detailed Information
 </h3>
@@ -83,3 +83,9 @@
 		</tr>
 	</tbody>
 </table>
+<br/>
+<br/>
+<div ng-show="company" style="border-style:groove;">
+		<b>SPARQL Query:</b><br/> 
+		{{company.sparqlQuery}}
+</div>

@@ -4,7 +4,7 @@ semanticWikiSearchApp.controller('KeywordSearchResultsController', function($sco
 	$scope.keyword=$routeParams.keyword;
 	$http.get("rest/company/search/" + $routeParams.keyword).	 		//$http.get('json/company.json').
 		success(function (data) {							
-			$scope.companies = data.companies;
+			$scope.result = data;
 			$scope.searchingComplete = true;
 			
 			$scope.companyName = undefined ; 
@@ -29,4 +29,5 @@ semanticWikiSearchApp.controller('KeywordSearchResultsController', function($sco
 	$scope.getCompanyInfo = function(id){	
 		$location.path("/company/id/" + id);
 	}
+	
 });

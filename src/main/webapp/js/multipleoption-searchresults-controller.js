@@ -2,7 +2,7 @@ semanticWikiSearchApp.controller('MultipleOptionSearchResultsController', functi
 	$scope.error=false;
 	$http.get("rest/" + "company/search/mutilple-option-search" + $routeParams.companyOptions).									
 			success(function (data) {
-						$scope.companies = data.companies;
+						$scope.result = data;
 						$scope.searchingComplete = true;
 						
 						$scope.keyword = undefined;

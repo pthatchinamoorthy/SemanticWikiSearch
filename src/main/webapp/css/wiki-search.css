@@ -24,7 +24,7 @@ nav2 {
 	text-align:center;	
 	border: 2px solid grey; border-radius: 25px;    
 }
-section {
+article {
 	padding:5px;
     position:absolute;
    	top:158px;	bottom:0px; left:332px; right:0px;
