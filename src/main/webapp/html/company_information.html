@@ -69,8 +69,8 @@
 		<tr>			
 			<td style="text-align:center;" colspan="2">
 				<form action="" name="Update Notes">
-					<input placeholder="         Add Notes about this company" style="padding:2px ; background-color:cornsilk ; height:50px ; width: 500px; border:1px solid grey; border-radius:25px;" ng-model="notes" ></input>
-					<br/> <br/>
+					<textarea placeholder="Add Notes about this company" rows="4" cols="50" ng-model="notes" ></textarea>
+					<br/>
 					<button type="submit" ng-click="updateNotes(company.resourceIdentifier);">
 						Add Personalized Notes
 					</button> 
@@ -85,7 +85,7 @@
 </table>
 <br/>
 <br/>
-<div ng-show="company" style="border-style:groove;">
+<div ng-show="company" style="border-style:groove; color:grey">
 		<b>SPARQL Query:</b><br/> 
 		{{company.sparqlQuery}}
 </div>
