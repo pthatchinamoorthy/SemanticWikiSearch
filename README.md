@@ -3,6 +3,34 @@
 # <em>URL - </em>
 <a href="http://prabhakarwikisearch.elasticbeanstalk.com">http://prabhakarwikisearch.elasticbeanstalk.com</a>
 
+# <em>Problem 1: Data Integration</em>
+  <ol>
+    <li>Problem
+        <ol>
+          <li>Data is stored in different locations</li>
+          <li>Different Containers - Database, Local files, Local Data Stores, Web Services</li>
+        </ol>
+    </li>
+    <li>Solution
+      <ol>RDF Data Model - Store the Data in RDF Data Model, irrespective of whether the container is a file or data store or webservice</ol>
+      <ol>SPARQL - Query language that queries and integrates multiple data stores in fly</ol>
+    </li>
+  </ol>
+  
+# <em>Problem 2: Data Extraction</em>
+  <ol>
+    <li>Data Extraction
+        <ol>
+          <li>Data is stored in millions of HTML web page, but there is no proper mechanishm to extract the data correctly and easily</li>
+          <li>Search Engines renders in-accurate results</li>
+        </ol>
+    </li>
+    <li>Solution
+      <ol>RDFa Tags - Embed RDFa Tags to the HTML webpage</ol>
+    </li>
+  </ol>
+  
+
 # <em>What is it</em>
 This is a Semantic Web Application that allows you to search for any Company's profile. 
 The Use Cases are
