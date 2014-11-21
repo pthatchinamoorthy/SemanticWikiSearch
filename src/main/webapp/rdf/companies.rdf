@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:j.0="http://prabhakar.com/"
+    xmlns:foaf="http://xmlns.com/foaf/0.1/"
+    xmlns:dbpediaOntology="http://dbpedia.org/ontology/"
+    xmlns:dbpediaProperty="http://dbpedia.org/property/">
+
+				<!-- Dell -->
+  <rdf:Description rdf:about="http://dbpedia.org/resource/Dell">
+	 <dbpediaProperty:symbol>N/A. It is a private company</dbpediaProperty:symbol>
+  </rdf:Description>
+  					     
+ 				<!-- Cognizant -->
+  <rdf:Description rdf:about="http://dbpedia.org/resource/Cognizant">
+    <dbpediaProperty:locationCountry>United States</dbpediaProperty:locationCountry>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://dbpedia.org/resource/Cognizant">
+    <dbpediaProperty:keyPeople>Francisco Dsouza</dbpediaProperty:keyPeople>
+  </rdf:Description> 
+  
+  <rdf:Description rdf:about="http://dbpedia.org/resource/Dell">
+    <foaf:name>Dell Inc</foaf:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://dbpedia.org/resource/Dell">
+    <foaf:isPrimaryTopicOf>http://en.wikipedia.org/wiki/Dell</foaf:isPrimaryTopicOf>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://dbpedia.org/resource/Dell">
+    <dbpediaOntology:abstract xml:lang="en">Dell Inc. is an American privately owned multinational computer technology company based in Round Rock, Texas, United States, that develops, sells, repairs and supports computers and related products and services. Bearing the name of its founder, Michael Dell, the company is one of the largest technological corporations in the world, employing more than 103,300 people worldwide.Dell sells personal computers, servers, data storage devices, network switches, software, computer peripherals, HDTVs, cameras, printers, MP3 players and also electronics built by other manufacturers. The company is well known for its innovations in supply chain management and electronic commerce, particularly its direct-sales model and its "build-to-order" or "configure to order" approach to manufacturing—delivering individual PCs configured to customer specifications.</dbpediaOntology:abstract>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://dbpedia.org/resource/Dell">
+    <dbpediaOntology:foundedBy>http://dbpedia.org/resource/Michael_Dell</dbpediaOntology:foundedBy>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://dbpedia.org/resource/Dell">
+    <dbpediaOntology:foundingDate>1984-02-01 (xsd:date)</dbpediaOntology:foundingDate>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://dbpedia.org/resource/Dell">
+    <dbpediaProperty:locationCity>http://dbpedia.org/resource/Round_Rock,_Texas</dbpediaProperty:locationCity>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://dbpedia.org/resource/Dell">
+    <dbpediaProperty:locationCountry>United States</dbpediaProperty:locationCountry>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://dbpedia.org/resource/Dell">
+    <dbpediaProperty:keyPeople>http://dbpedia.org/resource/Michael_Dell</dbpediaProperty:keyPeople>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://dbpedia.org/resource/Dell">
+    <dbpediaProperty:symbol>-</dbpediaProperty:symbol>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://dbpedia.org/resource/Dell">
+    <dbpediaProperty:revenue>US$ 56.94 billion</dbpediaProperty:revenue>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://dbpedia.org/resource/Dell">
+    <dbpediaProperty:netIncome>US$ 2.37 billion</dbpediaProperty:netIncome>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://dbpedia.org/resource/Dell">
+    <dbpediaProperty:numEmployees>108800</dbpediaProperty:numEmployees>
+  </rdf:Description>  
+  
+</rdf:RDF>

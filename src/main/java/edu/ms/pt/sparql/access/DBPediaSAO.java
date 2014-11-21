@@ -19,9 +19,9 @@ import edu.ms.pt.model.Company;
 
 public class DBPediaSAO {
 
-	public static final boolean DEPLOY_ENV_AMAZAON = false;
-	private static final boolean DUMMY_DATA = true;
+	public static final boolean DEPLOY_ENV_AMAZAON = true;
 	
+	private static final boolean DUMMY_DATA = true;
 	private static final Logger LOGGER = Logger.getLogger(DBPediaSAO.class);
 	
 	/**
@@ -176,13 +176,16 @@ public class DBPediaSAO {
 		}
 	}
 
-
 	public Company getCompanyInfo(String organisationIdentifier) {
-		String rdfStore= DEPLOY_ENV_AMAZAON ? "file:///var/lib/tomcat7/webapps/ROOT/rdf/notes.rdf" : "file:///C:/Users/thatchinamoorthyp/git/SemanticWikiSearch/src/main/webapp/rdf/notes.rdf";
+		String company_DBPedia_RDFStore = "http://dbpedia.org/resource/" + organisationIdentifier;
+		String notes_RDFStore= DEPLOY_ENV_AMAZAON ? "file:///var/lib/tomcat7/webapps/ROOT/rdf/notes.rdf" : "file:///C:/Users/thatchinamoorthyp/git/SemanticWikiSearch/src/main/webapp/rdf/notes.rdf";
+		String company_Local_RDFStore = DEPLOY_ENV_AMAZAON ? "file:///var/lib/tomcat7/webapps/ROOT/rdf/companies.rdf" : "file:///C:/Users/thatchinamoorthyp/git/SemanticWikiSearch/src/main/webapp/rdf/companies.rdf";
+		
 		String sparqlQuery = 
-				"SELECT (STR(?name) as ?nameVar) (STR(?notes) as ?notesVar) (STR(?isPrimaryTopicOf) as ?isPrimaryTopicOfVar) (STR(?abstract) as ?abstractVar) (STR(?foundedBy) as ?foundedByVar) (STR(?foundingDate) as ?foundedDateVar) (STR(?locationCity) as ?locationCityVar) (STR(?locationCountry) as ?locationCountryVar) (STR(?keyPeople) as ?keyPeopleVar) (STR(?symbol) as ?symbolVar) (STR(?revenue) as ?revenueVar) (STR(?netIncome) as ?netIncomeVar) (STR(?numEmployees) as ?numEmployeesVar)" +
-							" FROM <" + "http://dbpedia.org/resource/" + organisationIdentifier  + ">" +
-							" FROM NAMED <" + rdfStore + ">" +
+				"SELECT (STR(?name) as ?nameVar) (STR(?notes) as ?notesVar) (STR(?isPrimaryTopicOf) as ?isPrimaryTopicOfVar) (STR(?abstract) as ?abstractVar) (STR(?foundedBy) as ?foundedByVar) (STR(?foundingDate) as ?foundingDateVar) (STR(?locationCity) as ?locationCityVar) (STR(?locationCountry) as ?locationCountryVar) (STR(?keyPeople) as ?keyPeopleVar) (STR(?symbol) as ?symbolVar) (STR(?revenue) as ?revenueVar) (STR(?netIncome) as ?netIncomeVar) (STR(?numEmployees) as ?numEmployeesVar)" +
+							//" FROM <" + company_DBPedia_RDFStore + ">" +	
+							" FROM <" + company_Local_RDFStore + ">" +							
+							" FROM NAMED <" + notes_RDFStore + ">" +
 							" WHERE" + 
 							" {" +
 								" OPTIONAL{ <" + "http://dbpedia.org/resource/" + organisationIdentifier + "> ?property ?value.}" +
@@ -199,7 +202,7 @@ public class DBPediaSAO {
 								" OPTIONAL{ <" + "http://dbpedia.org/resource/" + organisationIdentifier + "> <http://dbpedia.org/property/netIncome> ?netIncome.}" +
 								" OPTIONAL{ <" + "http://dbpedia.org/resource/" + organisationIdentifier + "> <http://dbpedia.org/property/numEmployees> ?numEmployees.}" +
 								" OPTIONAL {" +
-									"GRAPH <" + rdfStore + "> " +
+									"GRAPH <" + notes_RDFStore + "> " +
 										" {<" + "http://dbpedia.org/resource/" + organisationIdentifier + "> <http://prabhakar.com/notes> ?notes.}" +
 								"}" +
 							"}" +
@@ -215,7 +218,7 @@ public class DBPediaSAO {
 			company.setResourceIdentifier(organisationIdentifier);
 			company.setDataSourceUrl("http://dbpedia.org/resource/" + organisationIdentifier);
 			
-			while(resultSet.hasNext()) {
+			if(resultSet.hasNext()) {
 				QuerySolution result = resultSet.next();
 				company.setName(result.get("nameVar") !=null ? result.get("nameVar").toString() : "-");
 				company.setIsPrimaryTopicOf(result.get("isPrimaryTopicOfVar") != null ? result.get("isPrimaryTopicOfVar").toString() : "-");
@@ -235,39 +238,21 @@ public class DBPediaSAO {
 												: company.getNotes() + "." + result.get("notesVar").toString()) 
 										: "No Saved Notes for this company");
 				company.setSparqlQuery(queryExecution.getQuery().toString());
+				
+			}	
+			while(resultSet.hasNext()) {
+				QuerySolution result = resultSet.next();
+				company.setNotes(result.get("notesVar") != null 
+										? (company.getNotes().contains(result.get("notesVar").toString())  
+												? company.getNotes() 
+												: company.getNotes() + "." + result.get("notesVar").toString()) 
+										: "No Saved Notes for this company");
 			}	
 			return company;
 		} catch(Exception e) {
 			LOGGER.error(e);
-			if(DUMMY_DATA) {
-				return ReturnCompanyWithDummyData(sparqlQuery);
-			}
 			throw e;
 		}
-	}
-
-	private Company ReturnCompanyWithDummyData(String sparqlQuery) {
-		Company company = new Company();
-		company.setName("Dell Inc");
-		company.setIsPrimaryTopicOf("");
-		company.setAabstract("Dell Inc. is an American privately owned multinational computer technology company " +
-				"based in Round Rock, Texas, United States, that develops, sells, repairs and supports computers and" +
-				" related products and services. Bearing the name of its founder, Michael Dell, the company is one of " +
-				"the largest technological corporations in the world, employing more than 103,300 people worldwide.Dell" +
-				" sells personal computers, servers, data storage devices, network switches, software, computer " +
-				"peripherals, HDTVs, cameras, printers, MP3 players and also electronics built by other manufacturers.");
-		company.setFoundedBy("http://dbpedia.org/resource/Michael_Dell");
-		company.setFoundingDate("");
-		company.setLocationCity("http://dbpedia.org/resource/Round_Rock,_Texas");
-		company.setLocationCountry("United States");
-		company.setKeyPeople("http://dbpedia.org/resource/Michael_Dell");
-		company.setSymbol("");
-		company.setRevenue("US$ 56.94 billion");
-		company.setNetIncome("US$ 2.37 billion") ;
-		company.setNumEmployees("108800") ;
-		company.setNotes("This is dummy notes, as DBPedia is down now.");
-		company.setSparqlQuery("DBPedia is down" + sparqlQuery);
-		return company;
 	}
 	
 	private void insertDummyCompanyRecords(List<Company> companyList) {
@@ -276,19 +261,28 @@ public class DBPediaSAO {
 		company.setIndustry("Sofware Services");
 		company.setLocationCountry("United States");
 		company.setKeyPeople("Michael Dell");
-		company.setResourceIdentifier("Dell_Inc");				
+		company.setResourceIdentifier("Dell");				
 		companyList.add(company);
-		company.setName("Microsoft Inc.");
-		company.setIndustry("Computer Software");
-		company.setLocationCountry("United States");
-		company.setKeyPeople("Bill Gates");
-		company.setResourceIdentifier("Microsoft");				
-		companyList.add(company);
-		company.setName("Apple Inc");
-		company.setIndustry("Computer Hardware");
-		company.setLocationCountry("United States");
-		company.setKeyPeople("Tim Cook");
-		company.setResourceIdentifier("Apple_Inc");				
-		companyList.add(company);
+		Company company1 = new Company();
+		company1.setName("Dell Services");
+		company1.setIndustry("Computer Software");
+		company1.setLocationCountry("United States");
+		company1.setKeyPeople("Michael Dell, Thompson");
+		company1.setResourceIdentifier("Dell");				
+		companyList.add(company1);
+		Company company2 = new Company();
+		company2.setName("Dell Hardware");
+		company2.setIndustry("Computer Hardware");
+		company2.setLocationCountry("United States");
+		company2.setKeyPeople("Michael Dell, Croft");
+		company2.setResourceIdentifier("Dell");				
+		companyList.add(company2);
+		Company company3 = new Company();
+		company3.setName("Dell Communications");
+		company3.setIndustry("Communications");
+		company3.setLocationCountry("United States");
+		company3.setKeyPeople("Michael Dell, Scott");
+		company3.setResourceIdentifier("Dell");				
+		companyList.add(company3);
 	}
 }
