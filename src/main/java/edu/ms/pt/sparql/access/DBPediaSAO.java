@@ -183,7 +183,7 @@ public class DBPediaSAO {
 		
 		String sparqlQuery = 
 				"SELECT (STR(?name) as ?nameVar) (STR(?notes) as ?notesVar) (STR(?isPrimaryTopicOf) as ?isPrimaryTopicOfVar) (STR(?abstract) as ?abstractVar) (STR(?foundedBy) as ?foundedByVar) (STR(?foundingDate) as ?foundingDateVar) (STR(?locationCity) as ?locationCityVar) (STR(?locationCountry) as ?locationCountryVar) (STR(?keyPeople) as ?keyPeopleVar) (STR(?symbol) as ?symbolVar) (STR(?revenue) as ?revenueVar) (STR(?netIncome) as ?netIncomeVar) (STR(?numEmployees) as ?numEmployeesVar)" +
-							//" FROM <" + company_DBPedia_RDFStore + ">" +	
+							" FROM <" + company_DBPedia_RDFStore + ">" +	
 							" FROM <" + company_Local_RDFStore + ">" +							
 							" FROM NAMED <" + notes_RDFStore + ">" +
 							" WHERE" + 
