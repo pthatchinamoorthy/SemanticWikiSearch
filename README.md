@@ -26,7 +26,7 @@ The Use Cases are
                 <li>Internal Company RDF Data Store<a href="prabhakarwikisearch.elasticbeanstalk.com/rdf/companies.rdf">prabhakarwikisearch.elasticbeanstalk.com/rdf/companies.rdf</a></li>
                 <li>Internal Notes RDF Store <a href="prabhakarwikisearch.elasticbeanstalk.com/rdf/notes.rdf">prabhakarwikisearch.elasticbeanstalk.com/rdf/notes.rdf</a></li>
                 <li>SPARQL Framework - Apache Jena's ARQ library to build, fire and aggregate SPARQL queries</li>
-                <li>REST Web Service Framework - JAX-RS Jersey </li>
+                <li>REST Web Service Framework - JAX-RS Jersey http://prabhakarwikisearch.elasticbeanstalk.com/rest/application.wadl</li>
             </ol>
       </li>
       <li>Front End
