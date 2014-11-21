@@ -235,7 +235,7 @@ public class DBPediaSAO {
 				company.setNotes(result.get("notesVar") != null 
 										? (company.getNotes().contains(result.get("notesVar").toString())  
 												? company.getNotes() 
-												: company.getNotes() + "." + result.get("notesVar").toString()) 
+												: company.getNotes() + result.get("notesVar").toString()) 
 										: "No Saved Notes for this company");
 				company.setSparqlQuery(queryExecution.getQuery().toString());
 				
@@ -245,7 +245,7 @@ public class DBPediaSAO {
 				company.setNotes(result.get("notesVar") != null 
 										? (company.getNotes().contains(result.get("notesVar").toString())  
 												? company.getNotes() 
-												: company.getNotes() + "." + result.get("notesVar").toString()) 
+												: company.getNotes() + result.get("notesVar").toString()) 
 										: "No Saved Notes for this company");
 			}	
 			return company;
