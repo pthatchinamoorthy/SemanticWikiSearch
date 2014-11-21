@@ -92,30 +92,48 @@ Web Server: Tomcat 7 Java 7
   </ol>
 
 # <em>Sample SPARQL Query</em>
-  <ol>Search Companies</ol>
+  <ol><b>Search Companies</b></ol>
   
   SELECT 
+  
     ?organization (STR(?name) as ?nameVar) (STR(?industry) as ?industryVar) 
+    
     (STR(?locationCountry) as ?locationCountryVar) (STR(?keyPeople) as ?keyPeopleVar) 
+    
   WHERE 
-  {  
+  
+  {
+  
     ?organization <http://xmlns.com/foaf/0.1/name> ?name. 
+    
     FILTER (regex(?name, '^dell Inc*', 'i')) 
+    
     ?organization <http://dbpedia.org/ontology/industry> ?industry.  
-    ?organization <http://dbpedia.org/property/keyPeople> ?keyPeople.  
+    
+    ?organization <http://dbpedia.org/property/keyPeople> ?keyPeople. 
+    
     ?organization <http://dbpedia.org/property/locationCountry> ?locationCountry.  
-  } 
+    
+  }
+  
   LIMIT 20
   
-  <ol>Retrive Company Information</ol>
+  <ol><b>Retrive Company Information</b></ol>
   
 SELECT 
+
     (STR(?name) as ?nameVar) (STR(?notes) as ?notesVar) (STR(?isPrimaryTopicOf) as ?isPrimaryTopicOfVar) 
+    
     (STR(?abstract) as ?abstractVar) (STR(?foundedBy) as ?foundedByVar) 
+    
     (STR(?foundingDate) as ?foundingDateVar) (STR(?locationCity) as ?locationCityVar) 
+    
     (STR(?locationCountry) as ?locationCountryVar) (STR(?keyPeople) as ?keyPeopleVar) 
+    
     (STR(?symbol) as ?symbolVar) (STR(?revenue) as ?revenueVar) (STR(?netIncome) as ?netIncomeVar) 
+    
     (STR(?numEmployees) as ?numEmployeesVar) 
+    
 FROM 
     <http://dbpedia.org/resource/Dell> 
 FROM 
@@ -125,23 +143,41 @@ FROM NAMED
 WHERE 
 { 
   OPTIONAL{ <http://dbpedia.org/resource/Dell> ?property ?value.} 
+  
   OPTIONAL{ <http://dbpedia.org/resource/Dell> <http://xmlns.com/foaf/0.1/name> ?name.}
+  
   OPTIONAL{<http://dbpedia.org/resource/Dell> <http://xmlns.com/foaf/0.1/isPrimaryTopicOf> ?isPrimaryTopicOf.} 
+  
   OPTIONAL{ <http://dbpedia.org/resource/Dell> <http://dbpedia.org/ontology/abstract> ?abstract. 
-              FILTER langMatches( lang(?abstract), "en" )} 
+                FILTER langMatches( lang(?abstract), "en" )} 
+              
   OPTIONAL{ <http://dbpedia.org/resource/Dell> <http://dbpedia.org/ontology/foundedBy> ?foundedBy.} 
+  
   OPTIONAL{ <http://dbpedia.org/resource/Dell> <http://dbpedia.org/ontology/foundingDate> ?foundingDate.} 
+  
   OPTIONAL{ <http://dbpedia.org/resource/Dell> <http://dbpedia.org/property/locationCity> ?locationCity.}
+  
   OPTIONAL{ <http://dbpedia.org/resource/Dell> <http://dbpedia.org/property/locationCountry> ?locationCountry.} 
+  
   OPTIONAL{ <http://dbpedia.org/resource/Dell> <http://dbpedia.org/property/keyPeople> ?keyPeople.} 
+  
   OPTIONAL{ <http://dbpedia.org/resource/Dell> <http://dbpedia.org/property/symbol> ?symbol.} 
+  
   OPTIONAL{ <http://dbpedia.org/resource/Dell> <http://dbpedia.org/property/revenue> ?revenue.} 
+  
   OPTIONAL{ <http://dbpedia.org/resource/Dell> <http://dbpedia.org/property/netIncome> ?netIncome.} 
+  
   OPTIONAL{ <http://dbpedia.org/resource/Dell> <http://dbpedia.org/property/numEmployees> ?numEmployees.}
+  
   OPTIONAL {
+  
         GRAPH <file:///var/lib/tomcat7/webapps/ROOT/rdf/notes.rdf>  {
+        
             <http://dbpedia.org/resource/Dell> <http://prabhakar.com/notes> ?notes.
+            
         }
+        
   }
+  
 } LIMIT 5
             
