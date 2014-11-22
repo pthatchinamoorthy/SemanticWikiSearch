@@ -19,7 +19,7 @@ import edu.ms.pt.model.Company;
 
 public class DBPediaSAO {
 
-	public static final boolean DEPLOY_ENV_AMAZAON = true;
+	public static final boolean DEPLOY_ENV_AMAZAON = false;
 	
 	private static final boolean DUMMY_DATA = true;
 	private static final Logger LOGGER = Logger.getLogger(DBPediaSAO.class);
@@ -117,7 +117,7 @@ public class DBPediaSAO {
 		if (foundedBy != null)
 			sparqlQuery += "?organization <http://dbpedia.org/ontology/foundedBy> ?foundedBy. FILTER (regex(?foundedBy, '" + foundedBy + "*', 'i')) ";
 		if (foundingDate != null)
-			sparqlQuery += "?organization <http://dbpedia.org/ontology/foundingDate> ?foundingDate. FILTER (str(?foundingDate)='" + foundingDate + "')";
+			sparqlQuery += "?organization <http://dbpedia.org/ontology/foundingDate> ?foundingDate. FILTER (str(?foundingDate)>'" + foundingDate + "')";
 		if (locationCity != null)
 			sparqlQuery += "?organization <http://dbpedia.org/property/locationCity> ?locationCity. FILTER (regex(?locationCity, '" + locationCity + "*', 'i')) ";
 		if (revenue != null)
