@@ -75,7 +75,7 @@ The Use Cases are
   	<li>Install Java, Gradle</li>
   	<li>Clone the source code GIT URL https://github.com/prabhakar1983/SemanticWikiSearch.git</li>
   	<li>Run the build command “gradle”. The gradle script has a default task – “jettyRun”, which will build the war file “SemanticWikiSearch.war” and deploy it to the local Jetty web server</li> 
-  	<li>Hit the Application URL: http://localhost:8080/SmartWikiSearch/ and start searching</li>
+  	<li>Hit the Application URL: <a href="http://localhost:8080/SmartWikiSearch/">http://localhost:8080/SmartWikiSearch/</a> and start searching</li>
   </ol>
   
 # <em>How to build and deploy in Amazon Elastic Bean Stalk</em>
