@@ -1,5 +1,7 @@
+apply plugin: "java" 
 apply plugin: "jetty" 
 apply plugin: 'eclipse'
+apply plugin: "idea" 
 defaultTasks 'jettyRun'
  
 repositories {
