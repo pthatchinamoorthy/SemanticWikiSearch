@@ -41,13 +41,13 @@ public class DBPediaSAO {
 					   " OPTIONAL { ?organization <http://dbpedia.org/property/keyPeople> ?keyPeople. }" +
 					   " OPTIONAL { ?organization <http://dbpedia.org/property/locationCountry> ?locationCountry. }";
 		} else if ("Contains".equals(searchOption)) {
-			sparqlQuery += "FILTER (regex(?name, '" + searchKeyword + "*'" + ", 'i'))";
+			sparqlQuery += caseInsensitiveRegexFilter("name", searchKeyword);
 			sparqlQuery += " OPTIONAL {?organization <http://dbpedia.org/ontology/industry> ?industry. }" + 		
 					   " OPTIONAL { ?organization <http://dbpedia.org/property/keyPeople> ?keyPeople. }" +
 					   " OPTIONAL { ?organization <http://dbpedia.org/property/locationCountry> ?locationCountry. }";
 		} else {
-			sparqlQuery += "FILTER (regex(?name, '^" + searchKeyword + "*'" + ", 'i'))";
-			sparqlQuery += " ?organization <http://dbpedia.org/ontology/industry> ?industry. " + 		
+			sparqlQuery += caseInsensitiveRegexFilter("name", "^"+searchKeyword);
+			sparqlQuery += " ?organization <http://dbpedia.org/ontology/industry> ?industry. " +
 					   " ?organization <http://dbpedia.org/property/keyPeople> ?keyPeople. " +
 					   " ?organization <http://dbpedia.org/property/locationCountry> ?locationCountry. ";
 		}
@@ -91,6 +91,7 @@ public class DBPediaSAO {
 		}
 	}
 
+
 	/**
 	 * @param searchKeyword
 	 * @param uriInfo 
@@ -106,8 +107,8 @@ public class DBPediaSAO {
 							 "WHERE { " +
 							 " ?organization <http://xmlns.com/foaf/0.1/name> ?name. ";
 		if (name != null)
-			sparqlQuery +=  " FILTER (regex(?name, '" + name + "*', 'i')) ";
-		
+			sparqlQuery += caseInsensitiveRegexFilter("name", name);
+
 		if (symbol != null)
 			sparqlQuery += "?organization <http://dbpedia.org/property/symbol> ?symbol. FILTER (str(?symbol)='" + symbol + "')";
 		if (greatThanNumEmployees != null)
@@ -115,28 +116,28 @@ public class DBPediaSAO {
 		if (lesserThanNumEmployees != null)
 			sparqlQuery += "?organization <http://dbpedia.org/property/numEmployees> ?numEmployees. FILTER (?numEmployees < " + lesserThanNumEmployees + ")";
 		if (foundedBy != null)
-			sparqlQuery += "?organization <http://dbpedia.org/ontology/foundedBy> ?foundedBy. FILTER (regex(?foundedBy, '" + foundedBy + "*', 'i')) ";
+			sparqlQuery += "?organization <http://dbpedia.org/ontology/foundedBy> ?foundedBy. " + caseInsensitiveRegexFilter("foundedBy", foundedBy);
 		if (foundingDate != null)
 			sparqlQuery += "?organization <http://dbpedia.org/ontology/foundingDate> ?foundingDate. FILTER (str(?foundingDate)>'" + foundingDate + "')";
 		if (locationCity != null)
-			sparqlQuery += "?organization <http://dbpedia.org/property/locationCity> ?locationCity. FILTER (regex(?locationCity, '" + locationCity + "*', 'i')) ";
+			sparqlQuery += "?organization <http://dbpedia.org/property/locationCity> ?locationCity. " + caseInsensitiveRegexFilter("locationCity", locationCity);
 		if (revenue != null)
 			sparqlQuery += "?organization <http://dbpedia.org/property/revenue> ?revenue. FILTER (?revenue > " + revenue + ")";
 		if (netIncome != null)
 			sparqlQuery += "?organization <http://dbpedia.org/property/netIncome> ?netIncome. FILTER (?netIncome > " + netIncome + ")";
 		
 		sparqlQuery += " OPTIONAL { ?organization <http://dbpedia.org/ontology/industry> ?industry. }";
-		if (industry != null) 
-			sparqlQuery += " FILTER (regex(?industry, '" + industry + "*', 'i')) ";
-		
+		if (industry != null)
+			sparqlQuery += caseInsensitiveRegexFilter("industry", industry);
+
 		sparqlQuery += "OPTIONAL { ?organization <http://dbpedia.org/property/keyPeople> ?keyPeople. }";
 		if (keyPeople != null)
-			sparqlQuery += " FILTER (regex(?keyPeople, '" + keyPeople + "*', 'i')) ";
-		
+			sparqlQuery += caseInsensitiveRegexFilter("keyPeople", keyPeople);
+
 		sparqlQuery += "OPTIONAL { ?organization <http://dbpedia.org/property/locationCountry> ?locationCountry. } ";
 		if (locationCountry != null)
-			sparqlQuery += " FILTER (regex(?locationCountry, '" + locationCountry + "*', 'i')) ";
-		
+			sparqlQuery += caseInsensitiveRegexFilter("locationCountry", locationCountry);
+
 		sparqlQuery += " } LIMIT 20";
 		
 		QueryExecution queryExecution = null;
@@ -254,7 +255,11 @@ public class DBPediaSAO {
 			throw e;
 		}
 	}
-	
+
+	private String caseInsensitiveRegexFilter(String field, String pattern) {
+		return " FILTER (regex(?" + field + ", '" + pattern + "', 'i')) ";
+	}
+
 	private void insertDummyCompanyRecords(List<Company> companyList) {
 		Company company = new Company();
 		company.setName("Dell Inc.");

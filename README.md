@@ -51,8 +51,8 @@ The Use Cases are
       <li>Back End Layer
             <ol>
                 <li>External Company Data Store - DBPedia <a href="http://dbpedia.org/sparql/">http://dbpedia.org/sparql/</a></li>
-                <li>Internal Company RDF Data Store<a href="prabhakarwikisearch.elasticbeanstalk.com/rdf/companies.rdf">prabhakarwikisearch.elasticbeanstalk.com/rdf/companies.rdf</a></li>
-                <li>Internal Notes RDF Store <a href="prabhakarwikisearch.elasticbeanstalk.com/rdf/notes.rdf">prabhakarwikisearch.elasticbeanstalk.com/rdf/notes.rdf</a></li>
+                <li>Internal Company RDF Data Store http://prabhakarwikisearch.elasticbeanstalk.com/rdf/companies.rdf</li>
+                <li>Internal Notes RDF Store http://prabhakarwikisearch.elasticbeanstalk.com/rdf/notes.rdf</li>
                 <li>SPARQL Framework - Apache Jena's ARQ library to build, fire and aggregate SPARQL queries</li>
                 <li>REST Web Service Framework - JAX-RS Jersey http://prabhakarwikisearch.elasticbeanstalk.com/rest/application.wadl</li>
             </ol>
@@ -72,17 +72,17 @@ The Use Cases are
   
 # <em>How to build and deploy locally in machine</em>
   <ol>
-  	<li>Install Java, Gradle</li>
+  	<li>Install Java</li>
   	<li>Clone the source code GIT URL https://github.com/prabhakar1983/SemanticWikiSearch.git</li>
-  	<li>Run the build command “gradle”. The gradle script has a default task – “jettyRun”, which will build the war file “SemanticWikiSearch.war” and deploy it to the local Jetty web server</li> 
-  	<li>Hit the Application URL: http://prabhakarwikisearch.elasticbeanstalk.com/ and start searching</li>
+  	<li>Run the build command "gradlew" or "gradlew.bat", depending on your platform. The gradle script has a default task – “jettyRun”, which will build the war file “SemanticWikiSearch.war” and deploy it to the local Jetty web server</li> 
+  	<li>Hit the Application URL: <a href="http://localhost:8080/SmartWikiSearch/">http://localhost:8080/SmartWikiSearch/</a> and start searching</li>
   </ol>
   
 # <em>How to build and deploy in Amazon Elastic Bean Stalk</em>
   <ol>
-  	<li>Install Java, Gradle</li>
+  	<li>Install Java</li>
   	<li>Clone the source code GIT URL https://github.com/prabhakar1983/SemanticWikiSearch.git</li>
-  	<li>Run the build command “gradle build”, which will generate the Web Deployable - “./lib/SemanticWikiSearch.war”</li> 
+  	<li>Run the build command “gradlew build”, which will generate the Web Deployable - “./build/libs/SemanticWikiSearch.war”</li> 
   	<li>Create a Tomcat running instance in Amazon’s PAAS environment – Amazon Elastic Beanstalk. http://aws.amazon.com/elasticbeanstalk/ , deploy the “SemanticWikiSearch.war” to it. 
 The configuration details for this application is
  	Operating System: 64bit Amazon Linux 2014.03 v1.0.7
